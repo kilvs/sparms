@@ -1,0 +1,38 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-small align-center">
+          <h1>{{ 'customer.register.title' | t | default: 'Create account' }}</h1>
+          <div class="spacer-medium"></div>
+          {%- form 'create_customer', class: 'component_form' -%}
+            {%- if form.errors -%}
+              <div class="w-form-fail" style="display:block;"><div>{{ form.errors | default_errors }}</div></div>
+            {%- endif -%}
+            <div class="component_form_field_group">
+              <label for="FirstName" class="form_label">First name</label>
+              <input type="text" name="customer[first_name]" id="FirstName" class="component_form_input w-input" autocomplete="given-name" required>
+            </div>
+            <div class="component_form_field_group">
+              <label for="LastName" class="form_label">Last name</label>
+              <input type="text" name="customer[last_name]" id="LastName" class="component_form_input w-input" autocomplete="family-name" required>
+            </div>
+            <div class="component_form_field_group">
+              <label for="Email" class="form_label">Email</label>
+              <input type="email" name="customer[email]" id="Email" class="component_form_input w-input" autocomplete="email" required>
+            </div>
+            <div class="component_form_field_group">
+              <label for="Password" class="form_label">Password</label>
+              <input type="password" name="customer[password]" id="Password" class="component_form_input w-input" autocomplete="new-password" required>
+            </div>
+            <div class="spacer-medium"></div>
+            <div class="button-group">
+              <input type="submit" class="button-primary w-button" value="Create">
+              <a href="{{ routes.account_login_url }}" class="button-secondary w-button">Cancel</a>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

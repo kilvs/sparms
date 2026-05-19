@@ -1,0 +1,103 @@
+/* Cart drawer — kept minimal and class-isolated so it never clashes with the Webflow CSS.
+   All sizing/colour values are intentionally generic; override in panthor-dev.css later if needed. */
+
+html.cart-drawer-open { overflow: hidden; }
+
+.cart-drawer__overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  z-index: 9998;
+}
+.cart-drawer.is-open .cart-drawer__overlay {
+  opacity: 1; visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+.cart-drawer__panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(440px, 100vw);
+  background: var(--background-color--background-primary, #ffffff);
+  color: inherit;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+}
+.cart-drawer.is-open .cart-drawer__panel { transform: translateX(0); }
+
+.cart-drawer__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--background-color--background-tertiary, rgba(0,0,0,0.1));
+}
+.cart-drawer__title { margin: 0; font-size: 1.25rem; font-weight: 600; }
+.cart-drawer__close {
+  background: transparent; border: 0; cursor: pointer;
+  font-size: 1.5rem; line-height: 1; padding: 0.25rem 0.5rem;
+  color: inherit;
+}
+
+.cart-drawer__body { flex: 1 1 auto; overflow-y: auto; padding: 1rem 1.5rem; }
+
+.cart-drawer__empty { text-align: center; padding: 2rem 0; }
+
+.cart-drawer__line {
+  display: grid; grid-template-columns: 80px 1fr; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--background-color--background-tertiary, rgba(0,0,0,0.1));
+}
+.cart-drawer__line-image-wrap { display: block; }
+.cart-drawer__line-image { width: 100%; height: auto; aspect-ratio: 1/1; object-fit: cover; }
+.cart-drawer__line-body { display: flex; flex-direction: column; gap: 0.25rem; }
+.cart-drawer__line-title { font-weight: 500; text-decoration: none; color: inherit; }
+.cart-drawer__line-variant { font-size: 0.875rem; opacity: 0.7; margin: 0; }
+.cart-drawer__line-price { font-weight: 600; margin: 0.25rem 0; }
+
+.cart-drawer__line-qty {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.cart-drawer__qty-step {
+  width: 28px; height: 28px; line-height: 1;
+  background: transparent; border: 1px solid currentColor; cursor: pointer;
+  color: inherit; border-radius: 999px; font-size: 1rem;
+}
+.cart-drawer__qty-input {
+  width: 48px; text-align: center;
+  background: transparent; border: 1px solid currentColor; color: inherit;
+  padding: 0.25rem;
+  -moz-appearance: textfield;
+}
+.cart-drawer__qty-input::-webkit-outer-spin-button,
+.cart-drawer__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.cart-drawer__line-remove {
+  margin-left: auto; background: transparent; border: 0; cursor: pointer;
+  color: inherit; text-decoration: underline; font-size: 0.875rem;
+}
+
+.cart-drawer__footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--background-color--background-tertiary, rgba(0,0,0,0.1));
+}
+.cart-drawer__subtotal-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 0.75rem; font-weight: 600;
+}
+.cart-drawer__actions { display: flex; gap: 0.5rem; flex-direction: column; }
+
+/* Header cart icon badge */
+.component_nav_list_icon_wrap { position: relative; display: inline-flex; }
+[data-cart-count] {
+  position: absolute; top: -6px; right: -8px;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px;
+  background: currentColor;
+  color: var(--background-color--background-primary, #ffffff);
+  font-size: 0.7rem; line-height: 18px; text-align: center;
+  font-weight: 600;
+  mix-blend-mode: difference;
+}
+[data-cart-count].is-hidden { display: none; }

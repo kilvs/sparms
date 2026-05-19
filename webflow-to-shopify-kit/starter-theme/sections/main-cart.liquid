@@ -1,0 +1,55 @@
+<section class="cart_section">
+  <div class="padding-section-large">
+    <div class="page-width">
+      <div class="max-width-large align-center">
+        <h1>{{ 'cart.general.title' | t | default: 'Your Cart' }}</h1>
+        <div class="spacer-medium"></div>
+        {%- if cart.item_count > 0 -%}
+          {%- form 'cart', cart, class: 'component_form' -%}
+            <div class="cart_lines">
+              {%- for line_item in cart.items -%}
+                <div class="cart_line" data-cart-line-key="{{ line_item.key }}">
+                  <div class="cart_line_image">
+                    {%- if line_item.image -%}
+                      <img src="{{ line_item.image | image_url: width: 200 }}" alt="{{ line_item.title | escape }}" loading="lazy">
+                    {%- endif -%}
+                  </div>
+                  <div class="cart_line_details">
+                    <a href="{{ line_item.url }}"><h3 class="heading-style-h6">{{ line_item.product.title }}</h3></a>
+                    {%- unless line_item.variant.title contains 'Default' -%}<p>{{ line_item.variant.title }}</p>{%- endunless -%}
+                    <p>{{ line_item.final_line_price | money }}</p>
+                  </div>
+                  <div class="cart_line_qty">
+                    <label for="updates_{{ line_item.key }}">Qty</label>
+                    <button type="button" data-cart-qty-step="-1" data-cart-line-key="{{ line_item.key }}" aria-label="Decrease quantity">&minus;</button>
+                    <input type="number" id="updates_{{ line_item.key }}" name="updates[{{ line_item.key }}]" value="{{ line_item.quantity }}" min="0" data-cart-line-change="{{ line_item.key }}">
+                    <button type="button" data-cart-qty-step="1" data-cart-line-key="{{ line_item.key }}" aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="cart_line_remove" data-cart-line-remove="{{ line_item.key }}">Remove</button>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="spacer-medium"></div>
+            <div class="cart_summary">
+              <p class="heading-style-h6">Subtotal: {{ cart.total_price | money }}</p>
+              <div class="button-group">
+                <button type="submit" name="update" class="button-secondary w-button">Update cart</button>
+                <button type="submit" name="checkout" class="button-primary w-button">Checkout</button>
+              </div>
+            </div>
+          {%- endform -%}
+        {%- else -%}
+          <p>Your cart is empty.</p>
+          <div class="button-group"><a href="{{ routes.collections_url }}/all" class="button-primary w-button">Continue shopping</a></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

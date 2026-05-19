@@ -1,0 +1,32 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-small align-center">
+          <h1>Activate account</h1>
+          <div class="spacer-small"></div>
+          <p>Create your password to activate your account.</p>
+          <div class="spacer-medium"></div>
+          {%- form 'activate_customer_password', class: 'component_form' -%}
+            {%- if form.errors -%}
+              <div class="w-form-fail" style="display:block;"><div>{{ form.errors | default_errors }}</div></div>
+            {%- endif -%}
+            <div class="component_form_field_group">
+              <label for="ActivatePassword" class="form_label">Password</label>
+              <input type="password" name="customer[password]" id="ActivatePassword" class="component_form_input w-input" autocomplete="new-password" required>
+            </div>
+            <div class="component_form_field_group">
+              <label for="ActivatePasswordConfirm" class="form_label">Confirm password</label>
+              <input type="password" name="customer[password_confirmation]" id="ActivatePasswordConfirm" class="component_form_input w-input" autocomplete="new-password" required>
+            </div>
+            <div class="spacer-medium"></div>
+            <div class="button-group">
+              <input type="submit" class="button-primary w-button" value="Activate Account">
+              <input type="submit" name="decline" class="button-secondary w-button" value="Decline Invitation">
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

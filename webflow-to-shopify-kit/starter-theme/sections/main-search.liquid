@@ -1,0 +1,46 @@
+<section class="search_section">
+  <div class="padding-section-large">
+    <div class="page-width">
+      <div class="max-width-large align-center">
+        <h1>{{ 'general.search.title' | t | default: 'Search' }}</h1>
+        <div class="spacer-medium"></div>
+        <form action="{{ routes.search_url }}" method="get" class="component_form">
+          <div class="component_form_field_group">
+            <label for="q" class="form_label">Search</label>
+            <input type="search" id="q" name="q" class="component_form_input w-input" placeholder="Search..." value="{{ search.terms | escape }}">
+          </div>
+          <div class="spacer-small"></div>
+          <div class="button-group"><button type="submit" class="button-primary w-button">Search</button></div>
+        </form>
+        {%- if search.performed -%}
+          <div class="spacer-medium"></div>
+          <p>{{ search.results_count }} results for "{{ search.terms | escape }}"</p>
+          {%- paginate search.results by 20 -%}
+            <div class="search_results">
+              {%- for item in search.results -%}
+                <article class="search_result">
+                  <h3 class="heading-style-h6"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                  {%- if item.object_type == 'product' -%}
+                    <p>{{ item.price | money }}</p>
+                  {%- elsif item.object_type == 'article' -%}
+                    <p>{{ item.excerpt_or_content | strip_html | truncate: 140 }}</p>
+                  {%- else -%}
+                    <p>{{ item.content | default: item.summary_html | strip_html | truncate: 140 }}</p>
+                  {%- endif -%}
+                </article>
+              {%- endfor -%}
+            </div>
+            {{ paginate | default_pagination }}
+          {%- endpaginate -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{
+  "general": {
+    "search": {
+      "title": "Search"
+    },
+    "password_page": {
+      "title": "Protected page",
+      "login_form_error": "Incorrect password. Please try again."
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext_html": "The page you’re looking for can’t be found.",
+      "link": "Continue shopping"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "subtotal": "Subtotal",
+      "update": "Update cart",
+      "checkout": "Checkout",
+      "empty": "Your cart is empty."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "quantity": "Quantity",
+      "price": "Price"
+    }
+  },
+  "customer": {
+    "account": { "title": "My Account" },
+    "login": { "title": "Log in" },
+    "register": { "title": "Create account" }
+  }
+}

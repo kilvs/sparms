@@ -1,0 +1,47 @@
+<section class="list_collections_section">
+  <div class="padding-section-large">
+    <div class="page-width">
+      <div class="max-width-large align-center">
+        <h1>{{ 'collections.list.title' | t | default: 'Collections' }}</h1>
+        <div class="spacer-medium"></div>
+        {%- if collections.size > 0 -%}
+          <div class="shop_list">
+            {%- for collection in collections -%}
+              {%- unless collection.handle == 'frontpage' -%}
+                <a href="{{ collection.url }}" class="component_product_card" style="text-decoration:none;color:inherit;">
+                  <div class="component_product_card_top">
+                    <div class="product_card_image_wrap">
+                      {%- if collection.featured_image -%}
+                        <img src="{{ collection.featured_image | image_url: width: 700 }}" loading="lazy" alt="{{ collection.title | escape }}" class="component_product_card_image">
+                      {%- else -%}
+                        <img src="{{ 'product-image-placeholder-1_1.webp' | asset_url }}" loading="lazy" alt="" class="component_product_card_image">
+                      {%- endif -%}
+                    </div>
+                    <div class="spacer-small"></div>
+                    <div class="component_divider_line"></div>
+                    <div class="spacer-small"></div>
+                  </div>
+                  <div class="component_product_card_bottom">
+                    <div class="component_product_card_bottom_item">
+                      <h3 class="heading-style-h6">{{ collection.title }}</h3>
+                      <p>{{ collection.products_count }} products</p>
+                    </div>
+                  </div>
+                </a>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <p>No collections yet.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "List collections",
+  "settings": []
+}
+{% endschema %}

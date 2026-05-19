@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code | default: 'en-AU' }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ shop.name }} &ndash; Gift Card</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ 'normalize.css' | asset_url | stylesheet_tag }}
+  {{ 'components.css' | asset_url | stylesheet_tag }}
+  {{ 'panthor-dev.css' | asset_url | stylesheet_tag }}
+  <style>
+    .giftcard_wrap { max-width: 540px; margin: 4rem auto; text-align: center; padding: 1rem; }
+    .giftcard_code { font-size: 1.5rem; letter-spacing: 0.1em; padding: 1rem; border: 1px solid currentColor; display: inline-block; word-break: break-all; margin: 1rem 0; }
+    .giftcard_qr img { display: inline-block; }
+    .giftcard_expired { opacity: 0.6; }
+  </style>
+  {{ content_for_header }}
+</head>
+<body>
+  <div class="page-wrapper">
+    <main class="main-wrapper">
+      <div class="giftcard_wrap{% if gift_card.expired %} giftcard_expired{% endif %}">
+        <h1>You have a gift card from {{ shop.name }}</h1>
+        <p>Initial balance: <strong>{{ gift_card.initial_value | money }}</strong></p>
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p>Remaining balance: <strong>{{ gift_card.balance | money }}</strong></p>
+        {%- endif -%}
+        {%- if gift_card.expired -%}
+          <p>Expired on {{ gift_card.expires_on | date: '%d %b %Y' }}</p>
+        {%- elsif gift_card.expires_on -%}
+          <p>Expires on {{ gift_card.expires_on | date: '%d %b %Y' }}</p>
+        {%- endif -%}
+        <div class="giftcard_code" data-code="{{ gift_card.code }}">{{ gift_card.code | format_code }}</div>
+        <div class="giftcard_qr">{{ gift_card.qr_identifier | generate_qr_code }}</div>
+        <div class="button-group" style="justify-content:center;margin-top:1.5rem;">
+          <a href="{{ shop.url }}" class="button-primary w-button">Shop {{ shop.name }}</a>
+          <button class="button-secondary w-button" onclick="window.print();return false;">Print this gift card</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
