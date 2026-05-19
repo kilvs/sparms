@@ -1,0 +1,17 @@
+{%- comment -%}
+  Rendered once inside <head> of layout/theme.liquid (and password.liquid).
+
+  Currently emits merchant-pasted Custom CSS so it can override anything
+  in panthor-dev.css / components.css without touching the original files.
+
+  If you later want merchant-controlled brand colors / font scale / layout
+  toggles, add :root { --var: {{ settings.X }}; } blocks here and the
+  matching settings to config/settings_schema.json. Keep the
+  `{% if settings.X != blank %}` guard so empty settings never override
+  the design's defaults (this is what bit us with the dark-mode bug).
+{%- endcomment -%}
+{%- if settings.custom_css != blank -%}
+<style id="theme-custom-css">
+{{ settings.custom_css }}
+</style>
+{%- endif -%}

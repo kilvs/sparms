@@ -1,0 +1,49 @@
+{%- if section.settings.show_section -%}
+      <section class="component_cta_section">
+        <div class="padding-global padding-section-medium">
+          <div class="container-large">
+            <div class="component_cta_wrapper">
+              <div class="component_cta_content_wrapper">
+                <h2>PERFORM UNDER PRESSURE with THE ORIGINAL SUN SLEEVE</h2>
+                <div class="max-width-xsmall">
+                  <p>Join thousands of athletes protecting their skin with our high-performance sun sleeves.</p>
+                </div>
+              </div>
+              <div class="component_cta_button_wrapper">
+                <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+                  <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                    </svg></div>
+                  <div>SHOP ALL</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "CTA",
+  "tag": "section",
+  "class": "shopify-section-component-cta",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA"
+    }
+  ]
+}
+{% endschema %}

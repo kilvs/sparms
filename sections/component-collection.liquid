@@ -1,0 +1,369 @@
+{%- if section.settings.show_section -%}
+      <div class="component_collection_section">
+        <div class="hide w-embed w-script">
+          <style>
+  .swiper-slide.is-collection.swiper-slide-active .component_collection_swiper-overlay {
+    opacity: 0;
+  }
+  .swiper-slide.is-collection.swiper-slide-active .component_collection_img-wrap {
+    transform: scale(1.5);
+    box-shadow: 0px 20px 24px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+  }
+  .swiper-slide.is-collection .component_collection_item-content {
+    opacity: 0%;
+  }
+  .swiper-slide.is-collection.swiper-slide-active .component_collection_item-content {
+    opacity: 100%;
+  }
+  .swiper-slide.is-collection.swiper-slide-active .component_collection_item-row.content {
+    width: 100%;
+  }
+  .swiper-slide.is-collection .component_collection_name-wrap {
+    opacity: 0%;
+  }
+  .swiper-slide.is-collection.swiper-slide-active .component_collection_name-wrap {
+    opacity: 100%;
+  }
+</style>
+          <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const isCollectionSwiper = new Swiper('#is-collection', {
+      direction: 'vertical',
+      slidesPerView: 5,
+      centeredSlides: true,
+      mousewheel: true,
+      speed: 500,
+      keyboard: {
+        enabled: true,
+      },
+      breakpoints: {
+        0: {
+          direction: 'horizontal',
+          slidesPerView: 1,
+          spaceBetween: 16,
+          mousewheel: false,
+        },
+        992: {
+          direction: 'vertical',
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+          mousewheel: true,
+        },
+      },
+    });
+  });
+</script>
+          <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const destination = document.querySelector('#destination');
+    function syncText() {
+      const activeSource = document.querySelector('.swiper-slide-active .text-source');
+      if (activeSource && destination) {
+        destination.textContent = activeSource.textContent;
+      }
+    }
+    // Initial sync
+    syncText();
+    // Watch for swiper-slide-active class changes dynamically
+    const observer = new MutationObserver(syncText);
+    observer.observe(document.querySelector('#is-collection'), {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['class'],
+    });
+  });
+</script>
+        </div>
+        <div class="padding-global padding-section-large">
+          <div class="container-x-large">
+            <div class="component_collection_content">
+              <div class="component_collection_top-wrapper">
+                <div class="component_collection_name-wrap is-vertical">
+                  <div class="component_collection_name">
+                    <div class="component_collection_icon-wrap">
+                      <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                        </svg></div>
+                    </div>
+                    <div id="destination" class="text-source">Lorem Ipsum</div>
+                  </div>
+                </div>
+                <div class="component_collection_logo-wrap">
+                  <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 92 86" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <g clip-path="url(#clip0_14663_7270)">
+                        <path d="M91.4575 35.928H42.4738C41.3048 35.928 40.3577 34.9783 40.3577 33.8061C40.3577 32.634 41.3048 31.6842 42.4738 31.6842H46.0704C55.0981 31.6842 63.4394 26.8543 67.9562 19.0129L74.8229 7.08702C71.1692 4.13259 67.06 1.73118 62.6151 0L55.5806 12.2144C51.3216 19.611 40.6784 19.611 36.4193 12.2144L29.3848 0C24.94 1.73118 20.8308 4.13259 17.1771 7.08702L33.7818 35.928H0.542499C0.185828 38.2332 0 40.5956 0 43C0 45.4044 0.185828 47.7668 0.542499 50.072H49.5262C50.6952 50.072 51.6423 51.0217 51.6423 52.1939C51.6423 53.366 50.6952 54.3158 49.5262 54.3158H45.9296C36.9019 54.3158 28.5606 59.1457 24.0438 66.9871L17.1771 78.913C20.8308 81.8674 24.94 84.2688 29.3848 86L36.4193 73.7856C40.6784 66.389 51.3216 66.389 55.5806 73.7856L62.6151 86C67.06 84.2688 71.1692 81.8674 74.8229 78.913L58.2182 50.072H91.4605C91.8172 47.7668 92.003 45.4044 92.003 43C92.003 40.5956 91.8172 38.2332 91.4605 35.928H91.4575Z" fill="currentColor"></path>
+                      </g>
+                      <defs>
+                        <clippath id="clip0_14663_7270">
+                          <rect width="92" height="86" fill="currentColor"></rect>
+                        </clippath>
+                      </defs>
+                    </svg></div>
+                </div>
+              </div>
+              <div id="is-collection" class="swiper is-collection w-node-_15d846e3-fecd-692e-298a-0b5c94f28273-94f28265">
+                <div class="swiper-wrapper is-collection">
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">SP Arms Sun Sleeves SP Arms Sun Sleeves</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">testing </div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">Test 2</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection swiper-slide-active">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">Test 3</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">Test 4</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">SP Arms Sun Sleeves</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide is-collection">
+                    <div class="component_collection_item">
+                      <a href="#" class="component_collection_item-content w-inline-block">
+                        <div class="max-width-small">
+                          <h2>adding style to sweat control</h2>
+                          <div class="component_collection_paragraph-wrap">
+                            <p>Discover our collections providing elite protection for your everyday.</p>
+                          </div>
+                        </div>
+                      </a>
+                      <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddaaa-af8ddaa2" class="component_collection_item-content-right">
+                        <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="" sizes="(max-width: 640px) 100vw, 640px" srcset="{{ 'collection-img-placeholder-p-500.webp' | asset_url }} 500w, {{ 'collection-img-placeholder.webp' | asset_url }} 640w">
+                          <div class="component_collection_swiper-overlay"></div>
+                        </div>
+                      </div>
+                      <div class="component_collection_item-grid">
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row no-bottom-border"></div>
+                        <div id="w-node-ab14c19e-1f78-63dc-b354-fa45af8ddab1-af8ddaa2" class="component_collection_item-row content">
+                          <a href="#" class="component_collection_name-wrap w-inline-block">
+                            <div class="component_collection_icon-wrap">
+                              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                  <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                </svg></div>
+                            </div>
+                            <div class="component_collection_text text-source">SP Arms Sun Sleeves</div>
+                          </a>
+                        </div>
+                        <div class="component_collection_item-row"></div>
+                        <div class="component_collection_item-row"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection swiper",
+  "tag": "section",
+  "class": "shopify-section-component-collection",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection swiper"
+    }
+  ]
+}
+{% endschema %}

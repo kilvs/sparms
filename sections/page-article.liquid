@@ -1,0 +1,26 @@
+{%- if section.settings.show_section -%}
+<section class="page-article-stub padding-global padding-section-medium">
+  <div class="container-large">
+    <div class="text-align-center">
+      <h1>{{ section.settings.heading | default: 'Article' }}</h1>
+      <div class="spacer-medium"></div>
+      <p>{{ section.settings.body | default: 'Article content will appear here once written.' }}</p>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page — Article",
+  "tag": "section",
+  "class": "shopify-section-page-article",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Article" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Article content will appear here once written." },
+    { "type": "paragraph", "content": "Stub section — wire up commerce / dynamic content per CONVERSION_GUIDE §7." }
+  ],
+  "presets": [{ "name": "Page — Article" }]
+}
+{% endschema %}

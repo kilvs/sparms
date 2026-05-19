@@ -1,0 +1,313 @@
+{%- if section.settings.show_section -%}
+      <section class="component_ambassadors_section">
+        <div class="w-embed w-script">
+          <style>
+/* 992px to 1240px — 3 columns */
+@media (min-width: 992px) and (max-width: 1239px) {
+  .component_ambassadors_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+  /* Column 2 only — same stagger effect for 3 cols */
+  .component_ambassadors_list-item:nth-child(3n+2) {
+    margin-top: 200px;
+    margin-left: -25%;
+  }
+  /* All cards overlap */
+  .component_ambassadors_list-item {
+    margin-bottom: -80px;
+  }
+  /* First 3 cards — extra overlap */
+  .component_ambassadors_list-item:nth-child(1),
+  .component_ambassadors_list-item:nth-child(2),
+  .component_ambassadors_list-item:nth-child(3) {
+    margin-bottom: -120px;
+  }
+}
+/* 1240px and above — 4 columns */
+@media (min-width: 1240px) {
+  .component_ambassadors_list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+  }
+  /* Column 2 and 4 — stagger effect */
+  .component_ambassadors_list-item:nth-child(4n+2),
+  .component_ambassadors_list-item:nth-child(4n+4) {
+    margin-top: 200px;
+    margin-left: -25%;
+  }
+  /* All cards overlap */
+  .component_ambassadors_list-item {
+    margin-bottom: -80px;
+  }
+  /* First 3 cards — extra overlap */
+  .component_ambassadors_list-item:nth-child(1),
+  .component_ambassadors_list-item:nth-child(2),
+  .component_ambassadors_list-item:nth-child(3) {
+    margin-bottom: -120px;
+  }
+}
+  </style>
+          <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+          <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger);
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+      const wrapper = document.querySelector('.component_ambassadors_list');
+      const cards = document.querySelectorAll('.component_ambassadors_list-item');
+      cards.forEach((card, i) => {
+        const isOdd = (i + 1) % 2 !== 0;  // 1st, 3rd, 5th... go down
+        const isEven = (i + 1) % 2 === 0; // 2nd, 4th, 6th... go up
+        gsap.to(card, {
+          y: isOdd ? 80 : -80, // odd = down, even = up
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: isOdd ? 2 : 1, // odd = slower, even = snappier
+          },
+        });
+      });
+      // Cleanup below 992px
+      return () => {
+        cards.forEach(card => gsap.set(card, { clearProps: 'y' }));
+      };
+    });
+  });
+</script>
+        </div>
+        <div class="padding-global padding-section-large">
+          <div class="container-large">
+            <div class="component_heading_split">
+              <h2 class="text-color-primary">OUR AMBASSADORS</h2>
+              <p id="w-node-bf55dd09-238b-a049-25b1-be6501456b06-01456aff" class="text-color-primary">A powerhouse collective from every corner of sport, our ambassadors wear Sparms with pride in training, on the field, and at every competition.</p>
+            </div>
+            <div class="spacer-xxlarge"></div>
+            <div class="component_ambassadors_list">
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-bf55dd09-238b-a049-25b1-be6501456b0c-01456aff" class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="component_ambassadors_list-item">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                          </svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag">
+                        <div>Golf</div>
+                      </div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>Code</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ambassadors",
+  "tag": "section",
+  "class": "shopify-section-component-ambassadors",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ambassadors"
+    }
+  ]
+}
+{% endschema %}

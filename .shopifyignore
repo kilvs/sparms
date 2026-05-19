@@ -1,0 +1,18 @@
+# Source files (Webflow export) — not part of the deployed theme
+*.html
+css/
+js/
+images/
+fonts/
+
+# Conversion artifacts
+convert.cjs
+convert-forms.cjs
+CONVERSION_GUIDE.md
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+node_modules/

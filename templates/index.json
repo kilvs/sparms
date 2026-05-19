@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero": {
+      "type": "home-01-hero",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "logo": {
+      "type": "component-logo",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "product-slider": {
+      "type": "home-02-product-slider",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "feature": {
+      "type": "component-feature",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "collection": {
+      "type": "component-collection",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "ambassadors": {
+      "type": "component-ambassadors",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "testimonial": {
+      "type": "component-testimonial",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "cta": {
+      "type": "component-cta",
+      "settings": {
+        "show_section": true
+      }
+    },
+    "community": {
+      "type": "component-community",
+      "settings": {
+        "show_section": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "logo",
+    "product-slider",
+    "feature",
+    "collection",
+    "ambassadors",
+    "testimonial",
+    "cta",
+    "community"
+  ]
+}

@@ -1,0 +1,390 @@
+{%- if section.settings.show_section -%}
+      <section class="home_product-slide_section">
+        <div class="padding-global padding-section-large">
+          <div class="container-large">
+            <div class="hide w-embed w-script">
+              <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('#is-product', {
+      spaceBetween: 16,
+      navigation: {
+        nextEl: '#product-swiper-next',
+        prevEl: '#product-swiper-prev',
+      },
+      breakpoints: {
+        0: {
+          enabled: false,
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+        },
+        992: {
+          enabled: true,
+          slidesPerView: 'auto',
+          spaceBetween: 32,
+        },
+      },
+    });
+  });
+</script>
+              <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+              <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('.button.is-add-to-cart');
+    const panels = document.querySelectorAll('.component_product-list_size-wrapper');
+    // Hide all panels on load
+    gsap.set(panels, { autoAlpha: 0 });
+    triggers.forEach((trigger, i) => {
+      const panel = panels[i]; // match each trigger to its own panel
+      // Open on click
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close all other panels first
+        panels.forEach((p) => {
+          if (p !== panel) {
+            gsap.to(p, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+          }
+        });
+        // Toggle this panel
+        const isVisible = gsap.getProperty(panel, 'autoAlpha') === 1;
+        gsap.to(panel, {
+          autoAlpha: isVisible ? 0 : 1,
+          duration: 0.3,
+          ease: isVisible ? 'power2.in' : 'power2.out',
+        });
+      });
+    });
+    // Close all panels when clicking outside
+    document.addEventListener('click', (e) => {
+      const clickedOutside = ![...triggers, ...panels].some(el => el.contains(e.target));
+      if (clickedOutside) {
+        gsap.to(panels, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+      }
+    });
+    // Close all panels when tapping outside on mobile
+    document.addEventListener('touchstart', (e) => {
+      const tappedOutside = ![...triggers, ...panels].some(el => el.contains(e.target));
+      if (tappedOutside) {
+        gsap.to(panels, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+      }
+    });
+  });
+</script>
+            </div>
+            <div class="w-embed"></div>
+            <div class="component_heading_split is-single-row">
+              <h2 class="text-color-white">LOCK IN PERFORMANCE</h2>
+              <p id="w-node-_67f83d0a-79c3-669e-ea70-a06b5a1eac52-6832ed3c" class="text-color-white text-size-medium">Discover the next generation in skin care that plays as hard as you do.</p>
+            </div>
+            <div class="spacer-xlarge"></div>
+            <div id="is-product" class="swiper is-product">
+              <div class="swiper-wrapper is-product">
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="{{ 'Product-Image-placeholder-p-500.webp' | asset_url }} 500w, {{ 'Product-Image-placeholder.webp' | asset_url }} 648w" alt="" src="{{ 'Product-Image-placeholder.webp' | asset_url }}" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="spacer-xlarge"></div>
+            <div class="home_product-slide_bottom-wrap">
+              <div class="swiper_arrow_wrapper hide-tablet">
+                <div id="product-swiper-prev" class="swiper_arrow">
+                  <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                    </svg></div>
+                </div>
+                <div id="product-swiper-next" class="swiper_arrow">
+                  <div class="icon-embed-blogs is-reversed w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                    </svg></div>
+                </div>
+              </div>
+              <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+                <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                    <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                  </svg></div>
+                <div>Shop All</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Home — Product slider",
+  "tag": "section",
+  "class": "shopify-section-home-product-slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home — Product slider"
+    }
+  ]
+}
+{% endschema %}

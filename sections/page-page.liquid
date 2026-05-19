@@ -1,0 +1,26 @@
+{%- if section.settings.show_section -%}
+<section class="page-page-stub padding-global padding-section-medium">
+  <div class="container-large">
+    <div class="text-align-center">
+      <h1>{{ section.settings.heading | default: 'Page' }}</h1>
+      <div class="spacer-medium"></div>
+      <p>{{ section.settings.body | default: 'Page content will appear here. Edit in the theme editor.' }}</p>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page — Page",
+  "tag": "section",
+  "class": "shopify-section-page-page",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Page" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Page content will appear here. Edit in the theme editor." },
+    { "type": "paragraph", "content": "Stub section — wire up commerce / dynamic content per CONVERSION_GUIDE §7." }
+  ],
+  "presets": [{ "name": "Page — Page" }]
+}
+{% endschema %}

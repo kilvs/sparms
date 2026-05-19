@@ -1,0 +1,67 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-large align-center">
+          <h1>Your Addresses</h1>
+          <div class="spacer-small"></div>
+          <a href="{{ routes.account_url }}" class="button-secondary w-button">Back to account</a>
+
+          <div class="spacer-medium"></div>
+          {%- paginate customer.addresses by 6 -%}
+            {%- for address in customer.addresses -%}
+              <div class="customer_address" style="border:1px solid #ccc;padding:1rem;margin-bottom:1rem;">
+                {%- if address == customer.default_address -%}<p><strong>Default address</strong></p>{%- endif -%}
+                {{ address | format_address }}
+                <div class="button-group">
+                  <a href="#edit-{{ address.id }}" class="button-secondary w-button">Edit</a>
+                  <a href="#delete-{{ address.id }}" data-target="{{ address.url }}" class="button-secondary w-button">Delete</a>
+                </div>
+              </div>
+            {%- endfor -%}
+            {{ paginate | default_pagination }}
+          {%- endpaginate -%}
+
+          <div class="spacer-large"></div>
+          <h2>Add a new address</h2>
+          {%- form 'customer_address', customer.new_address, class: 'component_form' -%}
+            <div class="component_form_field_group">
+              <label for="AddressFirstNameNew" class="form_label">First name</label>
+              <input type="text" id="AddressFirstNameNew" name="address[first_name]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressLastNameNew" class="form_label">Last name</label>
+              <input type="text" id="AddressLastNameNew" name="address[last_name]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressCompanyNew" class="form_label">Company</label>
+              <input type="text" id="AddressCompanyNew" name="address[company]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressAddress1New" class="form_label">Address 1</label>
+              <input type="text" id="AddressAddress1New" name="address[address1]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressAddress2New" class="form_label">Address 2</label>
+              <input type="text" id="AddressAddress2New" name="address[address2]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressCityNew" class="form_label">City</label>
+              <input type="text" id="AddressCityNew" name="address[city]" class="component_form_input w-input">
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressCountryNew" class="form_label">Country</label>
+              <select id="AddressCountryNew" name="address[country]" data-default="{{ form.country }}" class="component_form_input w-input">{{ all_country_option_tags }}</select>
+            </div>
+            <div class="component_form_field_group">
+              <label for="AddressZipNew" class="form_label">Postal/Zip Code</label>
+              <input type="text" id="AddressZipNew" name="address[zip]" class="component_form_input w-input">
+            </div>
+            <div class="spacer-small"></div>
+            <div class="button-group"><input type="submit" class="button-primary w-button" value="Add address"></div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

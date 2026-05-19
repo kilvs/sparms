@@ -1,0 +1,94 @@
+{%- if section.settings.show_section -%}
+      <section class="component_community_serction">
+        <div class="padding-section-medium">
+          <div class="padding-global">
+            <div class="container-large">
+              <div class="component_community_title_serction">
+                <h2>OUR community</h2>
+                <p>Real athletes. Real protection. Real stories.</p>
+              </div>
+            </div>
+          </div>
+          <div class="spacer-small"></div>
+          <div class="hide w-embed w-script">
+            <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //Splide Code for socials
+    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const gap = 16;
+    const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
+    new Splide('#community', {
+      type: 'loop',
+      drag: 'free', // enables drag-to-swipe with no snap
+      gap: '1rem',
+      autoWidth: true,
+      arrows: false,
+      pagination: false,
+      clones: needed,
+      autoScroll: {
+        speed: 0.3, // px per frame — increase to go faster
+        pauseOnHover: true, // keeps playing on hover
+        pauseOnFocus: false, // keeps playing on focus
+      },
+    }).mount(window.splide.Extensions);
+  });
+</script>
+          </div>
+          <div id="community" class="splide">
+            <div class="splide__track">
+              <div class="splide__list">
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-7.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-5.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-3.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-2.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-1.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-6.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Community",
+  "tag": "section",
+  "class": "shopify-section-component-community",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community"
+    }
+  ]
+}
+{% endschema %}

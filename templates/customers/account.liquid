@@ -1,0 +1,33 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-large align-center">
+          <h1>{{ 'customer.account.title' | t | default: 'My Account' }}</h1>
+          <div class="spacer-medium"></div>
+          <p>Hello, {{ customer.first_name | default: customer.email }}.</p>
+          <div class="spacer-small"></div>
+          <div class="button-group">
+            <a href="{{ routes.account_addresses_url }}" class="button-secondary w-button">Addresses</a>
+            <a href="{{ routes.account_logout_url }}" class="button-secondary w-button">Log out</a>
+          </div>
+          <div class="spacer-large"></div>
+
+          <h2>Order history</h2>
+          {%- if customer.orders.size > 0 -%}
+            <div class="customer_order_list">
+              {%- for order in customer.orders -%}
+                <div class="customer_order">
+                  <p>Order <a href="{{ order.customer_url }}">{{ order.name }}</a> &middot; {{ order.created_at | date: '%d %b %Y' }} &middot; {{ order.financial_status }} &middot; {{ order.total_price | money }}</p>
+                </div>
+              {%- endfor -%}
+            </div>
+            {{ paginate.previous | default_pagination }}
+          {%- else -%}
+            <p>You haven't placed any orders yet.</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

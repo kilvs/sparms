@@ -1,0 +1,173 @@
+{%- liquid
+  assign shop_menu = linklists[section.settings.shop_menu]
+  assign more_menu = linklists[section.settings.more_menu]
+  assign policy_menu = linklists[section.settings.policy_menu]
+-%}
+<footer class="component_footer_section">
+  <div class="padding-global padding-section-medium">
+    <div class="container-large">
+      <div class="component_footer_wrapper">
+        <div class="component_footer_upper_wrapper">
+          <div class="component_footer_upper_logo_wrapper">
+            <a href="{{ routes.root_url }}" aria-current="page" class="component_footer_logo w-inline-block w--current">
+              {%- if settings.logo != blank -%}
+                <img loading="lazy" src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name | escape }}" class="component_footer_logo_image">
+              {%- else -%}
+                <img loading="lazy" src="{{ 'footer-logo.svg' | asset_url }}" alt="{{ shop.name | escape }}" class="component_footer_logo_image">
+              {%- endif -%}
+            </a>
+            <div class="component_footer_form_wrapper">
+              <p>{{ section.settings.newsletter_heading | default: 'Stay connected with the latest SParms protection and performance updates' }}</p>
+              <div class="spacer-small"></div>
+              <div class="component_footer_form_block w-form">
+                {%- form 'customer', id: 'wf-form-Subscribe-Form', class: 'component_footer_form' -%}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <label for="footer-email" class="hide">Email</label>
+                  <input class="form_input is-footer w-input" maxlength="256" name="contact[email]" placeholder="{{ section.settings.email_placeholder | default: 'sparms@email.com' }}" type="email" id="footer-email" required>
+                  <div class="button-group is-footer">
+                    <button type="submit" class="button is-secondary is-icon is-alternate w-inline-block" style="background:transparent;border:0;padding:0;cursor:pointer;">
+                      <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                        </svg></div>
+                      <div>{{ section.settings.submit_label | default: 'SUBMIT' }}</div>
+                    </button>
+                  </div>
+                  {% render 'wf-form-states', form: form, success_text: section.settings.success_text, error_text: section.settings.error_text %}
+                {%- endform -%}
+              </div>
+              <div class="spacer-xxsmall"></div>
+              <p class="text-size-tiny">{{ section.settings.consent_text | default: 'By subscribing, you agree to our privacy policy and email terms' }}</p>
+            </div>
+          </div>
+          <div class="component_footer_upper_menu_wrapper">
+            <div class="component_footer_upper_menu">
+              <div class="text-weight-semibold">{{ section.settings.shop_menu_heading | default: 'Shop All' }}</div>
+              <div class="component_footer_upper_menu_link_wrapper">
+                {%- if shop_menu != blank and shop_menu.links.size > 0 -%}
+                  {%- for link in shop_menu.links -%}
+                    <a href="{{ link.url }}" class="component_footer_upper_menu_link">{{ link.title }}</a>
+                  {%- endfor -%}
+                {%- else -%}
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Women</a>
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Men</a>
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Youth</a>
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Birthday Event</a>
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Other</a>
+                  <a href="{{ routes.collections_url }}/all" class="component_footer_upper_menu_link">Accessories</a>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="component_footer_upper_menu">
+              <div class="text-weight-semibold">{{ section.settings.more_menu_heading | default: 'More' }}</div>
+              <div class="component_footer_upper_menu_link_wrapper">
+                {%- if more_menu != blank and more_menu.links.size > 0 -%}
+                  {%- for link in more_menu.links -%}
+                    <a href="{{ link.url }}" class="component_footer_upper_menu_link">{{ link.title }}</a>
+                  {%- endfor -%}
+                {%- else -%}
+                  <a href="{{ routes.root_url }}pages/ambassadors" class="component_footer_upper_menu_link">Ambassadors</a>
+                  <a href="{{ routes.root_url }}pages/size-guide" class="component_footer_upper_menu_link">Size guide</a>
+                  <a href="{{ routes.root_url }}pages/about" class="component_footer_upper_menu_link">About Us</a>
+                  <a href="{{ routes.root_url }}pages/shipping-returns" class="component_footer_upper_menu_link">Shipping &amp; Returns</a>
+                  <a href="{{ routes.root_url }}pages/store-locator" class="component_footer_upper_menu_link">Store Locator</a>
+                  <a href="{{ routes.root_url }}blogs/news" class="component_footer_upper_menu_link">Blog</a>
+                  <a href="{{ routes.root_url }}pages/faq" class="component_footer_upper_menu_link">FAQs</a>
+                  <a href="{{ routes.root_url }}pages/wholesale-b2b" class="component_footer_upper_menu_link">Wholesale</a>
+                  <a href="{{ routes.root_url }}pages/contact" class="component_footer_upper_menu_link">Contact Us</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component_footer_divider"></div>
+        <div class="component_footer_lower_wrapper">
+          <div class="component_footer_lower_payment_wrapper">
+            <div class="component_footer_lower_payment">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'payment_icon' -%}
+                  {%- if block.settings.icon != blank -%}
+                    <img loading="lazy" src="{{ block.settings.icon | image_url: width: 120 }}" alt="" class="component_footer_lower_payment_image" {{ block.shopify_attributes }}>
+                  {%- else -%}
+                    <img loading="lazy" src="{{ block.settings.fallback_filename | default: 'payment-01.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image" {{ block.shopify_attributes }}>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- else -%}
+                <img loading="lazy" src="{{ 'payment-01.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image">
+                <img loading="lazy" src="{{ 'payment-02.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image">
+                <img loading="lazy" src="{{ 'payment-03.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image">
+                <img loading="lazy" src="{{ 'payment-04.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image">
+                <img loading="lazy" src="{{ 'payment-05.svg' | asset_url }}" alt="" class="component_footer_lower_payment_image">
+              {%- endfor -%}
+            </div>
+            <div class="text-size-small">{{ section.settings.copyright | default: '© 2025 SParms' }}</div>
+          </div>
+          <div class="component_footer_lower_terms_wrapper">
+            <div class="component_footer_lower_currency">
+              <img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt="" class="component_footer_lower_currency_image">
+              <div>{{ section.settings.currency_label | default: 'Australia AUD$' }}</div>
+            </div>
+            <div class="component_footer_lower_policy">
+              {%- if policy_menu != blank and policy_menu.links.size > 0 -%}
+                {%- for link in policy_menu.links -%}
+                  <a href="{{ link.url }}" class="component_footer_lower_policy_link">{{ link.title }}</a>
+                {%- endfor -%}
+              {%- else -%}
+                <a href="{{ shop.privacy_policy.url | default: '#' }}" class="component_footer_lower_policy_link">Privacy Policy</a>
+                <a href="{{ shop.terms_of_service.url | default: '#' }}" class="component_footer_lower_policy_link">Terms of Service</a>
+                <a href="#" class="component_footer_lower_policy_link">Cookies Settings</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Newsletter" },
+    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Stay connected with the latest SParms protection and performance updates" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "sparms@email.com" },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "SUBMIT" },
+    { "type": "text", "id": "consent_text", "label": "Consent text", "default": "By subscribing, you agree to our privacy policy and email terms" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "Thank you! Your submission has been received!" },
+    { "type": "text", "id": "error_text", "label": "Error message", "default": "Oops! Something went wrong while submitting the form." },
+    { "type": "header", "content": "Menus" },
+    { "type": "text", "id": "shop_menu_heading", "label": "First column heading", "default": "Shop All" },
+    { "type": "link_list", "id": "shop_menu", "label": "First column menu" },
+    { "type": "text", "id": "more_menu_heading", "label": "Second column heading", "default": "More" },
+    { "type": "link_list", "id": "more_menu", "label": "Second column menu" },
+    { "type": "link_list", "id": "policy_menu", "label": "Bottom policy links" },
+    { "type": "header", "content": "Lower bar" },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2025 SParms" },
+    { "type": "text", "id": "currency_label", "label": "Currency label", "default": "Australia AUD$" }
+  ],
+  "blocks": [
+    {
+      "type": "payment_icon",
+      "name": "Payment icon",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon image" },
+        { "type": "text", "id": "fallback_filename", "label": "Fallback asset filename", "info": "Used when no image is uploaded. Must exist in assets/.", "default": "payment-01.svg" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "payment_icon", "settings": { "fallback_filename": "payment-01.svg" } },
+        { "type": "payment_icon", "settings": { "fallback_filename": "payment-02.svg" } },
+        { "type": "payment_icon", "settings": { "fallback_filename": "payment-03.svg" } },
+        { "type": "payment_icon", "settings": { "fallback_filename": "payment-04.svg" } },
+        { "type": "payment_icon", "settings": { "fallback_filename": "payment-05.svg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

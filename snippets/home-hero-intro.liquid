@@ -1,0 +1,45 @@
+<script>
+window.Webflow = window.Webflow || [];
+window.Webflow.push(function () {
+  const hasSeenIntro = sessionStorage.getItem('introPlayed');
+  if (hasSeenIntro) {
+    gsap.set('.home_hero_blue-dot', { opacity: 0, scale: 1 });
+    gsap.set('.home_logo_svg-wrap', { opacity: 1, scale: 100 });
+    gsap.set('.home_hero_load', { opacity: 0 });
+    return;
+  }
+  sessionStorage.setItem('introPlayed', 'true');
+  const tl = gsap.timeline();
+  // Blue dot pops in
+  tl.fromTo('.home_hero_blue-dot',
+    { scale: 0, opacity: 1 },
+    { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.7)' },
+  0)
+  // Blue dot fades out
+  .fromTo('.home_hero_blue-dot',
+    { opacity: 1 },
+    { opacity: 0, duration: 0.5 },
+  1.5)
+  // Logo locked invisible at scale: 1
+  .fromTo('.home_logo_svg-wrap',
+    { opacity: 0, scale: 1 },
+    { opacity: 0, scale: 1, duration: 0 },
+  0)
+  // Logo fades in, holds scale: 1
+  .fromTo('.home_logo_svg-wrap',
+    { opacity: 0, scale: 1 },
+    { opacity: 1, scale: 1, duration: 0.5 },
+  1.5)
+  // 1s gap — logo sits visible at scale: 1 (2.0s → 3.0s)
+  // Logo scales from 1 to 100
+  .fromTo('.home_logo_svg-wrap',
+    { scale: 1 },
+    { scale: 100, duration: 2.5, ease: 'linear' },
+  3.0)
+  // Loader fades out
+  .fromTo('.home_hero_load',
+    { autoAlpha: 1 },
+    { autoAlpha: 0, duration: 0.75 },
+  3.75);
+});
+</script>

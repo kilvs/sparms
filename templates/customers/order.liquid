@@ -1,0 +1,54 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-large align-center">
+          <h1>Order {{ order.name }}</h1>
+          <p>Placed on {{ order.created_at | date: '%d %b %Y, %H:%M' }}</p>
+
+          <div class="spacer-medium"></div>
+          <table class="customer_order_table" style="width:100%">
+            <thead>
+              <tr><th>Product</th><th>SKU</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              {%- for line_item in order.line_items -%}
+                <tr>
+                  <td>{{ line_item.title }}</td>
+                  <td>{{ line_item.sku }}</td>
+                  <td>{{ line_item.price | money }}</td>
+                  <td>{{ line_item.quantity }}</td>
+                  <td>{{ line_item.final_line_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+            <tfoot>
+              <tr><td colspan="4">Subtotal</td><td>{{ order.subtotal_price | money }}</td></tr>
+              {%- for shipping_method in order.shipping_methods -%}
+                <tr><td colspan="4">Shipping ({{ shipping_method.title }})</td><td>{{ shipping_method.price | money }}</td></tr>
+              {%- endfor -%}
+              {%- for tax_line in order.tax_lines -%}
+                <tr><td colspan="4">Tax ({{ tax_line.title }})</td><td>{{ tax_line.price | money }}</td></tr>
+              {%- endfor -%}
+              <tr><td colspan="4"><strong>Total</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+            </tfoot>
+          </table>
+
+          <div class="spacer-large"></div>
+          <div class="component_grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div>
+              <h3>Billing address</h3>
+              {{ order.billing_address | format_address }}
+              <p>Payment status: {{ order.financial_status_label }}</p>
+            </div>
+            <div>
+              <h3>Shipping address</h3>
+              {{ order.shipping_address | format_address }}
+              <p>Fulfillment status: {{ order.fulfillment_status_label }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

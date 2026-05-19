@@ -36,11 +36,15 @@ const TEMPLATE = path.join(ROOT, 'templates', 'index.json');
 // Each entry: kind 'home' (page-specific) or 'component' (reusable),
 // the slug (used in filename + schema name), and 1-based inclusive line range.
 const BOUNDARIES = [
-  // EXAMPLE (replace with real boundaries for your source):
-  { kind: 'home',      orderIdx: 1,  slug: 'banner',     name: 'Home — Banner',     startLine: 2,   endLine: 21  },
-  { kind: 'home',      orderIdx: 2,  slug: 'overview',   name: 'Home — Overview',   startLine: 22,  endLine: 63  },
-  { kind: 'component',               slug: 'marquee',    name: 'Marquee',           startLine: 64,  endLine: 115 },
-  // ...add more boundaries here
+  { kind: 'home',      orderIdx: 1, slug: 'hero',            name: 'Home — Hero',            startLine: 3,    endLine: 64   },
+  { kind: 'component',              slug: 'logo',            name: 'Logo strip',             startLine: 65,   endLine: 131  },
+  { kind: 'home',      orderIdx: 2, slug: 'product-slider',  name: 'Home — Product slider',  startLine: 132,  endLine: 494  },
+  { kind: 'component',              slug: 'feature',         name: 'Feature',                startLine: 495,  endLine: 628  },
+  { kind: 'component',              slug: 'collection',      name: 'Collection swiper',      startLine: 629,  endLine: 970  },
+  { kind: 'component',              slug: 'ambassadors',     name: 'Ambassadors',            startLine: 971,  endLine: 1256 },
+  { kind: 'component',              slug: 'testimonial',     name: 'Testimonial',            startLine: 1257, endLine: 1711 },
+  { kind: 'component',              slug: 'cta',             name: 'CTA',                    startLine: 1712, endLine: 1733 },
+  { kind: 'component',              slug: 'community',       name: 'Community',              startLine: 1734, endLine: 1800 },
 ];
 
 // ────────────────────────────────────────────────────────────────────────────

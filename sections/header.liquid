@@ -1,0 +1,110 @@
+{%- liquid
+  assign menu = linklists[section.settings.main_menu]
+  assign more_menu = linklists[section.settings.more_menu]
+  assign primary_cta_url = section.settings.cta_url
+  if primary_cta_url == blank and section.settings.cta_product != blank
+    assign primary_cta_url = section.settings.cta_product.url
+  endif
+  if primary_cta_url == blank and section.settings.cta_collection != blank
+    assign primary_cta_url = section.settings.cta_collection.url
+  endif
+  assign primary_cta_url = primary_cta_url | default: routes.collections_url | append: '/all'
+-%}
+<div data-wf--main-menu--variant="base" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="component_navbar_section w-nav">
+  <div class="component_navbar_wrapper">
+    <nav role="navigation" class="component_navbar_navigation_wrapper w-nav-menu">
+      <a href="{{ primary_cta_url }}" class="button is-secondary is-icon is-alternate w-inline-block">
+        <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+            <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+          </svg></div>
+        <div>{{ section.settings.cta_label | default: 'SHOP ALL' }}</div>
+      </a>
+      {%- if menu != blank and menu.links.size > 0 -%}
+        {%- for link in menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
+              <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+                <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
+                <div>{{ link.title }}</div>
+              </div>
+              <nav class="w-dropdown-list">
+                {%- for child in link.links -%}
+                  <a href="{{ child.url }}" class="w-dropdown-link">{{ child.title }}</a>
+                {%- endfor -%}
+              </nav>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="component_navbar_navigation_link w-nav-link">{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}pages/ambassadors" class="component_navbar_navigation_link w-nav-link">Ambassadors</a>
+        <a href="{{ routes.root_url }}pages/size-guide" class="component_navbar_navigation_link w-nav-link">Size Guide</a>
+        {%- if more_menu != blank and more_menu.links.size > 0 -%}
+          <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
+            <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+              <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
+              <div>More</div>
+            </div>
+            <nav class="w-dropdown-list">
+              {%- for child in more_menu.links -%}
+                <a href="{{ child.url }}" class="w-dropdown-link">{{ child.title }}</a>
+              {%- endfor -%}
+            </nav>
+          </div>
+        {%- else -%}
+          <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
+            <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+              <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
+              <div>More</div>
+            </div>
+            <nav class="w-dropdown-list">
+              <a href="{{ routes.root_url }}pages/about" class="w-dropdown-link">About Us</a>
+              <a href="{{ routes.root_url }}blogs/news" class="w-dropdown-link">Blog</a>
+              <a href="{{ routes.root_url }}pages/contact" class="w-dropdown-link">Contact Us</a>
+            </nav>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </nav>
+    <a href="{{ routes.root_url }}" class="component_navbar_logo_wrapper w-nav-brand">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 400 }}" loading="lazy" alt="{{ shop.name | escape }}" class="component_navbar_logo"{% if settings.logo_width %} style="max-width:{{ settings.logo_width }}px;"{% endif %}>
+      {%- else -%}
+        <img loading="lazy" src="{{ 'logo_1.svg' | asset_url }}" alt="{{ shop.name | escape }}" class="component_navbar_logo">
+      {%- endif -%}
+    </a>
+    <div class="component_navbar_icons_wrapper">
+      <a href="{{ routes.search_url }}" class="component_navbar_icons_link w-inline-block" aria-label="Search"><img loading="lazy" src="{{ 'search.svg' | asset_url }}" alt="" class="component_navbar_icons_link_icon"></a>
+      <a href="{{ routes.account_url }}" class="component_navbar_icons_link w-inline-block" aria-label="Account"><img loading="lazy" src="{{ 'accounts.svg' | asset_url }}" alt="" class="component_navbar_icons_link_icon"></a>
+      <a href="{{ routes.cart_url }}" data-cart-open class="component_navbar_icons_link w-inline-block" aria-label="Cart">
+        <img loading="lazy" src="{{ 'card.svg' | asset_url }}" alt="" class="component_navbar_icons_link_icon">
+        <span data-cart-count class="component_navbar_cart_count{% if cart.item_count == 0 %} is-hidden{% endif %}">{{ cart.item_count }}</span>
+      </a>
+      <a href="#" class="component_navbar_icons_link w-inline-block" aria-label="Region"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></a>
+    </div>
+    <div id="w-node-b0ef8415-fdc7-cb9b-e624-7e7c8ae87f65-8ae87f43" class="component_navbar_menu_button w-nav-button">
+      <div class="w-icon-nav-menu"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    { "type": "paragraph", "content": "Logo image is set in Theme settings → Brand identity. The Webflow SVG is used as fallback." },
+    { "type": "header", "content": "Navigation" },
+    { "type": "link_list", "id": "main_menu", "label": "Primary menu", "info": "Links shown next to the SHOP ALL button. Use child links for the dropdown." },
+    { "type": "link_list", "id": "more_menu", "label": "‘More’ dropdown menu", "info": "Fallback when the primary menu has no nested links." },
+    { "type": "header", "content": "Primary CTA (SHOP ALL)" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "SHOP ALL" },
+    { "type": "product", "id": "cta_product", "label": "Linked product (optional)" },
+    { "type": "collection", "id": "cta_collection", "label": "Linked collection (optional)" },
+    { "type": "url", "id": "cta_url", "label": "Custom URL (overrides product / collection)" }
+  ],
+  "presets": [{ "name": "Header" }]
+}
+{% endschema %}

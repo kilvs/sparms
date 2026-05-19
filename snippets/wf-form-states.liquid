@@ -1,0 +1,16 @@
+{%- comment -%}
+  Renders Webflow-style success/error blocks driven by Shopify form state.
+  Required parameter:
+    form          - the Shopify form object
+  Optional:
+    success_text  - text for the success block (default: "Thank you! Your submission has been received!")
+    error_text    - text for the error block (default: "Oops! Something went wrong while submitting the form.")
+{%- endcomment -%}
+{%- assign _success_text = success_text | default: 'Thank you! Your submission has been received!' -%}
+{%- assign _error_text = error_text | default: 'Oops! Something went wrong while submitting the form.' -%}
+<div class="w-form-done"{% if form.posted_successfully? %} style="display:block"{% endif %}>
+  <div>{{ _success_text }}</div>
+</div>
+<div class="w-form-fail"{% if form.errors %} style="display:block"{% endif %}>
+  <div>{{ _error_text }}{% if form.errors %}: {{ form.errors | default_errors }}{% endif %}</div>
+</div>

@@ -30,30 +30,28 @@ const SOURCE_DIR = path.join(ROOT, 'webflow-source');
 // EDIT ME — your source pages and where they should end up in Shopify
 // ────────────────────────────────────────────────────────────────────────────
 const PAGES = [
-  { html: 'index.html',             section: 'page-index',        templateFile: 'templates/index.json' },
-  { html: 'product-template.html',  section: 'page-product',      templateFile: 'templates/product.json' },
-  { html: 'shop.html',              section: 'page-collection',   templateFile: 'templates/collection.json' },
-  { html: 'blog.html',              section: 'page-blog',         templateFile: 'templates/blog.json' },
-  { html: 'article-template.html',  section: 'page-article',      templateFile: 'templates/article.json' },
-  { html: 'about.html',             section: 'page-about',        templateFile: 'templates/page.about.json' },
-  { html: 'contact.html',           section: 'page-contact',      templateFile: 'templates/page.contact.json' },
-  { html: 'legal.html',             section: 'page-legal',        templateFile: 'templates/page.json' },
-  { html: '404.html',               section: 'page-404',          templateFile: 'templates/404.json' },
+  { html: 'index.html', section: 'page-index', templateFile: 'templates/index.json' },
 ];
 
 // Map every internal *.html link to its Shopify route
 const HREF_MAP = {
-  'index.html':            "{{ routes.root_url }}",
-  'about.html':            "{{ routes.root_url }}pages/about",
-  'shop.html':             "{{ routes.collections_url }}/all",
-  'blog.html':             "{{ routes.root_url }}blogs/news",
-  'contact.html':          "{{ routes.root_url }}pages/contact",
-  'legal.html':            "{{ routes.root_url }}pages/legal",
-  '404.html':              "/404",
-  '401.html':              "/password",
-  'product-template.html': "{{ routes.collections_url }}/all",
-  'article-template.html': "{{ routes.root_url }}blogs/news",
-  // Add more here for your project's static pages
+  'index.html':              "{{ routes.root_url }}",
+  'about.html':              "{{ routes.root_url }}pages/about",
+  'shop-all.html':           "{{ routes.collections_url }}/all",
+  'blog.html':               "{{ routes.root_url }}blogs/news",
+  'blog-posts.html':         "{{ routes.root_url }}blogs/news",
+  'contact.html':            "{{ routes.root_url }}pages/contact",
+  'legal.html':              "{{ routes.root_url }}pages/legal",
+  '404.html':                "/404",
+  '401.html':                "/password",
+  'product-page.html':       "{{ routes.collections_url }}/all",
+  'collection-template.html':"{{ routes.collections_url }}/all",
+  'ambassadors.html':        "{{ routes.root_url }}pages/ambassadors",
+  'faq.html':                "{{ routes.root_url }}pages/faq",
+  'login-signup.html':       "{{ routes.account_login_url }}",
+  'size-guide.html':         "{{ routes.root_url }}pages/size-guide",
+  'thank-you.html':          "{{ routes.root_url }}pages/thank-you",
+  'wholesale-b2b.html':      "{{ routes.root_url }}pages/wholesale-b2b",
 };
 
 // ────────────────────────────────────────────────────────────────────────────

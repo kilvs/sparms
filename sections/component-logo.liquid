@@ -1,0 +1,94 @@
+{%- if section.settings.show_section -%}
+      <section class="component_logo_section">
+        <div class="hide w-embed w-script">
+          <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //Splide Code for socials
+    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const gap = 16;
+    const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
+    new Splide('#logo', {
+      type: 'loop',
+      drag: false,
+      gap: '4rem', // 992px and above
+      autoWidth: true,
+      arrows: false,
+      pagination: false,
+      clones: needed,
+      autoScroll: {
+        speed: 0.3,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+      },
+      breakpoints: {
+        992: {
+          gap: '1rem', // below 992px
+        },
+      },
+    }).mount(window.splide.Extensions);
+  });
+</script>
+        </div>
+        <div id="logo" class="splide">
+          <div class="splide__track">
+            <div class="splide__list">
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'compression.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">compression</div>
+                </div>
+              </div>
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'Unisex.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">unisex</div>
+                </div>
+              </div>
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'Light-Weight.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">light-weight</div>
+                </div>
+              </div>
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'Cooling.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">cooling</div>
+                </div>
+              </div>
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'Quick-Dry.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">quick dry</div>
+                </div>
+              </div>
+              <div class="splide__slide">
+                <div class="home_logo_item"><img loading="lazy" src="{{ 'UPF.svg' | asset_url }}" alt="" class="home_logo_icon">
+                  <div class="heading-style-h3">upf 50+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Logo strip",
+  "tag": "section",
+  "class": "shopify-section-component-logo",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo strip"
+    }
+  ]
+}
+{% endschema %}

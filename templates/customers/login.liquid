@@ -1,0 +1,52 @@
+<main class="main-wrapper">
+  <section class="customer_section">
+    <div class="padding-section-large">
+      <div class="page-width">
+        <div class="max-width-small align-center">
+          <h1>{{ 'customer.login.title' | t | default: 'Log in' }}</h1>
+          <div class="spacer-medium"></div>
+
+          {%- form 'customer_login', class: 'component_form' -%}
+            {%- if form.errors -%}
+              <div class="w-form-fail" style="display:block;">
+                <div>{{ form.errors | default_errors }}</div>
+              </div>
+            {%- endif -%}
+            <div class="component_form_field_group">
+              <label for="CustomerEmail" class="form_label">Email</label>
+              <input type="email" name="customer[email]" id="CustomerEmail" class="component_form_input w-input" autocomplete="email" autocorrect="off" autocapitalize="off" required>
+            </div>
+            <div class="component_form_field_group">
+              <label for="CustomerPassword" class="form_label">Password</label>
+              <input type="password" name="customer[password]" id="CustomerPassword" class="component_form_input w-input" autocomplete="current-password" required>
+            </div>
+            <div class="spacer-medium"></div>
+            <div class="button-group">
+              <input type="submit" class="button-primary w-button" value="Sign In">
+              <a href="#recover" class="button-secondary w-button">Forgot password?</a>
+            </div>
+            <div class="spacer-small"></div>
+            <p>New customer? <a href="{{ routes.account_register_url }}">Create an account</a></p>
+          {%- endform -%}
+
+          <div id="recover" class="spacer-large"></div>
+          <h2>Reset your password</h2>
+          {%- form 'recover_customer_password', class: 'component_form' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="w-form-done" style="display:block;"><div>We've sent you an email with a link to update your password.</div></div>
+            {%- endif -%}
+            {%- if form.errors -%}
+              <div class="w-form-fail" style="display:block;"><div>{{ form.errors | default_errors }}</div></div>
+            {%- endif -%}
+            <div class="component_form_field_group">
+              <label for="RecoverEmail" class="form_label">Email</label>
+              <input type="email" name="email" id="RecoverEmail" class="component_form_input w-input" autocomplete="email" required>
+            </div>
+            <div class="spacer-small"></div>
+            <div class="button-group"><input type="submit" class="button-primary w-button" value="Submit"></div>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
