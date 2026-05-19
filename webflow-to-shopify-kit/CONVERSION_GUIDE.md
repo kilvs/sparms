@@ -65,6 +65,8 @@ Before starting, take stock of the export:
 | `js/*.js` | `assets/` |
 | `images/*` | `assets/` |
 | `fonts/*` | `assets/` |
+| `videos/*` (when present) | `assets/` |
+| `documents/*` (when present) | `assets/` |
 | `index.html` | `sections/page-index.liquid` + `templates/index.json` |
 | `product-template.html` | `sections/page-product.liquid` + `templates/product.json` |
 | `shop.html` | `sections/page-collection.liquid` + `templates/collection.json` |
@@ -74,7 +76,9 @@ Before starting, take stock of the export:
 | `404.html` | `sections/page-404.liquid` + `templates/404.json` |
 | `401.html` | `layout/password.liquid` (no sections — full layout) |
 
-**Filename collision check**: confirm no two assets share a name once `images/` and `fonts/` flatten into `assets/`. Prefix font files if needed and update CSS.
+**Source page filenames vary by project**: Webflow lets designers rename pages, so the table's "product-template.html / shop.html / article-template.html" are conventions, not guarantees. Recent exports tend to use `product-page.html`, `shop-all.html`, `blog-posts.html`, `collection-template.html`. Always check the AUDIT.md file table before configuring `convert.cjs`'s `PAGES` array and `HREF_MAP`.
+
+**Filename collision check**: confirm no two assets share a name once `images/`, `fonts/`, `videos/`, `documents/` flatten into `assets/`. Prefix font files if needed and update CSS.
 
 ---
 
@@ -394,6 +398,52 @@ Save the script alongside `convert.cjs` — it's reusable across Webflow exports
 
 ---
 
+## 6.2 Seed template block-instances after enriching schemas
+
+**This is a step you MUST run after the §6.1 enrichment.** Skipping it causes blank sections.
+
+### Why
+
+`schema.presets.blocks` only seeds blocks when a merchant clicks "Add section" *fresh* from the theme editor. Sections that come from a JSON template (`templates/index.json`, `templates/page.about.json`, etc.) start with whatever blocks the JSON declares — **empty if blocks aren't specified**.
+
+So when you:
+1. Run `split-page.cjs` (which writes a basic `templates/<page>.json` with `{ "type": "...", "settings": {...} }` per section, no blocks),
+2. Then enrich each section's `{% schema %}` with `schema.blocks` and a matching `schema.presets[0].blocks` (per §6.1),
+3. Push the theme,
+
+…the section markup loops `{% for block in section.blocks %}` over an empty array. The section renders as an empty band, with whatever CSS gives the wrapper its height (often nothing → invisible).
+
+### Two safety nets
+
+**1. Run the seeder script** after every §6.1 enrichment:
+
+```bash
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs --dry   # preview
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs         # write
+```
+
+The script reads each section file referenced from `templates/*.json`, extracts the first `presets.blocks` array from the schema, and writes those block instances into the template's section entry as `blocks` + `block_order`. It skips sections that already have blocks in the template (so it never overwrites your customizations).
+
+**2. Always add an `{% else %}` fallback inside each `{% for block %}` loop.** This guarantees the section renders content even if blocks fail to instantiate (template not re-pushed, merchant cleared all blocks in the editor, schema mismatch, etc.):
+
+```liquid
+{%- for block in section.blocks -%}
+  {%- if block.type == 'slide' -%}
+    <!-- ...editable slide using block.settings... -->
+  {%- endif -%}
+{%- else -%}
+  <!-- ...verbatim Webflow markup, the original 6 slides... -->
+{%- endfor -%}
+```
+
+The fallback uses the original static markup verbatim — the section never looks broken even if the template JSON loses its block instances.
+
+### How the seeder generates block IDs
+
+For each preset block, the script writes `"<sectionId>-<blockType>-<N>"` (e.g. `"collection-slide-1"`, `"collection-slide-2"`). These are stable per template + section type, so re-running the seeder produces the same IDs.
+
+---
+
 ## 7. Dynamic data binding (commerce pages)
 
 ### Product page (`page-product.liquid`)
@@ -600,6 +650,15 @@ done
 - **Cart drawer / line item properties**: Webflow doesn't model these. Add later via section blocks if needed.
 - **`gift_card.liquid` is a full HTML doc** — it doesn't go through `layout/theme.liquid` and must contain its own `<!DOCTYPE html>` / `<head>` / `<body>` and load its own CSS. Don't reference `{{ content_for_header }}` from theme.liquid here.
 - **`layout/password.liquid` and `templates/password.json` are separate.** The layout is just the HTML shell; the form/section goes in the template. Putting the form in the layout works visually but breaks the principle that templates own their content and editor sections.
+- **Section preset blocks ≠ template block instances.** Adding `schema.blocks` to a section file does NOT seed those blocks into existing template-instantiated sections. See §6.2 — you need to either run `seed-template-blocks.cjs` after every enrichment pass, or add `{% else %}` fallbacks inside every `{% for block %}` loop. Skipping this leaves the homepage with empty bands wherever a section uses repeating blocks.
+- **Webflow Swiper `enabled: false` config breaks in Swiper v12.** Some Webflow exports use `breakpoints: { 0: { enabled: false, ... }, 992: { enabled: true, ... } }` to disable swipe on mobile. In Swiper v12 this disables the entire carousel regardless of the desktop override. Drop the `enabled` toggle and use a different mechanism if you really need mobile-disabled behavior (e.g. destroy the swiper in a media query callback).
+- **Splide auto-scroll extension is separate from Splide core.** If any section calls `.mount(window.splide.Extensions)` with `autoScroll: {...}` config, you must load `@splidejs/splide-extension-auto-scroll` in `theme.liquid` alongside Splide. The extension is only ~5 KB; load it whenever the export uses Splide.
+- **`webflow-source/videos/` and `documents/` need flattening too.** The kit's `flatten-assets.{sh,ps1}` now copies these subdirectories. Older versions of the kit skipped them — if you have a hero video that 404s, check whether the files made it into `assets/`.
+- **Page filenames vary per Webflow export.** Webflow lets designers rename pages, so the kit's `convert.cjs` `PAGES` array (which defaults to `product-template.html`, `shop.html`, `article-template.html`) often won't match. Always look at the AUDIT.md file table and the `webflow-source/` listing before running `convert.cjs`.
+- **Form IDs vary per Webflow export.** The kit's `convert-forms.cjs` defaults to `wf-form-Newsletter-Form` (Webflow's named component), but recent exports use `wf-form-Subscribe-Form`, `wf-form-Email-Form`, etc. AUDIT.md lists every ID in the export. Pass it as a CLI arg: `node convert-forms.cjs wf-form-Subscribe-Form`.
+- **`<main>` placement when splitting the homepage.** The kit's `convert.cjs` leaves `<main class="main-wrapper">` inside the monolithic `page-<name>.liquid`. When you split into per-block sections, the `<main>` wrapper has nowhere obvious to live. Move it into `layout/theme.liquid` around `{{ content_for_layout }}` — the kit's CONVERSION_GUIDE §5's "don't double-wrap" warning only applies when the page-level section still owns the `<main>`.
+- **`.home_hero_load` style fades to invisible but stays in the DOM.** Webflow's hero intro typically animates a fullscreen `position: fixed` overlay with `autoAlpha: 0` — leaves the element with `visibility: hidden` but technically still there. The original Webflow's `hasSeenIntro` shortcut path is worse: it sets only `opacity: 0`, leaving `visibility: visible`, so a fixed invisible div silently captures clicks across the viewport. Fix: add a GSAP `onComplete` callback that sets `display: none` after the animation, and have the shortcut path go straight to `display: none`.
+- **Hard-coded `{% for i in (1..N) %}` fallback loops should match the original card count.** When a Webflow section's static HTML has 5 product cards or 8 ambassador headshots, your `{% for block %}{% else %}` fallback should produce the same number. Mismatch causes layout shift between bound vs. fallback states.
 
 ---
 

@@ -104,6 +104,19 @@ rm sections/page-index.liquid
 
 Then enrich each section's schema with editable text/image/CTA settings per kit `§6.1`. Default values should match the original static content so out-of-the-box rendering is identical.
 
+### 5b. (REQUIRED after §6.1) Seed JSON templates with block instances
+
+`schema.presets.blocks` only seed blocks when a merchant adds a section *fresh* from the editor. Existing template-instantiated sections start with empty `section.blocks`. After enriching section schemas with `schema.blocks`, run:
+
+```bash
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs --dry   # preview
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs         # write
+```
+
+Also add `{% else %}` fallback markup to every `{% for block in section.blocks %}` loop, with the original Webflow content verbatim. This guarantees the section renders content even if blocks fail to instantiate. See kit `§6.2`.
+
+**Skip this and the homepage will render empty bands** wherever a section uses repeating blocks.
+
 ### 6. Re-run the required-files check + JSON/Liquid validators
 
 ```bash
@@ -145,8 +158,12 @@ These exist because they caused real bugs in past conversions — see kit `CONVE
 - **Never strip `data-wf-*` attributes** from any element.
 - **Inside `{% liquid %}` tags**: one statement per line. Semicolons are NOT valid separators — they cause silent parse failure that Shopify reports as the cryptic "missing required file layout/theme.liquid" error.
 - **Every image_picker setting needs a 3-tier fallback**: `image_picker → fallback_image filename → hard-coded asset`. Empty image pickers should NEVER render a broken `<img>`.
-- **Every block-based section needs an `{% else %}` branch** with the original Webflow markup verbatim, so the page never looks empty when the merchant clears blocks.
+- **Every block-based section needs an `{% else %}` branch** inside its `{% for block in section.blocks %}` loop, with the original Webflow markup verbatim. The fallback fires when the template doesn't seed blocks AND when a merchant clears all blocks. Always pair with running `seed-template-blocks.cjs`.
 - **Color settings should not have `default` values** unless verified against the actual CSS — wrong defaults override the dark-theme Webflow CSS and make text invisible (see kit `§13` for the dark-mode bug).
+- **Check AUDIT.md before configuring scripts** — page filenames (`product-page.html` vs `product-template.html`), form IDs (`wf-form-Subscribe-Form` vs `wf-form-Newsletter-Form`), Webflow JS bundle name, primary CSS filename all vary per export. The kit scripts have defaults that won't match every project.
+- **Check `webflow-source/` for `videos/` and `documents/` folders** before assuming `flatten-assets` handled everything. The current scripts copy these subdirectories, but older runs or older kit versions may not have — verify with `ls assets/ | grep <expected-filename>` if a video or PDF 404s.
+- **Drop `enabled: false` from Swiper breakpoint configs** — the original Webflow may use it to disable swipe on mobile, but Swiper v12 reads it as "disable the whole carousel" and ignores the desktop override. Use `slidesPerView`-based control instead, or destroy/recreate the swiper via media-query JS if you really need mobile-disabled behavior.
+- **Hero-load overlays need `display: none` not `autoAlpha: 0`** — Webflow's hero-intro pattern animates a fullscreen `position: fixed` overlay to invisible but leaves it in the DOM. Always end the timeline (and the `hasSeenIntro` shortcut path) with `display: none` set in JS, otherwise the invisible div silently captures clicks across the viewport.
 - **Commit format**: Conventional Commits per `CLAUDE.md`. e.g. `feat(home): split hero into its own section`.
 
 ---

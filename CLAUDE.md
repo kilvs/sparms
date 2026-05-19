@@ -100,6 +100,7 @@ Pick the narrowest scope that fits. Common scopes for this kind of repo:
 - `cart` — `cart-ajax.js`, cart drawer, cart wiring
 - `guide` — `CONVERSION_GUIDE.md` or `CLAUDE.md`
 - `webflow-bridge` — preserving Webflow JS bundle / `data-wf-*` attributes / `w-mod-*` classes
+- `kit` — changes to scripts/docs inside `webflow-to-shopify-kit/` (gotchas captured, scripts fixed, README/CONVERSION_GUIDE updates)
 
 ### Examples
 
@@ -141,6 +142,10 @@ fix(webflow-bridge): force w-mod-ix3 so typewriter isn't hidden
     bash webflow-to-shopify-kit/scripts/check-required-files.sh
     ```
     All 7 `customers/*.liquid`, `gift_card.liquid` (must be `.liquid`), `list-collections.json`, `password.json` must exist or publish fails with the misleading "missing layout/theme.liquid" error.
+11. **Block-based sections need both seeded template blocks AND `{% else %}` fallbacks.** Adding `schema.blocks` to a section file doesn't seed those blocks into existing template-instantiated sections (`presets.blocks` only fires when a merchant adds a section fresh from the editor). After enriching schemas, run `node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs` to write block instances into `templates/*.json`, AND make sure every `{% for block in section.blocks %}` has an `{% else %}` branch with verbatim Webflow markup as a fallback. Skipping either causes blank sections in production.
+12. **Swiper v12 `enabled: false` breakpoint config is broken.** The original Webflow may use `breakpoints: { 0: { enabled: false, ... } }` to disable mobile swipe; in v12 that disables the entire carousel and ignores the desktop override. Drop the `enabled` toggle.
+13. **`videos/` and `documents/` need to be in `assets/` too.** `flatten-assets.{sh,ps1}` now handles them, but if you see a 404 on a hero video or PDF, check whether the files made it in.
+14. **`.home_hero_load` and similar fullscreen overlays must end at `display: none`, not `autoAlpha: 0`.** GSAP's `autoAlpha: 0` sets `visibility: hidden` — the element stays in the DOM. For fixed-positioned hero loaders, that's enough to silently capture clicks. The first-visit timeline needs `onComplete: () => loadEl.style.display = 'none'`, and the second-visit `hasSeenIntro` shortcut should go straight to `display: none`.
 
 ---
 

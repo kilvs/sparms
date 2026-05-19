@@ -1,4 +1,4 @@
-# PowerShell equivalent of install-skills.sh — for Windows users.
+# PowerShell equivalent of install-skills.sh -- for Windows users.
 #
 # Installs Shopify's official AI-assistant skills into the current project.
 # Skills land in .agents/skills/ and are picked up by Claude Code, GitHub
@@ -27,11 +27,11 @@ if (Get-Command pnpm -ErrorAction SilentlyContinue) {
 
 foreach ($skill in $skills) {
     Write-Host ""
-    Write-Host "▶ Installing skill: $skill"
+    Write-Host "> Installing skill: $skill"
     & $runner @runnerArgs skills add $repo --skill $skill
 }
 
 Write-Host ""
-Write-Host "✓ Done. Skills installed at .agents/skills/"
+Write-Host "OK Done. Skills installed at .agents/skills/"
 Write-Host "  Commit .agents/ so collaborators pick them up:"
 Write-Host '  git add .agents && git commit -m "chore: add shopify-dev + shopify-liquid skills"'

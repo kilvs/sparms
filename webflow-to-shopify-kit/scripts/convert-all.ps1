@@ -1,4 +1,4 @@
-# PowerShell equivalent of convert-all.sh — for Windows users.
+# PowerShell equivalent of convert-all.sh -- for Windows users.
 #
 # Usage (from project root):
 #   pwsh webflow-to-shopify-kit/scripts/convert-all.ps1
@@ -17,26 +17,26 @@ if (-not (Test-Path $Kit -PathType Container)) {
 
 function Heading($txt) {
     Write-Host ""
-    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+    Write-Host "===============================================================" -ForegroundColor Cyan
     Write-Host "  $txt" -ForegroundColor Cyan
-    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+    Write-Host "===============================================================" -ForegroundColor Cyan
 }
 function Step($txt) {
     Write-Host ""
-    Write-Host "▶ $txt" -ForegroundColor Yellow
+    Write-Host "> $txt" -ForegroundColor Yellow
     Write-Host "──────────────────────────────────────────────"
 }
 
-Heading "Webflow → Shopify automated conversion"
+Heading "Webflow -> Shopify automated conversion"
 
 Step "Step 0: install Shopify AI skills (skipped if already installed)"
 if ((Test-Path ".agents/skills/shopify-dev") -and (Test-Path ".agents/skills/shopify-liquid")) {
-    Write-Host "  ✓ skills already at .agents/skills/ — skipping" -ForegroundColor Green
+    Write-Host "  OK skills already at .agents/skills/ -- skipping" -ForegroundColor Green
 } else {
     & pwsh "$Kit/scripts/install-skills.ps1"
 }
 
-Step "Step 2: audit the Webflow source → AUDIT.md"
+Step "Step 2: audit the Webflow source -> AUDIT.md"
 & pwsh "$Kit/scripts/audit-source.ps1"
 
 Step "Step 3: flatten + rewrite assets"
@@ -44,12 +44,12 @@ Step "Step 3: flatten + rewrite assets"
 
 Step "Step 4: bootstrap starter theme"
 Copy-Item -Recurse -Force "$Kit/starter-theme/*" .
-# .shopifyignore is treated as hidden by Copy-Item — copy explicitly
+# .shopifyignore is treated as hidden by Copy-Item -- copy explicitly
 Copy-Item -Force "$Kit/starter-theme/.shopifyignore" .
-Write-Host "  ✓ copied starter-theme/ into project root" -ForegroundColor Green
-Write-Host "  ✓ includes CLAUDE.md, theme.liquid (with placeholders), customer templates, AJAX cart, …" -ForegroundColor Green
+Write-Host "  OK copied starter-theme/ into project root" -ForegroundColor Green
+Write-Host "  OK includes CLAUDE.md, theme.liquid (with placeholders), customer templates, AJAX cart, ..." -ForegroundColor Green
 
-Step "Step 6: extract page content (HTML → sections + templates)"
+Step "Step 6: extract page content (HTML -> sections + templates)"
 & node "$Kit/scripts/convert.cjs"
 
 Step "Step 7: convert Webflow newsletter forms"
@@ -57,7 +57,7 @@ $hasNewsletter = Get-ChildItem sections/*.liquid -ErrorAction SilentlyContinue |
 if ($hasNewsletter) {
     & node "$Kit/scripts/convert-forms.cjs"
 } else {
-    Write-Host "  (no newsletter forms found in sections/ — skipping)" -ForegroundColor DarkGray
+    Write-Host "  (no newsletter forms found in sections/ -- skipping)" -ForegroundColor DarkGray
 }
 
 Step "Step 10: verify Shopify-required files"
@@ -66,7 +66,7 @@ Step "Step 10: verify Shopify-required files"
 Heading "Automated steps complete."
 
 Write-Host ""
-Write-Host "  Still TODO (need judgement — hand to an AI assistant with"
+Write-Host "  Still TODO (need judgement -- hand to an AI assistant with"
 Write-Host "  webflow-to-shopify-kit/CONVERT_PROMPT.md as the brief):"
 Write-Host ""
 Write-Host "  • Step 5  Fill placeholders in layout/theme.liquid" -ForegroundColor Yellow

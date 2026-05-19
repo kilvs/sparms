@@ -19,8 +19,9 @@ webflow-to-shopify-kit/
 │   ├── audit-source.{sh,ps1}      # Step 2 — writes AUDIT.md with data-wf-* IDs + components
 │   ├── flatten-assets.{sh,ps1}    # Step 3 — copies + rewrites webflow-source/ into flat assets/
 │   ├── convert.cjs                # Step 6 — bulk page-content extractor (HTML → sections + templates)
-│   ├── convert-forms.cjs          # Step 7 — bulk Webflow newsletter → Shopify {% form %} converter
+│   ├── convert-forms.cjs          # Step 7 — bulk Webflow newsletter → Shopify {% form %} converter (configurable form ID)
 │   ├── split-page.cjs             # Step 9 — splits monolithic page section into per-block sections
+│   ├── seed-template-blocks.cjs   # Step 9b — seeds JSON templates with section preset blocks (run after §6.1)
 │   └── check-required-files.sh    # Step 10 — pre-push verifier
 └── starter-theme/            # universal theme files you can copy verbatim
     ├── CLAUDE.md             # template AI commit-message context — edit <BRAND> placeholder
@@ -192,10 +193,11 @@ Produces `sections/page-*.liquid` and `templates/*.json` for each page. Internal
 ### Step 7 — convert Webflow forms
 
 ```bash
-node webflow-to-shopify-kit/scripts/convert-forms.cjs
+# Default form ID is wf-form-Newsletter-Form. Override per export:
+node webflow-to-shopify-kit/scripts/convert-forms.cjs wf-form-Subscribe-Form
 ```
 
-Bulk-replaces Webflow newsletter forms with Shopify's `{% form 'customer' %}` carrying a `newsletter` tag. Contact forms (Webflow's `wf-form-Enquiry-Form`) need manual conversion — see `CONVERSION_GUIDE.md §8`.
+Bulk-replaces Webflow newsletter forms with Shopify's `{% form 'customer' %}` carrying a `newsletter` tag. The form ID is configurable — check AUDIT.md for the actual ID your export uses (`wf-form-Newsletter-Form`, `wf-form-Subscribe-Form`, `wf-form-Email-Form`, etc.). Contact forms (`wf-form-Enquiry-Form` etc.) still need manual conversion — see `CONVERSION_GUIDE.md §8`.
 
 ### Step 8 — build header + footer sections
 
@@ -211,6 +213,17 @@ node webflow-to-shopify-kit/scripts/split-page.cjs
 ```
 
 Output: `sections/<page>-NN-<slug>.liquid` for page-specific blocks, `sections/component-<slug>.liquid` for reusable ones (matched by Webflow's `component_*_section` class prefix).
+
+### Step 9b — seed JSON templates with block instances (REQUIRED if you used `schema.blocks` in §6.1)
+
+After enriching section schemas with `schema.blocks` per CONVERSION_GUIDE §6.1, the existing `templates/*.json` files don't know about those blocks — `presets.blocks` only seed when a merchant adds a section *fresh* from the editor. Run:
+
+```bash
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs --dry   # preview
+node webflow-to-shopify-kit/scripts/seed-template-blocks.cjs         # write
+```
+
+Reads each section file referenced from `templates/*.json`, extracts the first `presets.blocks` array from the schema, and seeds those block instances into the template's section entry as `blocks` + `block_order`. Won't overwrite sections that already have blocks. Skip this step and your homepage will render empty bands wherever a section uses repeating blocks.
 
 ### Step 10 — verify required files
 
