@@ -2,57 +2,96 @@
   "sections": {
     "hero": {
       "type": "home-01-hero",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true }
     },
     "logo": {
       "type": "component-logo",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "logo-1": { "type": "feature", "settings": { "label": "compression",  "icon_filename": "compression.svg" } },
+        "logo-2": { "type": "feature", "settings": { "label": "unisex",       "icon_filename": "Unisex.svg" } },
+        "logo-3": { "type": "feature", "settings": { "label": "light-weight", "icon_filename": "Light-Weight.svg" } },
+        "logo-4": { "type": "feature", "settings": { "label": "cooling",      "icon_filename": "Cooling.svg" } },
+        "logo-5": { "type": "feature", "settings": { "label": "quick dry",    "icon_filename": "Quick-Dry.svg" } },
+        "logo-6": { "type": "feature", "settings": { "label": "upf 50+",      "icon_filename": "UPF.svg" } }
+      },
+      "block_order": ["logo-1", "logo-2", "logo-3", "logo-4", "logo-5", "logo-6"]
     },
     "product-slider": {
       "type": "home-02-product-slider",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true }
     },
     "feature": {
       "type": "component-feature",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "card-1": { "type": "feature_card", "settings": { "heading": "Proven SPF 50+ Protection", "body": "Claiming to have the best sun sleeves is bold, but we back it up. Every year, our products are independently certified and rigorously tested to give you the ultimate UV defence. When you choose Sparms, you’re choosing protection you can trust.", "alignment": "left" } },
+        "card-2": { "type": "feature_card", "settings": { "heading": "Stay Cool Under Pressure", "body": "Our proprietary process harnesses the moisture-wicking power of premium fabrics, delivering a cooling, effortless fit from the moment you put it on. Whether you’re under the midday sun or pushing through an intense session, our sleeves keep you fresh, focused and moving at your best.", "alignment": "right" } },
+        "card-3": { "type": "feature_card", "settings": { "heading": "The Style in SPF", "body": "Designed for athletes who demand more than just function, our sleeves keep you cool, protected, and looking sharp while you push your limits.", "alignment": "left" } },
+        "card-4": { "type": "feature_card", "settings": { "heading": "The Style in SPF", "body": "With a wide range of sizes, every piece stays in place, supporting your performance and letting you focus on the play. Engineered for every body and designed to look as sharp as it feels, Sparms keeps you ready for whatever the day throws at you.", "alignment": "right" } }
+      },
+      "block_order": ["card-1", "card-2", "card-3", "card-4"]
     },
     "collection": {
       "type": "component-collection",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "slide-1": { "type": "slide", "settings": {} },
+        "slide-2": { "type": "slide", "settings": {} },
+        "slide-3": { "type": "slide", "settings": {} },
+        "slide-4": { "type": "slide", "settings": {} },
+        "slide-5": { "type": "slide", "settings": {} },
+        "slide-6": { "type": "slide", "settings": {} }
+      },
+      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5", "slide-6"]
     },
     "ambassadors": {
       "type": "component-ambassadors",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "a-1": { "type": "ambassador", "settings": {} },
+        "a-2": { "type": "ambassador", "settings": {} },
+        "a-3": { "type": "ambassador", "settings": {} },
+        "a-4": { "type": "ambassador", "settings": {} },
+        "a-5": { "type": "ambassador", "settings": {} },
+        "a-6": { "type": "ambassador", "settings": {} },
+        "a-7": { "type": "ambassador", "settings": {} },
+        "a-8": { "type": "ambassador", "settings": {} }
+      },
+      "block_order": ["a-1", "a-2", "a-3", "a-4", "a-5", "a-6", "a-7", "a-8"]
     },
     "testimonial": {
       "type": "component-testimonial",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "t-1": { "type": "testimonial", "settings": { "name": "Alyssa Healy",      "position": "Australian Women’s Cricket Captain",   "quote": "I was actually a customer before I became a part of SParms Cricket. Using SParms in my own training and daily life, I realised everyone needed this so when SParms reached out, we got the ball rolling as soon as we could." } },
+        "t-2": { "type": "testimonial", "settings": { "name": "Mitchell Starc",    "position": "Australian International Cricketer",   "quote": "Cricket demands performance regardless of weather, with most of it under the scorching sun so protecting our skin is paramount. Partnering with SParms Cricket was a natural choice for us. Their advanced sun protection solutions are a game-changer, and I’m proud to be a part of this initiative." } },
+        "t-3": { "type": "testimonial", "settings": { "name": "Marina Alex",       "position": "Golf Professional (LPGA), LPGA Winner", "quote": "They are a fantastic product, I’ve been wearing them for few season to protect my skin from the sun. Their shawls are absolutely incredible, super comfortable, you don’t even know you have them on." } },
+        "t-4": { "type": "testimonial", "settings": { "name": "Brittany Lincicome","position": "Golf Professional (LPGA), LPGA Winner", "quote": "Thank you SOOOO much to @SParms_UPF50 for my new shawl sleeves. Best sun protection ever!!!!! #Love" } },
+        "t-5": { "type": "testimonial", "settings": { "name": "Zack Guthrie",      "position": "Professional AFL Player",               "quote": "The Sparms products help to keep me cool and comfortable during the hot summer months. It provides great protection whilst allowing me to perform at my best." } },
+        "t-6": { "type": "testimonial", "settings": { "name": "Jesse Levine",      "position": "Former Professional Tennis Player",     "quote": "After playing professional tennis for 10 years, the SParms keep me protected from the sun with the most comfort and coolness." } },
+        "t-7": { "type": "testimonial", "settings": { "name": "Chloe Stewart",     "position": "Australian Lawn Bowls Champion",        "quote": "SParms are essential every time I go on the bowls green. Super comfortable, lightweight, and always keep me cool!" } }
+      },
+      "block_order": ["t-1", "t-2", "t-3", "t-4", "t-5", "t-6", "t-7"]
     },
     "cta": {
       "type": "component-cta",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true }
     },
     "community": {
       "type": "component-community",
-      "settings": {
-        "show_section": true
-      }
+      "settings": { "show_section": true },
+      "blocks": {
+        "p-1": { "type": "photo", "settings": { "image_filename": "community-image-7.webp" } },
+        "p-2": { "type": "photo", "settings": { "image_filename": "community-image-5.webp" } },
+        "p-3": { "type": "photo", "settings": { "image_filename": "community-image-4.webp" } },
+        "p-4": { "type": "photo", "settings": { "image_filename": "community-image-3.webp" } },
+        "p-5": { "type": "photo", "settings": { "image_filename": "community-image-2.webp" } },
+        "p-6": { "type": "photo", "settings": { "image_filename": "community-image-1.webp" } },
+        "p-7": { "type": "photo", "settings": { "image_filename": "community-image-6.webp" } },
+        "p-8": { "type": "photo", "settings": { "image_filename": "community-image-4.webp" } }
+      },
+      "block_order": ["p-1", "p-2", "p-3", "p-4", "p-5", "p-6", "p-7", "p-8"]
     }
   },
   "order": [

@@ -114,6 +114,42 @@
                         </div>
                       </div>
                     {%- endif -%}
+                  {%- else -%}
+                    {%- for i in (1..6) -%}
+                      <div class="swiper-slide is-collection">
+                        <div class="component_collection_item">
+                          <a href="{{ routes.collections_url }}/all" class="component_collection_item-content w-inline-block">
+                            <div class="max-width-small">
+                              <h2>adding style to sweat control</h2>
+                              <div class="component_collection_paragraph-wrap">
+                                <p>Discover our collections providing elite protection for your everyday.</p>
+                              </div>
+                            </div>
+                          </a>
+                          <div class="component_collection_item-content-right">
+                            <div class="component_collection_img-wrap"><img loading="lazy" src="{{ 'collection-img-placeholder.webp' | asset_url }}" alt="">
+                              <div class="component_collection_swiper-overlay"></div>
+                            </div>
+                          </div>
+                          <div class="component_collection_item-grid">
+                            <div class="component_collection_item-row"></div>
+                            <div class="component_collection_item-row no-bottom-border"></div>
+                            <div class="component_collection_item-row content">
+                              <a href="{{ routes.collections_url }}/all" class="component_collection_name-wrap w-inline-block">
+                                <div class="component_collection_icon-wrap">
+                                  <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                      <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                                    </svg></div>
+                                </div>
+                                <div class="component_collection_text text-source">SP Arms Sun Sleeves</div>
+                              </a>
+                            </div>
+                            <div class="component_collection_item-row"></div>
+                            <div class="component_collection_item-row"></div>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endfor -%}
                   {%- endfor -%}
                 </div>
               </div>

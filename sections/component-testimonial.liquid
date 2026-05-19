@@ -87,6 +87,39 @@
                         </div>
                       </div>
                     {%- endif -%}
+                  {%- else -%}
+                    {%- assign default_quotes = 'Alyssa Healy|Australian Women’s Cricket Captain|I was actually a customer before I became a part of SParms Cricket. Using SParms in my own training and daily life, I realised everyone needed this so when SParms reached out, we got the ball rolling as soon as we could.;;Mitchell Starc|Australian International Cricketer|Cricket demands performance regardless of weather, with most of it under the scorching sun so protecting our skin is paramount. Partnering with SParms Cricket was a natural choice for us. Their advanced sun protection solutions are a game-changer, and I’m proud to be a part of this initiative.;;Marina Alex|Golf Professional (LPGA), LPGA Winner|They are a fantastic product, I’ve been wearing them for few season to protect my skin from the sun. Their shawls are absolutely incredible, super comfortable, you don’t even know you have them on.;;Brittany Lincicome|Golf Professional (LPGA), LPGA Winner|Thank you SOOOO much to @SParms_UPF50 for my new shawl sleeves. Best sun protection ever!!!!! #Love;;Zack Guthrie|Professional AFL Player|The Sparms products help to keep me cool and comfortable during the hot summer months. It provides great protection whilst allowing me to perform at my best.;;Jesse Levine|Former Professional Tennis Player|After playing professional tennis for 10 years, the SParms keep me protected from the sun with the most comfort and coolness.;;Chloe Stewart|Australian Lawn Bowls Champion|SParms are essential every time I go on the bowls green. Super comfortable, lightweight, and always keep me cool!' | split: ';;' -%}
+                    {%- for tq in default_quotes -%}
+                      {%- assign parts = tq | split: '|' -%}
+                      <div class="component_testimonial_tabs_item">
+                        <div class="component_testimonial_tabs_item_wrapper">
+                          <div class="component_testimonial_tabs_title">
+                            <div class="component_testimonial_tabs_item_icon"></div>
+                            <p id="testi-name-from" class="component_testimonial_tabs_title_text">{{ parts[0] }}</p>
+                          </div>
+                          <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">{{ parts[1] }}</div>
+                        </div>
+                        <div class="component_testimonial_tabs_item_content hide-desktop">
+                          <div class="component_testimonial_tabs_image_headshot_container">
+                            <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="{{ parts[0] | escape }}" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
+                            <div class="component_testimonial_tabs_image_headshot_content">
+                              <div class="component_testimonial_tabs_title">
+                                <div class="component_testimonial_tabs_title_icon"></div>
+                                <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">{{ parts[0] }}</p>
+                              </div>
+                              <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">{{ parts[1] }}</div>
+                            </div>
+                          </div>
+                          <div class="spacer-medium"></div>
+                          <div class="component_testimonial_tabs_image_content_wrapper">
+                            <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
+                              </svg></div>
+                            <p id="testi-content-from" class="text-size-large">{{ parts[2] }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endfor -%}
                   {%- endfor -%}
                 </div>
               </div>

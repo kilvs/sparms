@@ -49,14 +49,14 @@
                   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const swiper = new Swiper('#is-feature', {
+      slidesPerView: 1,
       spaceBetween: 16,
       navigation: {
         nextEl: '#feature-swiper-next',
         prevEl: '#feature-swiper-prev',
       },
       breakpoints: {
-        0: { enabled: true, slidesPerView: 1, spaceBetween: 16 },
-        992: { enabled: false, slidesPerView: 'auto', spaceBetween: 32 },
+        992: { slidesPerView: 'auto', spaceBetween: 32 },
       },
     });
   });
@@ -89,6 +89,32 @@
                             </div>
                           </div>
                         {%- endif -%}
+                      {%- else -%}
+                        {%- assign default_cards = 'Proven SPF 50+ Protection|Claiming to have the best sun sleeves is bold, but we back it up. Every year, our products are independently certified and rigorously tested to give you the ultimate UV defence. When you choose Sparms, you’re choosing protection you can trust.|left;;Stay Cool Under Pressure|Our proprietary process harnesses the moisture-wicking power of premium fabrics, delivering a cooling, effortless fit from the moment you put it on. Whether you’re under the midday sun or pushing through an intense session, our sleeves keep you fresh, focused and moving at your best.|right;;The Style in SPF|Designed for athletes who demand more than just function, our sleeves keep you cool, protected, and looking sharp while you push your limits.|left;;The Style in SPF|With a wide range of sizes, every piece stays in place, supporting your performance and letting you focus on the play. Engineered for every body and designed to look as sharp as it feels, Sparms keeps you ready for whatever the day throws at you.|right' | split: ';;' -%}
+                        {%- for card in default_cards -%}
+                          {%- assign cparts = card | split: '|' -%}
+                          {%- assign calign = cparts[2] -%}
+                          <div class="swiper-slide{% if forloop.first == false %} is-feature{% endif %}">
+                            <div class="component_feature_card{% if calign == 'right' %} is-feature-right{% endif %}">
+                              <div class="component_feature_title-wrap{% if calign == 'right' %} is-right-aligned{% endif %}">
+                                {%- if calign == 'right' -%}
+                                  <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                                    </svg></div>
+                                  <h3 class="home_feature_title">{{ cparts[0] }}</h3>
+                                {%- else -%}
+                                  <h3 class="home_feature_title">{{ cparts[0] }}</h3>
+                                  <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                                    </svg></div>
+                                {%- endif -%}
+                              </div>
+                              <div class="component_feature_card-body{% if calign == 'right' %} is-right-aligned{% endif %}">
+                                <p class="paragraph">{{ cparts[1] }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        {%- endfor -%}
                       {%- endfor -%}
                     </div>
                   </div>

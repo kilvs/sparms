@@ -93,6 +93,33 @@
                     </div>
                   </div>
                 {%- endif -%}
+              {%- else -%}
+                {%- for i in (1..8) -%}
+                  <div class="component_ambassadors_list-item">
+                    <div class="component_ambassadors_card">
+                      <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                      <div class="component_ambassadors_content">
+                        <div class="component_ambassadors_name-wrap">
+                          <div class="component_collection_icon-wrap">
+                            <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                        </div>
+                        <div class="component_ambasadors_tag-wrap">
+                          <div class="component_ambassadors_tag">
+                            <div>Golf</div>
+                          </div>
+                          <div class="component_ambassadors_tag">
+                            <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                            <div>AU</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
               {%- endfor -%}
             </div>
           </div>

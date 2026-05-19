@@ -14,11 +14,11 @@
               <script>
   document.addEventListener('DOMContentLoaded', function () {
     const swiper = new Swiper('#is-product', {
+      slidesPerView: 'auto',
       spaceBetween: 16,
       navigation: { nextEl: '#product-swiper-next', prevEl: '#product-swiper-prev' },
       breakpoints: {
-        0: { enabled: false, slidesPerView: 'auto', spaceBetween: 0 },
-        992: { enabled: true, slidesPerView: 'auto', spaceBetween: 32 },
+        992: { slidesPerView: 'auto', spaceBetween: 32 },
       },
     });
   });
