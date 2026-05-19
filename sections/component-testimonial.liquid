@@ -1,3 +1,21 @@
+{%- liquid
+  assign first_block = section.blocks | first
+  if first_block != blank
+    if first_block.settings.headshot != blank
+      assign first_headshot = first_block.settings.headshot | image_url: width: 600
+    else
+      assign first_headshot = first_block.settings.headshot_filename | default: 'Ambassadors-Image.webp' | asset_url
+    endif
+    assign first_name = first_block.settings.name | default: 'Jake Rodriguez'
+    assign first_position = first_block.settings.position | default: 'Professional cyclist'
+    assign first_quote = first_block.settings.quote | default: 'Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.'
+  else
+    assign first_headshot = 'Ambassadors-Image.webp' | asset_url
+    assign first_name = 'Jake Rodriguez'
+    assign first_position = 'Professional cyclist'
+    assign first_quote = 'Lorem ipsum dolor sit amet consectetur.'
+  endif
+-%}
 {%- if section.settings.show_section -%}
       <section class="component_testimonial_section">
         <div class="padding-global padding-section-large">
@@ -5,9 +23,9 @@
             <div class="component_testimonial_wrapper">
               <div class="component_testimonial_title_wrapper">
                 <div class="component_testimonial_title">
-                  <h2 class="text-color-primary">THE TOP CHOICE OF ELITE SPORTING CHAMPIONS</h2>
+                  <h2 class="text-color-primary">{{ section.settings.heading | default: 'THE TOP CHOICE OF ELITE SPORTING CHAMPIONS' }}</h2>
                 </div>
-                <p class="text-color-primary">Hear from the sporting champions who trust Sparms</p>
+                <p class="text-color-primary">{{ section.settings.body | default: 'Hear from the sporting champions who trust Sparms' }}</p>
               </div>
               <div class="component_testimonial_tabs_wrapper">
                 <div class="component_testimonial_tabs_image_stack">
@@ -16,403 +34,116 @@
                       <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
                           <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
                         </svg></div>
-                      <p id="testi-content-to" class="component_testimonial_tabs_image_content_text">“Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.”</p>
+                      <p id="testi-content-to" class="component_testimonial_tabs_image_content_text">“{{ first_quote }}”</p>
                     </div>
                     <div class="component_testimonial_tabs_image_headshot_container">
-                      <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-to" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
+                      <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-to" loading="lazy" alt="{{ first_name | escape }}" src="{{ first_headshot }}" class="component_testimonial_tabs_image_headshot"></div>
                       <div class="component_testimonial_tabs_image_headshot_content">
                         <div class="component_testimonial_tabs_title">
                           <div class="component_testimonial_tabs_title_icon"></div>
-                          <p id="testi-title-to" class="component_testimonial_tabs_image_headshot_content_title_content">Jake Rodriguez</p>
+                          <p id="testi-title-to" class="component_testimonial_tabs_image_headshot_content_title_content">{{ first_name }}</p>
                         </div>
-                        <div id="testi-position-to" class="component_testimonial_tabs_subtitle">Professional cyclist</div>
+                        <div id="testi-position-to" class="component_testimonial_tabs_subtitle">{{ first_position }}</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="component_testimonial_tabs">
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Alyssa Healy</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Australian Women’s Cricket Captain</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'testimonial' -%}
+                      {%- liquid
+                        if block.settings.headshot != blank
+                          assign hs_url = block.settings.headshot | image_url: width: 600
+                        else
+                          assign hs_url = block.settings.headshot_filename | default: 'Ambassadors-Image.webp' | asset_url
+                        endif
+                      -%}
+                      <div class="component_testimonial_tabs_item" {{ block.shopify_attributes }}>
+                        <div class="component_testimonial_tabs_item_wrapper">
                           <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Alyssa Healy</p>
+                            <div class="component_testimonial_tabs_item_icon"></div>
+                            <p id="testi-name-from" class="component_testimonial_tabs_title_text">{{ block.settings.name | default: 'Athlete name' }}</p>
                           </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Australian Women’s Cricket Captain</div>
+                          <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">{{ block.settings.position | default: 'Position / sport' }}</div>
+                        </div>
+                        <div class="component_testimonial_tabs_item_content hide-desktop">
+                          <div class="component_testimonial_tabs_image_headshot_container">
+                            <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="{{ block.settings.name | escape }}" src="{{ hs_url }}" class="component_testimonial_tabs_image_headshot"></div>
+                            <div class="component_testimonial_tabs_image_headshot_content">
+                              <div class="component_testimonial_tabs_title">
+                                <div class="component_testimonial_tabs_title_icon"></div>
+                                <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">{{ block.settings.name | default: 'Athlete name' }}</p>
+                              </div>
+                              <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">{{ block.settings.position | default: 'Position / sport' }}</div>
+                            </div>
+                          </div>
+                          <div class="spacer-medium"></div>
+                          <div class="component_testimonial_tabs_image_content_wrapper">
+                            <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
+                              </svg></div>
+                            <p id="testi-content-from" class="text-size-large">{{ block.settings.quote | default: 'Edit this testimonial to share an athlete’s feedback.' }}</p>
+                          </div>
                         </div>
                       </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;I was actually a customer before I became a part of SParms Cricket. Using SParms in my own training and daily life, I realised everyone needed this so when SParms reached out, we got the ball rolling as soon as we could.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Mitchell Starc</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Australian International Cricketer</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Mitchell Starc</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Australian International Cricketer</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;Cricket demands performance regardless of weather, with most of it under the scorching sun so protecting our skin is paramount. Partnering with SParms Cricket was a natural choice for us. Their advanced sun protection solutions are a game-changer, and I’m proud to be a part of this initiative.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Marina Alex</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Golf Professional (LPGA), LPGA Winner</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Marina Alex</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Golf Professional (LPGA), LPGA Winner</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;They are a fantastic product, I&#x27;ve been wearing them for few season to protect my skin from the sun. Their shawls are absolutely incredible, super comfortable, you don&#x27;t even know you have them on.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Karrie Webb</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Golf Professional (LPGA), Previous World Number 1</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Karrie Webb</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Golf Professional (LPGA), Previous World Number 1</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;After a very hot &amp; sunny start 2 season I&#x27;m grateful for my @SParms_UPF50. Wish I had been wearing this since I was a kid. Huge difference.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Mo Martin</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Golf Professional (LPGA), LPGA Winner</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Mo Martin</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Golf Professional (LPGA), LPGA Winner</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;I’ve been on the LPGA for 8 year and I’ve been wearing SParms for a good majority of that. It has kept me happy and healthy under the sun.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">So Yeon Ryu</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Golf Professional (LPGA), LPGA Winner</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">So Yeon Ryu</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Golf Professional (LPGA), LPGA Winner</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;I have zero idea of how am I gonna protect my skin without SParms Sun Protection. SParms is easy and safe way to protect your skin from the sun. If anyone is looking for a good product to protect your skin, check them out!&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Brittany Lincicome</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Golf Professional (LPGA), LPGA Winner</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Brittany Lincicome</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Golf Professional (LPGA), LPGA Winner</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;Thank you SOOOO much to @SParms_UPF50 for my new shawl sleeves. Best sun protection ever!!!!! #Love&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Zack Guthrie</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Professional AFL Player</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Zack Guthrie</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Professional AFL Player</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;The Sparms products help to keep me cool and comfortable during the hot summer months. It provides great protection whilst allowing me to perform at my best.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Jesse Levine</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Former Professional Tennis Player</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Jesse Levine</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Former Professional Tennis Player</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;After playing professional tennis for 10 years, the SParms keep me protected from the sun with the most comfort and coolness.&quot;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="component_testimonial_tabs_item">
-                    <div class="component_testimonial_tabs_item_wrapper">
-                      <div class="component_testimonial_tabs_title">
-                        <div class="component_testimonial_tabs_item_icon"></div>
-                        <p id="testi-name-from" class="component_testimonial_tabs_title_text">Chloe Stewart</p>
-                      </div>
-                      <div id="testi-position-from" class="component_testimonial_tabs_subtitle is-link">Australian Lawn Bowls Champion</div>
-                    </div>
-                    <div class="component_testimonial_tabs_item_content hide-desktop">
-                      <div class="component_testimonial_tabs_image_headshot_container">
-                        <div class="component_testimonial_tabs_image_headshot_wrapper"><img id="testi-image-from" loading="lazy" alt="" src="{{ 'Ambassadors-Image.webp' | asset_url }}" class="component_testimonial_tabs_image_headshot"></div>
-                        <div class="component_testimonial_tabs_image_headshot_content">
-                          <div class="component_testimonial_tabs_title">
-                            <div class="component_testimonial_tabs_title_icon"></div>
-                            <p id="testi-title" class="component_testimonial_tabs_image_headshot_content_title_content">Chloe Stewart</p>
-                          </div>
-                          <div id="testi-position" class="component_testimonial_tabs_subtitle is-mobile">Australian Lawn Bowls Champion</div>
-                        </div>
-                      </div>
-                      <div class="spacer-medium"></div>
-                      <div class="component_testimonial_tabs_image_content_wrapper">
-                        <div class="component_testimonial_tabs_image_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 27 38" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                            <path d="M13.125 37.5L15 33.75V28.125H24.375C24.8723 28.125 25.3492 27.9275 25.7008 27.5758C26.0525 27.2242 26.25 26.7473 26.25 26.25V23.2762C26.25 22.29 25.8487 21.3225 25.1512 20.625L22.5 17.9738V11.25C22.9973 11.25 23.4742 11.0525 23.8258 10.7008C24.1775 10.3492 24.375 9.87228 24.375 9.375V3.75C24.375 1.68187 22.6931 0 20.625 0H5.625C3.55687 0 1.875 1.68187 1.875 3.75V9.375C1.875 9.87228 2.07254 10.3492 2.42418 10.7008C2.77581 11.0525 3.25272 11.25 3.75 11.25V17.9738L1.09875 20.625C0.397176 21.3293 0.0022598 22.2822 0 23.2762V26.25C0 26.7473 0.197544 27.2242 0.549175 27.5758C0.900806 27.9275 1.37772 28.125 1.875 28.125H11.25V33.75L13.125 37.5ZM5.625 3.75H20.625V7.5H5.625V3.75ZM3.75 23.2762L6.95062 20.0756C7.12508 19.9018 7.26343 19.6952 7.35772 19.4677C7.452 19.2402 7.50036 18.9963 7.5 18.75V11.25H18.75V18.75C18.75 19.2488 18.9469 19.725 19.2994 20.0756L22.5 23.2762V24.375H3.75V23.2762Z" fill="currentColor"></path>
-                          </svg></div>
-                        <p id="testi-content-from" class="text-size-large">&quot;SParms are essential every time I go on the bowls green. Super comfortable, lightweight, and always keep me cool!&quot;<br>Would you like me to reformat these into a table or a specific document style for you?</p>
-                      </div>
-                    </div>
-                  </div>
+                    {%- endif -%}
+                  {%- endfor -%}
                 </div>
               </div>
               <div class="hide w-embed w-script">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
                 <style>
-/* --- ESSENTIAL CSS --- */
 .component_testimonial_tabs_item { cursor: pointer; }
-.component_testimonial_tabs_item_icon {
-  width: 0rem;
-  overflow: hidden;
-  transition: width 0.3s ease;
-}
-.component_testimonial_tabs_item_wrapper {
-  color: #666;
-  font-weight: 400;
-  transition: color 0.3s ease, font-weight 0.3s ease;
-}
-/* Active State for Icon & Text */
-.component_testimonial_tabs_item.is-active .component_testimonial_tabs_item_icon {
-  width: 1.0625rem;
-}
-.component_testimonial_tabs_item.is-active .component_testimonial_tabs_item_wrapper {
-  color: #000;
-  font-weight: 700;
-}
-/* Mobile: Ensure content starts hidden */
+.component_testimonial_tabs_item_icon { width: 0rem; overflow: hidden; transition: width 0.3s ease; }
+.component_testimonial_tabs_item_wrapper { color: #666; font-weight: 400; transition: color 0.3s ease, font-weight 0.3s ease; }
+.component_testimonial_tabs_item.is-active .component_testimonial_tabs_item_icon { width: 1.0625rem; }
+.component_testimonial_tabs_item.is-active .component_testimonial_tabs_item_wrapper { color: #000; font-weight: 700; }
 @media screen and (max-width: 991px) {
-  .component_testimonial_tabs_item_content {
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-  }
+  .component_testimonial_tabs_item_content { height: 0; overflow: hidden; opacity: 0; }
 }
 </style>
                 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".component_testimonial_tabs_item");
-  // --- DESKTOP LOGIC (Enhanced GSAP Swap) ---
   function updateDesktopContent(activeItem) {
     if (window.innerWidth > 991) {
       const mapping = [
         { from: "#testi-image-from", to: "#testi-image-to", type: "src" },
-        { from: "#testi-stars-from", to: "#testi-stars-to", type: "html" }, // Included stars
+        { from: "#testi-stars-from", to: "#testi-stars-to", type: "html" },
         { from: "#testi-name-from", to: "#testi-title-to", type: "text" },
         { from: "#testi-position-from", to: "#testi-position-to", type: "text" },
         { from: "#testi-content-from", to: "#testi-content-to", type: "text" }
       ];
-      // Identify target elements that actually exist in the DOM
-      const targets = mapping
-        .map(item => document.querySelector(item.to))
-        .filter(el => el !== null);
-      // 1. Fade out and slide down slightly
-      gsap.to(targets, { 
-        opacity: 0, 
-        y: 10, 
-        duration: 0.3, 
-        stagger: 0.05, 
-        ease: "power2.in",
+      const targets = mapping.map(item => document.querySelector(item.to)).filter(el => el !== null);
+      gsap.to(targets, {
+        opacity: 0, y: 10, duration: 0.3, stagger: 0.05, ease: "power2.in",
         onComplete: () => {
-          // 2. Update the content while invisible
           mapping.forEach(item => {
             const source = activeItem.querySelector(item.from);
             const target = document.querySelector(item.to);
             if (source && target) {
-              if (item.type === "src") {
-                target.src = source.src;
-                if (source.srcset) target.srcset = source.srcset;
-              } else if (item.type === "html") {
-                target.innerHTML = source.innerHTML; // Preserves SVG/Icon markup
-              } else {
-                target.innerText = source.innerText;
-              }
+              if (item.type === "src") { target.src = source.src; }
+              else if (item.type === "html") { target.innerHTML = source.innerHTML; }
+              else { target.innerText = source.innerText; }
             }
           });
-          // 3. Prepare for "Slide Up" entrance (set position lower)
-          gsap.set(targets, { y: -10 });
-          // 4. Fade in and slide to original position
-          gsap.to(targets, { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.4, 
-            stagger: 0.08, 
-            ease: "power2.out" 
-          });
-        }
+          gsap.to(targets, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power2.out" });
+        },
       });
     }
   }
-  // --- MOBILE LOGIC (GSAP Accordion) ---
   function handleMobileAccordion(activeItem) {
     if (window.innerWidth <= 991) {
-      tabs.forEach(tab => {
-        const content = tab.querySelector(".component_testimonial_tabs_item_content");
-        if (tab !== activeItem) {
-          gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: "power2.inOut" });
+      document.querySelectorAll(".component_testimonial_tabs_item").forEach(item => {
+        const content = item.querySelector(".component_testimonial_tabs_item_content");
+        if (item !== activeItem) {
+          gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: "power2.in" });
         } else {
           gsap.to(content, { height: "auto", opacity: 1, duration: 0.5, ease: "power2.out" });
         }
       });
     }
   }
-  // --- CLICK EVENT ---
   tabs.forEach((tab) => {
     tab.addEventListener("click", function() {
       if (this.classList.contains("is-active")) return;
@@ -422,10 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
       handleMobileAccordion(this);
     });
   });
-  // --- INITIALIZE ---
   if (tabs.length > 0) {
     tabs[0].classList.add("is-active");
-    // Initial content setup (Immediate, no animation)
     const firstItem = tabs[0];
     const initialMapping = [
       { from: "#testi-image-from", to: "#testi-image-to", type: "src" },
@@ -437,9 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initialMapping.forEach(item => {
       const source = firstItem.querySelector(item.from);
       const target = document.querySelector(item.to);
-      if(source && target) {
-        if(item.type === "src") { target.src = source.src; }
-        else if(item.type === "html") { target.innerHTML = source.innerHTML; }
+      if (source && target) {
+        if (item.type === "src") { target.src = source.src; }
+        else if (item.type === "html") { target.innerHTML = source.innerHTML; }
         else { target.innerText = source.innerText; }
       }
     });
@@ -462,20 +191,36 @@ document.addEventListener("DOMContentLoaded", () => {
   "tag": "section",
   "class": "shopify-section-component-testimonial",
   "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "THE TOP CHOICE OF ELITE SPORTING CHAMPIONS" },
+    { "type": "text", "id": "body", "label": "Body", "default": "Hear from the sporting champions who trust Sparms" }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_section",
-      "label": "Show this section",
-      "default": true
-    },
-    {
-      "type": "paragraph",
-      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Athlete name", "default": "Athlete name" },
+        { "type": "text", "id": "position", "label": "Position / sport", "default": "Position / sport" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Edit this testimonial to share an athlete’s feedback." },
+        { "type": "image_picker", "id": "headshot", "label": "Headshot (override)" },
+        { "type": "text", "id": "headshot_filename", "label": "Headshot fallback asset filename", "default": "Ambassadors-Image.webp" }
+      ]
     }
   ],
+  "max_blocks": 12,
   "presets": [
     {
-      "name": "Testimonial"
+      "name": "Testimonial",
+      "blocks": [
+        { "type": "testimonial", "settings": { "name": "Alyssa Healy", "position": "Australian Women’s Cricket Captain", "quote": "I was actually a customer before I became a part of SParms Cricket. Using SParms in my own training and daily life, I realised everyone needed this so when SParms reached out, we got the ball rolling as soon as we could." } },
+        { "type": "testimonial", "settings": { "name": "Mitchell Starc", "position": "Australian International Cricketer", "quote": "Cricket demands performance regardless of weather, with most of it under the scorching sun so protecting our skin is paramount. Partnering with SParms Cricket was a natural choice for us. Their advanced sun protection solutions are a game-changer, and I’m proud to be a part of this initiative." } },
+        { "type": "testimonial", "settings": { "name": "Marina Alex", "position": "Golf Professional (LPGA), LPGA Winner", "quote": "They are a fantastic product, I’ve been wearing them for few season to protect my skin from the sun. Their shawls are absolutely incredible, super comfortable, you don’t even know you have them on." } },
+        { "type": "testimonial", "settings": { "name": "Brittany Lincicome", "position": "Golf Professional (LPGA), LPGA Winner", "quote": "Thank you SOOOO much to @SParms_UPF50 for my new shawl sleeves. Best sun protection ever!!!!! #Love" } },
+        { "type": "testimonial", "settings": { "name": "Zack Guthrie", "position": "Professional AFL Player", "quote": "The Sparms products help to keep me cool and comfortable during the hot summer months. It provides great protection whilst allowing me to perform at my best." } },
+        { "type": "testimonial", "settings": { "name": "Jesse Levine", "position": "Former Professional Tennis Player", "quote": "After playing professional tennis for 10 years, the SParms keep me protected from the sun with the most comfort and coolness." } },
+        { "type": "testimonial", "settings": { "name": "Chloe Stewart", "position": "Australian Lawn Bowls Champion", "quote": "SParms are essential every time I go on the bowls green. Super comfortable, lightweight, and always keep me cool!" } }
+      ]
     }
   ]
 }

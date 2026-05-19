@@ -4,8 +4,8 @@
           <div class="padding-global">
             <div class="container-large">
               <div class="component_community_title_serction">
-                <h2>OUR community</h2>
-                <p>Real athletes. Real protection. Real stories.</p>
+                <h2>{{ section.settings.heading | default: 'OUR community' }}</h2>
+                <p>{{ section.settings.body | default: 'Real athletes. Real protection. Real stories.' }}</p>
               </div>
             </div>
           </div>
@@ -13,22 +13,21 @@
           <div class="hide w-embed w-script">
             <script>
   document.addEventListener('DOMContentLoaded', function() {
-    //Splide Code for socials
-    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const slideWidth = 16 * 16;
     const gap = 16;
     const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
     new Splide('#community', {
       type: 'loop',
-      drag: 'free', // enables drag-to-swipe with no snap
+      drag: 'free',
       gap: '1rem',
       autoWidth: true,
       arrows: false,
       pagination: false,
       clones: needed,
       autoScroll: {
-        speed: 0.3, // px per frame — increase to go faster
-        pauseOnHover: true, // keeps playing on hover
-        pauseOnFocus: false, // keeps playing on focus
+        speed: 0.3,
+        pauseOnHover: true,
+        pauseOnFocus: false,
       },
     }).mount(window.splide.Extensions);
   });
@@ -37,30 +36,29 @@
           <div id="community" class="splide">
             <div class="splide__track">
               <div class="splide__list">
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-7.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-5.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-3.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-2.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-1.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-6.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
-                <div class="splide__slide">
-                  <div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div>
-                </div>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'photo' -%}
+                    {%- liquid
+                      if block.settings.image != blank
+                        assign img_url = block.settings.image | image_url: width: 1200
+                      else
+                        assign img_url = block.settings.image_filename | default: 'community-image-1.webp' | asset_url
+                      endif
+                    -%}
+                    <div class="splide__slide" {{ block.shopify_attributes }}>
+                      <div class="component_community_image_wrapper"><img loading="lazy" src="{{ img_url }}" alt="{{ block.settings.alt | escape }}" class="component_community_image"></div>
+                    </div>
+                  {%- endif -%}
+                {%- else -%}
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-7.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-5.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-3.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-2.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-1.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-6.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                  <div class="splide__slide"><div class="component_community_image_wrapper"><img loading="lazy" src="{{ 'community-image-4.webp' | asset_url }}" alt="" class="component_community_image"></div></div>
+                {%- endfor -%}
               </div>
             </div>
           </div>
@@ -74,20 +72,36 @@
   "tag": "section",
   "class": "shopify-section-component-community",
   "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "OUR community" },
+    { "type": "text", "id": "body", "label": "Body", "default": "Real athletes. Real protection. Real stories." }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_section",
-      "label": "Show this section",
-      "default": true
-    },
-    {
-      "type": "paragraph",
-      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (override)" },
+        { "type": "text", "id": "image_filename", "label": "Fallback asset filename", "default": "community-image-1.webp" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "" }
+      ]
     }
   ],
+  "max_blocks": 30,
   "presets": [
     {
-      "name": "Community"
+      "name": "Community",
+      "blocks": [
+        { "type": "photo", "settings": { "image_filename": "community-image-7.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-5.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-4.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-3.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-2.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-1.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-6.webp" } },
+        { "type": "photo", "settings": { "image_filename": "community-image-4.webp" } }
+      ]
     }
   ]
 }

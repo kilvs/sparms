@@ -1,14 +1,41 @@
+{%- liquid
+  assign primary_url = section.settings.primary_cta_url
+  if primary_url == blank and section.settings.primary_cta_collection != blank
+    assign primary_url = section.settings.primary_cta_collection.url
+  endif
+  assign primary_url = primary_url | default: routes.collections_url | append: '/all'
+
+  assign secondary_url = section.settings.secondary_cta_url
+  if secondary_url == blank and section.settings.secondary_cta_collection != blank
+    assign secondary_url = section.settings.secondary_cta_collection.url
+  endif
+  assign secondary_url = secondary_url | default: routes.collections_url | append: '/all'
+
+  if section.settings.background_image != blank
+    assign bg_url = section.settings.background_image | image_url: width: 2160
+  else
+    assign bg_url = section.settings.background_image_filename | default: 'Feature-background-Image.webp' | asset_url
+  endif
+
+  if section.settings.wordmark_image != blank
+    assign wordmark_url = section.settings.wordmark_image | image_url: width: 2160
+  else
+    assign wordmark_url = section.settings.wordmark_filename | default: 'sparms-logo-wordmark.png' | asset_url
+  endif
+-%}
 {%- if section.settings.show_section -%}
       <section class="component_feature_section">
         <div class="component_feature_top">
-          <div class="component_feature_logo-wrap"><img src="{{ 'sparms-logo-wordmark.png' | asset_url }}" loading="lazy" sizes="(max-width: 2160px) 100vw, 2160px" srcset="{{ 'sparms-logo-wordmark-p-500.png' | asset_url }} 500w, {{ 'sparms-logo-wordmark-p-800.png' | asset_url }} 800w, {{ 'sparms-logo-wordmark-p-1080.png' | asset_url }} 1080w, {{ 'sparms-logo-wordmark-p-1600.png' | asset_url }} 1600w, {{ 'sparms-logo-wordmark-p-2000.png' | asset_url }} 2000w, {{ 'sparms-logo-wordmark.png' | asset_url }} 2160w" alt=""></div>
-          <div class="spacer-xxlarge"></div>
+          {%- if section.settings.show_wordmark -%}
+            <div class="component_feature_logo-wrap"><img src="{{ wordmark_url }}" loading="lazy" alt=""></div>
+            <div class="spacer-xxlarge"></div>
+          {%- endif -%}
           <div class="padding-global">
             <div class="container-large">
               <div class="component_heading_split">
-                <h2>the sporting advantage</h2>
+                <h2>{{ section.settings.heading | default: 'the sporting advantage' }}</h2>
                 <div id="w-node-aae64b67-93d9-9131-8253-5487d50c4b50-6832ed3c" class="component_heading_description">
-                  <p>The Original sun sleeve, and the choice of champions, Sparms is trusted by elite athletes worldwide. Our lightweight, breathable fabrics are designed to enhance, not limit. Get the best protection for your every day.</p>
+                  <p>{{ section.settings.body | default: 'The Original sun sleeve, and the choice of champions, Sparms is trusted by elite athletes worldwide. Our lightweight, breathable fabrics are designed to enhance, not limit. Get the best protection for your every day.' }}</p>
                 </div>
               </div>
             </div>
@@ -28,16 +55,8 @@
         prevEl: '#feature-swiper-prev',
       },
       breakpoints: {
-        0: {
-          enabled: true,
-          slidesPerView: 1,
-          spaceBetween: 16,
-        },
-        992: {
-          enabled: false,
-          slidesPerView: 'auto',
-          spaceBetween: 32,
-        },
+        0: { enabled: true, slidesPerView: 1, spaceBetween: 16 },
+        992: { enabled: false, slidesPerView: 'auto', spaceBetween: 32 },
       },
     });
   });
@@ -46,58 +65,31 @@
                 <div class="component_feature_swiper-wrap">
                   <div id="is-feature" class="swiper is-feature">
                     <div class="swiper-wrapper is-feature">
-                      <div id="w-node-f1651195-a419-79af-3780-f2b900556a86-6832ed3c" class="swiper-slide">
-                        <div class="component_feature_card">
-                          <div class="component_feature_title-wrap">
-                            <h3 class="home_feature_title">Proven SPF 50+ Protection</h3>
-                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
-                              </svg></div>
+                      {%- for block in section.blocks -%}
+                        {%- if block.type == 'feature_card' -%}
+                          {%- assign align = block.settings.alignment | default: 'left' -%}
+                          <div class="swiper-slide{% if forloop.first == false %} is-feature{% endif %}" {{ block.shopify_attributes }}>
+                            <div class="component_feature_card{% if align == 'right' %} is-feature-right{% endif %}">
+                              <div class="component_feature_title-wrap{% if align == 'right' %} is-right-aligned{% endif %}">
+                                {%- if align == 'right' -%}
+                                  <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                                    </svg></div>
+                                  <h3 class="home_feature_title">{{ block.settings.heading | default: 'Stay Cool Under Pressure' }}</h3>
+                                {%- else -%}
+                                  <h3 class="home_feature_title">{{ block.settings.heading | default: 'Proven SPF 50+ Protection' }}</h3>
+                                  <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                                    </svg></div>
+                                {%- endif -%}
+                              </div>
+                              <div class="component_feature_card-body{% if align == 'right' %} is-right-aligned{% endif %}">
+                                <p class="paragraph">{{ block.settings.body | default: 'Edit this block to add your supporting copy.' }}</p>
+                              </div>
+                            </div>
                           </div>
-                          <div class="component_feature_card-body">
-                            <p class="paragraph">Claiming to have the best sun sleeves is bold, but we back it up.  Every year, our products are independently certified and rigorously tested to give you the ultimate UV defence. When you choose Sparms, you’re choosing protection you can trust.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="w-node-_8a5bf798-6761-a3fc-6061-d6178265f9c7-6832ed3c" class="swiper-slide is-feature">
-                        <div class="component_feature_card is-feature-right">
-                          <div class="component_feature_title-wrap is-right-aligned">
-                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
-                              </svg></div>
-                            <h3 class="home_feature_title">Stay Cool Under Pressure</h3>
-                          </div>
-                          <div class="component_feature_card-body is-right-aligned">
-                            <p class="paragraph">Our proprietary process harnesses the moisture-wicking power of premium fabrics, delivering a cooling, effortless fit from the moment you put it on. Whether you’re under the midday sun or pushing through an intense session, our sleeves keep you fresh, focused and moving at your best.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="w-node-_0c45e353-c92f-64e5-2724-abce473ff976-6832ed3c" class="swiper-slide is-feature">
-                        <div class="component_feature_card">
-                          <div class="component_feature_title-wrap">
-                            <h3 class="home_feature_title">The Style in SPF</h3>
-                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
-                              </svg></div>
-                          </div>
-                          <div class="component_feature_card-body">
-                            <p class="paragraph">Designed for athletes who demand more than just function, our sleeves keep you cool, protected, and looking sharp while you push your limits.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="w-node-_4e5d2765-dc2a-b7e0-f257-5cf6531bb0b1-6832ed3c" class="swiper-slide is-feature">
-                        <div class="component_feature_card is-feature-right">
-                          <div class="component_feature_title-wrap is-right-aligned">
-                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
-                              </svg></div>
-                            <h3 class="home_feature_title">The Style in SPF</h3>
-                          </div>
-                          <div class="component_feature_card-body is-right-aligned">
-                            <p class="paragraph">With a wide range of sizes, every piece stays in place, supporting your performance and letting you focus on the play. Engineered for every body and designed to look as sharp as it feels, Sparms keeps you ready for whatever the day throws at you.</p>
-                          </div>
-                        </div>
-                      </div>
+                        {%- endif -%}
+                      {%- endfor -%}
                     </div>
                   </div>
                   <div class="swiper_arrow_wrapper is-feature">
@@ -114,23 +106,27 @@
                   </div>
                 </div>
                 <div class="button-group">
-                  <a href="#" class="button is-secondary is-icon w-inline-block">
-                    <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                        <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
-                      </svg></div>
-                    <div>View collection</div>
-                  </a>
-                  <a href="#" class="button is-link is-icon w-inline-block">
-                    <div>Shop All</div>
-                    <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
-                        <path d="M9.70697 16.9496L15.414 11.2426L9.70697 5.53564L8.29297 6.94964L12.586 11.2426L8.29297 15.5356L9.70697 16.9496Z" fill="currentColor"></path>
-                      </svg></div>
-                  </a>
+                  {%- if section.settings.show_primary_cta -%}
+                    <a href="{{ primary_url }}" class="button is-secondary is-icon w-inline-block">
+                      <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                        </svg></div>
+                      <div>{{ section.settings.primary_cta_label | default: 'View collection' }}</div>
+                    </a>
+                  {%- endif -%}
+                  {%- if section.settings.show_secondary_cta -%}
+                    <a href="{{ secondary_url }}" class="button is-link is-icon w-inline-block">
+                      <div>{{ section.settings.secondary_cta_label | default: 'Shop All' }}</div>
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M9.70697 16.9496L15.414 11.2426L9.70697 5.53564L8.29297 6.94964L12.586 11.2426L8.29297 15.5356L9.70697 16.9496Z" fill="currentColor"></path>
+                        </svg></div>
+                    </a>
+                  {%- endif -%}
                 </div>
               </div>
             </div>
           </div>
-          <div class="component_feature_body-img-wrap"><img src="{{ 'Feature-background-Image.webp' | asset_url }}" loading="lazy" sizes="100vw" srcset="{{ 'Feature-background-Image-p-500.webp' | asset_url }} 500w, {{ 'Feature-background-Image-p-800.webp' | asset_url }} 800w, {{ 'Feature-background-Image-p-1080.webp' | asset_url }} 1080w, {{ 'Feature-background-Image-p-1600.webp' | asset_url }} 1600w, {{ 'Feature-background-Image-p-2000.webp' | asset_url }} 2000w, {{ 'Feature-background-Image.webp' | asset_url }} 2160w" alt="" class="home_feature_body-img"></div>
+          <div class="component_feature_body-img-wrap"><img src="{{ bg_url }}" loading="lazy" alt="" class="home_feature_body-img"></div>
         </div>
       </section>
 {%- endif -%}
@@ -141,20 +137,49 @@
   "tag": "section",
   "class": "shopify-section-component-feature",
   "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "header", "content": "Wordmark" },
+    { "type": "checkbox", "id": "show_wordmark", "label": "Show wordmark image", "default": true },
+    { "type": "image_picker", "id": "wordmark_image", "label": "Wordmark image (override)" },
+    { "type": "text", "id": "wordmark_filename", "label": "Wordmark fallback asset filename", "default": "sparms-logo-wordmark.png" },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "the sporting advantage" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "The Original sun sleeve, and the choice of champions, Sparms is trusted by elite athletes worldwide. Our lightweight, breathable fabrics are designed to enhance, not limit. Get the best protection for your every day." },
+    { "type": "header", "content": "Background image" },
+    { "type": "image_picker", "id": "background_image", "label": "Background image (override)" },
+    { "type": "text", "id": "background_image_filename", "label": "Background fallback asset filename", "default": "Feature-background-Image.webp" },
+    { "type": "header", "content": "Primary CTA" },
+    { "type": "checkbox", "id": "show_primary_cta", "label": "Show primary CTA", "default": true },
+    { "type": "text", "id": "primary_cta_label", "label": "Label", "default": "View collection" },
+    { "type": "collection", "id": "primary_cta_collection", "label": "Linked collection (optional)" },
+    { "type": "url", "id": "primary_cta_url", "label": "Custom URL (overrides collection)" },
+    { "type": "header", "content": "Secondary CTA" },
+    { "type": "checkbox", "id": "show_secondary_cta", "label": "Show secondary CTA", "default": true },
+    { "type": "text", "id": "secondary_cta_label", "label": "Label", "default": "Shop All" },
+    { "type": "collection", "id": "secondary_cta_collection", "label": "Linked collection (optional)" },
+    { "type": "url", "id": "secondary_cta_url", "label": "Custom URL (overrides collection)" }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_section",
-      "label": "Show this section",
-      "default": true
-    },
-    {
-      "type": "paragraph",
-      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+      "type": "feature_card",
+      "name": "Feature card",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Feature heading" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Edit this block to add your supporting copy." },
+        { "type": "select", "id": "alignment", "label": "Alignment", "default": "left", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }] }
+      ]
     }
   ],
+  "max_blocks": 8,
   "presets": [
     {
-      "name": "Feature"
+      "name": "Feature",
+      "blocks": [
+        { "type": "feature_card", "settings": { "heading": "Proven SPF 50+ Protection", "body": "Claiming to have the best sun sleeves is bold, but we back it up. Every year, our products are independently certified and rigorously tested to give you the ultimate UV defence. When you choose Sparms, you’re choosing protection you can trust.", "alignment": "left" } },
+        { "type": "feature_card", "settings": { "heading": "Stay Cool Under Pressure", "body": "Our proprietary process harnesses the moisture-wicking power of premium fabrics, delivering a cooling, effortless fit from the moment you put it on. Whether you’re under the midday sun or pushing through an intense session, our sleeves keep you fresh, focused and moving at your best.", "alignment": "right" } },
+        { "type": "feature_card", "settings": { "heading": "The Style in SPF", "body": "Designed for athletes who demand more than just function, our sleeves keep you cool, protected, and looking sharp while you push your limits.", "alignment": "left" } },
+        { "type": "feature_card", "settings": { "heading": "The Style in SPF", "body": "With a wide range of sizes, every piece stays in place, supporting your performance and letting you focus on the play. Engineered for every body and designed to look as sharp as it feels, Sparms keeps you ready for whatever the day throws at you.", "alignment": "right" } }
+      ]
     }
   ]
 }

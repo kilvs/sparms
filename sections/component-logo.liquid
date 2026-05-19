@@ -3,14 +3,13 @@
         <div class="hide w-embed w-script">
           <script>
   document.addEventListener('DOMContentLoaded', function() {
-    //Splide Code for socials
-    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const slideWidth = 16 * 16;
     const gap = 16;
     const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
     new Splide('#logo', {
       type: 'loop',
       drag: false,
-      gap: '4rem', // 992px and above
+      gap: '4rem',
       autoWidth: true,
       arrows: false,
       pagination: false,
@@ -22,7 +21,7 @@
       },
       breakpoints: {
         992: {
-          gap: '1rem', // below 992px
+          gap: '1rem',
         },
       },
     }).mount(window.splide.Extensions);
@@ -32,36 +31,54 @@
         <div id="logo" class="splide">
           <div class="splide__track">
             <div class="splide__list">
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'compression.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">compression</div>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'feature' -%}
+                  {%- liquid
+                    if block.settings.icon != blank
+                      assign icon_url = block.settings.icon | image_url: width: 200
+                    else
+                      assign icon_url = block.settings.icon_filename | default: 'compression.svg' | asset_url
+                    endif
+                  -%}
+                  <div class="splide__slide" {{ block.shopify_attributes }}>
+                    <div class="home_logo_item">
+                      <img loading="lazy" src="{{ icon_url }}" alt="{{ block.settings.label | escape }}" class="home_logo_icon">
+                      <div class="heading-style-h3">{{ block.settings.label | default: 'compression' }}</div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- else -%}
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'compression.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">compression</div>
+                  </div>
                 </div>
-              </div>
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'Unisex.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">unisex</div>
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'Unisex.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">unisex</div>
+                  </div>
                 </div>
-              </div>
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'Light-Weight.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">light-weight</div>
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'Light-Weight.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">light-weight</div>
+                  </div>
                 </div>
-              </div>
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'Cooling.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">cooling</div>
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'Cooling.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">cooling</div>
+                  </div>
                 </div>
-              </div>
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'Quick-Dry.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">quick dry</div>
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'Quick-Dry.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">quick dry</div>
+                  </div>
                 </div>
-              </div>
-              <div class="splide__slide">
-                <div class="home_logo_item"><img loading="lazy" src="{{ 'UPF.svg' | asset_url }}" alt="" class="home_logo_icon">
-                  <div class="heading-style-h3">upf 50+</div>
+                <div class="splide__slide">
+                  <div class="home_logo_item"><img loading="lazy" src="{{ 'UPF.svg' | asset_url }}" alt="" class="home_logo_icon">
+                    <div class="heading-style-h3">upf 50+</div>
+                  </div>
                 </div>
-              </div>
+              {%- endfor -%}
             </div>
           </div>
         </div>
@@ -74,20 +91,32 @@
   "tag": "section",
   "class": "shopify-section-component-logo",
   "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "paragraph", "content": "Auto-scrolling feature marquee. Each block is one icon + label. Default icons come from the Webflow export — upload your own to override." }
+  ],
+  "blocks": [
     {
-      "type": "checkbox",
-      "id": "show_section",
-      "label": "Show this section",
-      "default": true
-    },
-    {
-      "type": "paragraph",
-      "content": "Imported from Webflow. To make text/images editable, add settings here or split into blocks — see CONVERSION_GUIDE §6.1."
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "compression" },
+        { "type": "image_picker", "id": "icon", "label": "Icon (override)" },
+        { "type": "text", "id": "icon_filename", "label": "Icon fallback asset filename", "default": "compression.svg" }
+      ]
     }
   ],
+  "max_blocks": 20,
   "presets": [
     {
-      "name": "Logo strip"
+      "name": "Logo strip",
+      "blocks": [
+        { "type": "feature", "settings": { "label": "compression",  "icon_filename": "compression.svg" } },
+        { "type": "feature", "settings": { "label": "unisex",       "icon_filename": "Unisex.svg" } },
+        { "type": "feature", "settings": { "label": "light-weight", "icon_filename": "Light-Weight.svg" } },
+        { "type": "feature", "settings": { "label": "cooling",      "icon_filename": "Cooling.svg" } },
+        { "type": "feature", "settings": { "label": "quick dry",    "icon_filename": "Quick-Dry.svg" } },
+        { "type": "feature", "settings": { "label": "upf 50+",      "icon_filename": "UPF.svg" } }
+      ]
     }
   ]
 }
