@@ -1,14 +1,16 @@
 # Source files (Webflow export) — not part of the deployed theme
-*.html
-css/
-js/
-images/
-fonts/
+webflow-source/
+
+# Conversion kit (scripts, starter-theme, docs)
+webflow-to-shopify-kit/
 
 # Conversion artifacts
+AUDIT.md
 convert.cjs
 convert-forms.cjs
-CONVERSION_GUIDE.md
+
+# Project / AI context (root-only — don't deploy)
+CLAUDE.md
 
 # Editor / OS
 .DS_Store
