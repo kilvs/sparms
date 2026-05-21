@@ -1,0 +1,2080 @@
+<!DOCTYPE html><!--  Last Published: Thu May 21 2026 02:31:14 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="6a0beefbc13bed565d7073e7" data-wf-site="69f96182cd5d92656832ecc9">
+<head>
+  <meta charset="utf-8">
+  <title>Product Template</title>
+  <meta content="Product Template" property="og:title">
+  <meta content="Product Template" name="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/components.css" rel="stylesheet" type="text/css">
+  <link href="css/sparms.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon"><!--  Keep this css code to improve the font quality -->
+  <style>
+  * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -o-font-smoothing: antialiased;
+}
+</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="global-styles">
+      <div class="style-overrides w-embed">
+        <style>
+/* Ensure all elements inherit the color from its parent */
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-nav-brand,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-slider-arrow-left,
+.w-slider-arrow-right,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+/* Prevent all click and hover interaction with an element */
+.pointer-events-off {
+	pointer-events: none;
+}
+/* Enables all click and hover interaction with an element */
+.pointer-events-on {
+  pointer-events: auto;
+}
+/* Create a class of .div-square which maintains a 1:1 dimension of a div */
+.div-square::after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+/* Adds inline flex display */
+.display-inlineflex {
+  display: inline-flex;
+}
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+/* Remove default Webflow chevron from form select */
+select{
+  -webkit-appearance:none;
+}
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+.margin-0 {
+  margin: 0rem !important;
+}
+.padding-0 {
+  padding: 0rem !important;
+}
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+/* Apply "..." at 100% width */
+.truncate-width { 
+		width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+/* Removes native scrollbar */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none; 
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+</style>
+      </div>
+      <div class="color-schemes w-embed">
+        <style>
+/* Color Schemes Controls*/
+<meta name="relume-color-schemes" content="false"/>
+  .color-scheme-1 {
+/*All sections should point to Color Scheme 1*/
+  }
+  .color-scheme-2 {
+    --color-scheme-1--text: var(--color-scheme-2--text);
+    --color-scheme-1--background: var(--color-scheme-2--background);
+    --color-scheme-1--foreground: var(--color-scheme-2--foreground);
+    --color-scheme-1--border: var(--color-scheme-2--border);
+    --color-scheme-1--accent: var(--color-scheme-2--accent);
+  }
+  .color-scheme-3 {
+    --color-scheme-1--text: var(--color-scheme-3--text);
+    --color-scheme-1--background: var(--color-scheme-3--background);
+    --color-scheme-1--foreground: var(--color-scheme-3--foreground);
+    --color-scheme-1--border: var(--color-scheme-3--border);
+    --color-scheme-1--accent: var(--color-scheme-3--accent);
+  }
+  .color-scheme-4 {
+    --color-scheme-1--text: var(--color-scheme-4--text);
+    --color-scheme-1--background: var(--color-scheme-4--background);
+    --color-scheme-1--foreground: var(--color-scheme-4--foreground);
+    --color-scheme-1--border: var(--color-scheme-4--border);
+    --color-scheme-1--accent: var(--color-scheme-4--accent);
+  }
+  .color-scheme-5 {
+    --color-scheme-1--text: var(--color-scheme-5--text);
+    --color-scheme-1--background: var(--color-scheme-5--background);
+    --color-scheme-1--foreground: var(--color-scheme-5--foreground);
+    --color-scheme-1--border: var(--color-scheme-5--border);
+    --color-scheme-1--accent: var(--color-scheme-5--accent);
+  }
+  .color-scheme-6 {
+    --color-scheme-1--text: var(--color-scheme-6--text);
+    --color-scheme-1--background: var(--color-scheme-6--background);
+    --color-scheme-1--foreground: var(--color-scheme-6--foreground);
+    --color-scheme-1--border: var(--color-scheme-6--border);
+    --color-scheme-1--accent: var(--color-scheme-6--accent);
+  }
+  .color-scheme-7 {
+    --color-scheme-1--text: var(--color-scheme-7--text);
+    --color-scheme-1--background: var(--color-scheme-7--background);
+    --color-scheme-1--foreground: var(--color-scheme-7--foreground);
+    --color-scheme-1--border: var(--color-scheme-7--border);
+    --color-scheme-1--accent: var(--color-scheme-7--accent);
+  }
+  .color-scheme-8 {
+    --color-scheme-1--text: var(--color-scheme-8--text);
+    --color-scheme-1--background: var(--color-scheme-8--background);
+    --color-scheme-1--foreground: var(--color-scheme-8--foreground);
+    --color-scheme-1--border: var(--color-scheme-8--border);
+    --color-scheme-1--accent: var(--color-scheme-8--accent);
+  }
+  .color-scheme-9 {
+    --color-scheme-1--text: var(--color-scheme-9--text);
+    --color-scheme-1--background: var(--color-scheme-9--background);
+    --color-scheme-1--foreground: var(--color-scheme-9--foreground);
+    --color-scheme-1--border: var(--color-scheme-9--border);
+    --color-scheme-1--accent: var(--color-scheme-9--accent);
+  }
+  .color-scheme-10 {
+    --color-scheme-1--text: var(--color-scheme-10--text);
+    --color-scheme-1--background: var(--color-scheme-10--background);
+    --color-scheme-1--foreground: var(--color-scheme-10--foreground);
+    --color-scheme-1--border: var(--color-scheme-10--border);
+    --color-scheme-1--accent: var(--color-scheme-10--accent);
+  }
+/* Inherit slider dot colors */
+.w-slider-dot {
+  background-color: var(--color-scheme-1--text);
+  opacity: 0.20;
+}
+.w-slider-dot.w-active {
+  background-color: var(--color-scheme-1--text);
+  opacity: 1;
+}
+/* Override .w-slider-nav-invert styles */
+.w-slider-nav-invert .w-slider-dot {
+  background-color: var(--color-scheme-1--text) !important;
+  opacity: 0.20 !important;
+}
+.w-slider-nav-invert .w-slider-dot.w-active {
+  background-color: var(--color-scheme-1--text) !important;
+  opacity: 1 !important;
+}
+</style>
+      </div>
+      <div class="custom-css w-embed">
+        <style>
+  html.wf-design-mode .home_hero_load {
+    display: none;
+  }
+  .size_filter_tab-link.w--current .size_filter_icon-wrap{
+    transform: scale(1);
+  }
+  .size_filter_tab-link.w--current .size_filter_label{
+    margin-left: 0rem;
+    font-weight: 700;
+  }
+</style>
+      </div>
+    </div>
+    <div data-wf--main-menu--variant="dark" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="component_navbar_section w-variant-68e39418-5105-edf7-f1ae-5c78351ae185 w-nav">
+      <div class="component_navbar_wrapper">
+        <nav role="navigation" class="component_navbar_navigation_wrapper w-nav-menu">
+          <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+            <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+              </svg></div>
+            <div>SHOP ALL</div>
+          </a>
+          <a href="#" class="component_navbar_navigation_link w-nav-link">Ambassadors</a>
+          <a href="#" class="component_navbar_navigation_link w-nav-link">Size Guide</a>
+          <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
+            <div class="component_navbar_dropdown_toggle w-dropdown-toggle">
+              <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
+              <div>More</div>
+            </div>
+            <nav class="w-dropdown-list">
+              <a href="#" class="w-dropdown-link">Link 1</a>
+              <a href="#" class="w-dropdown-link">Link 2</a>
+              <a href="#" class="w-dropdown-link">Link 3</a>
+            </nav>
+          </div>
+        </nav>
+        <a href="#" class="component_navbar_logo_wrapper w-nav-brand"><img loading="lazy" src="images/logo_1.svg" alt="" class="component_navbar_logo"></a>
+        <div class="component_navbar_icons_wrapper">
+          <a href="#" class="component_navbar_icons_link w-inline-block"><img loading="lazy" src="images/search.svg" alt="" class="component_navbar_icons_link_icon"></a>
+          <a href="#" class="component_navbar_icons_link w-inline-block"><img loading="lazy" src="images/accounts.svg" alt="" class="component_navbar_icons_link_icon"></a>
+          <a href="#" class="component_navbar_icons_link w-inline-block"><img loading="lazy" src="images/card.svg" alt="" class="component_navbar_icons_link_icon"></a>
+          <a href="#" class="component_navbar_icons_link w-inline-block"><img loading="lazy" src="images/au.webp" alt=""></a>
+        </div>
+        <div id="w-node-b0ef8415-fdc7-cb9b-e624-7e7c8ae87f65-8ae87f43" class="component_navbar_menu_button w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+    <main class="main-wrapper">
+      <section class="product_header_section">
+        <div class="padding-global">
+          <div class="padding-vertical padding-small">
+            <div class="container-large">
+              <div class="w-embed w-script">
+                <style>
+  .is-active-accordion .product_faq_icon-wrap {
+    transform: scale(1);
+  }
+  .is-active-accordion .product_faq_label {
+    margin-left: 0.5rem;
+    font-weight: 700;
+  }
+  .is-active-inputactive .product_radio_circle-inner {
+    border-color: var(--border--dark);
+  }
+</style>
+                <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('#is-product-img', {
+      spaceBetween: 16,
+      loop: true,
+      slidesPerView: 'auto',
+      navigation: {
+        nextEl: '#product-swiper-next',
+        prevEl: '#product-swiper-prev',
+      },
+      pagination: {
+        el: '#service-swiper-pagination',
+        bulletClass: 'swiper_bullet',
+        bulletActiveClass: 'is-active',
+        clickable: true,
+      },
+    });
+  });
+</script>
+              </div>
+              <div class="product_header_bredcrumbs-wrapper">
+                <a href="#" class="product_header_bredcrumb-link">Shop all</a>
+                <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                    <path d="M6.47099 11.2998L10.2757 7.4951L6.47099 3.69043L5.52832 4.6331L8.39032 7.4951L5.52832 10.3571L6.47099 11.2998Z" fill="currentColor"></path>
+                  </svg></div>
+                <a href="#" class="product_header_bredcrumb-link">Category</a>
+                <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                    <path d="M6.47099 11.2998L10.2757 7.4951L6.47099 3.69043L5.52832 4.6331L8.39032 7.4951L5.52832 10.3571L6.47099 11.2998Z" fill="currentColor"></path>
+                  </svg></div>
+                <a href="#" class="product_header_bredcrumb-link">Product name</a>
+              </div>
+              <div class="spacer-small"></div>
+              <div class="swiper_wrapper">
+                <div id="is-product-img" class="swiper is-product-img">
+                  <div class="swiper-wrapper is-product-img">
+                    <div class="swiper-slide is-product-img">
+                      <div class="product_header_img-wrap"><img src="images/product-placeholder-1.webp" loading="lazy" sizes="(max-width: 878px) 100vw, 878px" srcset="images/product-placeholder-1-p-500.webp 500w, images/product-placeholder-1-p-800.webp 800w, images/product-placeholder-1.webp 878w" alt=""></div>
+                    </div>
+                    <div class="swiper-slide is-product-img">
+                      <div class="product_header_img-wrap"><img src="images/product-placeholder-2.webp" loading="lazy" sizes="(max-width: 878px) 100vw, 878px" srcset="images/product-placeholder-2-p-500.webp 500w, images/product-placeholder-2-p-800.webp 800w, images/product-placeholder-2.webp 878w" alt=""></div>
+                    </div>
+                    <div class="swiper-slide is-product-img">
+                      <div class="product_header_img-wrap"><img src="images/product-placeholder-3.webp" loading="lazy" sizes="(max-width: 878px) 100vw, 878px" srcset="images/product-placeholder-3-p-500.webp 500w, images/product-placeholder-3-p-800.webp 800w, images/product-placeholder-3.webp 878w" alt=""></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="spacer-small"></div>
+                <div class="swiper_bottom_wrapper">
+                  <div id="service-swiper-pagination" class="swiper_bullet_wrapper">
+                    <div class="swiper_bullet is-active"></div>
+                    <div class="swiper_bullet"></div>
+                  </div>
+                  <div class="swiper_arrow_wrapper">
+                    <div id="product-swiper-prev" class="swiper_arrow is-dark">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                        </svg></div>
+                    </div>
+                    <div id="product-swiper-next" class="swiper_arrow is-dark">
+                      <div class="icon-embed-blogs is-reversed w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                        </svg></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="spacer-medium"></div>
+              <div class="product_header_component">
+                <div class="product_header_content">
+                  <h1>Sparms Sun Sleeves</h1>
+                  <div class="spacer-small"></div>
+                  <div>$34.95</div>
+                  <div class="product_trust_rating-wrap">
+                    <div class="product_star-rating_wrapper">
+                      <div class="product_star-rating_icon">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="product_star-rating_icon">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="product_star-rating_icon">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="product_star-rating_icon">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="product_star-rating_icon">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                    </div>
+                    <div class="text-size-small">733 reviews</div>
+                  </div>
+                  <div class="spacer-small"></div>
+                  <p>Hate sticky sunscreen? Meet the original Sparms sleeves. Built with Fusion FlexXP™ Microfibre technology, they keep you cool, protected, and performing under pressure, no matter the sport, no matter the conditions.</p>
+                </div>
+                <div id="w-node-f76e1b9e-8f92-231b-cf43-22fcf9618c91-5d7073e7" class="product_header_content">
+                  <div class="product_header_faqs-wrap">
+                    <div fs-accordion-initial="1" fs-accordion-element="group" class="product_faq_component">
+                      <div class="product_faq_embed hide w-embed w-script"><!--  [Finsweet Attributes] Accordion  -->
+                        <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-accordion@1/accordion.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                      </div>
+                      <div fs-accordion-element="accordion" class="product_faq_item">
+                        <div id="accordion-2-header-1" tabindex="0" role="button" aria-controls="accordion-2-content-1" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                          <div class="product_faq_icon-wrap">
+                            <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="product_faq_label">Description</div>
+                          <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                            <div class="dash"></div>
+                          </div>
+                        </div>
+                        <div id="accordion-2-content-1" aria-labelledby="accordion-2-header-1" fs-accordion-element="content" class="product_faq_accordion_content">
+                          <div class="product_faq_body">
+                            <p class="product_faq_paragraph">Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="accordion" class="product_faq_item">
+                        <div id="accordion-2-header-1" tabindex="0" role="button" aria-controls="accordion-2-content-1" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                          <div class="product_faq_icon-wrap">
+                            <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="product_faq_label">Product Details</div>
+                          <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                            <div class="dash"></div>
+                          </div>
+                        </div>
+                        <div id="accordion-2-content-1" aria-labelledby="accordion-2-header-1" fs-accordion-element="content" class="product_faq_accordion_content">
+                          <div class="product_faq_body">
+                            <p class="product_faq_paragraph">Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="accordion" class="product_faq_item">
+                        <div id="accordion-2-header-1" tabindex="0" role="button" aria-controls="accordion-2-content-1" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                          <div class="product_faq_icon-wrap">
+                            <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="product_faq_label">Sizing</div>
+                          <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                            <div class="dash"></div>
+                          </div>
+                        </div>
+                        <div id="accordion-2-content-1" aria-labelledby="accordion-2-header-1" fs-accordion-element="content" class="product_faq_accordion_content">
+                          <div class="product_faq_body">
+                            <p class="product_faq_paragraph">Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="accordion" class="product_faq_item">
+                        <div id="accordion-2-header-1" tabindex="0" role="button" aria-controls="accordion-2-content-1" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                          <div class="product_faq_icon-wrap">
+                            <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="product_faq_label">Care</div>
+                          <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                            <div class="dash"></div>
+                          </div>
+                        </div>
+                        <div id="accordion-2-content-1" aria-labelledby="accordion-2-header-1" fs-accordion-element="content" class="product_faq_accordion_content">
+                          <div class="product_faq_body">
+                            <p class="product_faq_paragraph">Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="accordion" class="product_faq_item">
+                        <div id="accordion-2-header-1" tabindex="0" role="button" aria-controls="accordion-2-content-1" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                          <div class="product_faq_icon-wrap">
+                            <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="product_faq_label">Shipping &amp; Returns</div>
+                          <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                            <div class="dash"></div>
+                          </div>
+                        </div>
+                        <div id="accordion-2-content-1" aria-labelledby="accordion-2-header-1" fs-accordion-element="content" class="product_faq_accordion_content">
+                          <div class="product_faq_body">
+                            <p class="product_faq_paragraph">Lorem ipsum dolor sit amet consectetur. Quam urna adipiscing proin dictumst purus cras. Gravida scelerisque proin vitae duis pulvinar aliquam sit enim. Faucibus in congue magna blandit. Suspendisse volutpat nunc facilisis sit. Iaculis tincidunt lorem scelerisque turpis. At tempus cras augue tempus justo.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="w-node-_57992934-c284-88d5-a538-65189cc99e97-5d7073e7" class="product_header_content is-card">
+                  <div class="product_header_form-block w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" method="get" class="product_header_form" data-wf-page-id="6a0beefbc13bed565d7073e7" data-wf-element-id="d9ebcda4-bca4-a10f-9b89-15f1bb33ce2e">
+                      <div class="product_radio_embed w-embed w-script"><!--  [Finsweet Attributes] Input Active Class  -->
+                        <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                        <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const radios = document.querySelectorAll('input[type="radio"][name="color-swatch"]');
+    const target = document.querySelector('#radio-label');
+    const sizeRadios = document.querySelectorAll('input[type="radio"][name="size"]');
+    const sizeTarget = document.querySelector('#radio-size-label');
+    const lengthRadios = document.querySelectorAll('input[type="radio"][name="Length"]');
+    const lengthTarget = document.querySelector('#radio-length-label');
+    // Set initial colour value on load
+    const checkedRadio = document.querySelector('input[type="radio"][name="color-swatch"]:checked');
+    if (checkedRadio) {
+      target.textContent = checkedRadio.value.trim();
+    }
+    // Set initial size value on load
+    const checkedSize = document.querySelector('input[type="radio"][name="size"]:checked');
+    if (checkedSize) {
+      sizeTarget.textContent = checkedSize.value.trim();
+    }
+    // Set initial length value on load
+    const checkedLength = document.querySelector('input[type="radio"][name="Length"]:checked');
+    if (checkedLength) {
+      lengthTarget.textContent = checkedLength.value.trim();
+    }
+    // Colour change
+    radios.forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (this.checked) {
+          target.textContent = this.value.trim();
+        }
+      });
+    });
+    // Size change
+    sizeRadios.forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (this.checked) {
+          sizeTarget.textContent = this.value.trim();
+        }
+      });
+    });
+    // Length change
+    lengthRadios.forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (this.checked) {
+          lengthTarget.textContent = this.value.trim();
+        }
+      });
+    });
+  });
+</script>
+                      </div>
+                      <div class="product_radio_component">
+                        <div class="product_label">
+                          <div>Colour:</div>
+                          <div id="radio-label" class="text-weight-bold w-node-_80c1c260-7031-2e5f-87d7-9adf69e9bf86-5d7073e7">Hi Vis Green</div>
+                        </div>
+                        <div aria-label="add_description_here" role="radiogroup" class="product_radio_group"><label class="product_radio_field is-active-inputactive w-radio">
+                            <div class="product_radio_circle-inner"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input w--redirected-checked"></div><input type="radio" name="color-swatch" id="Hi-Vis-Green" data-name="color-swatch" style="opacity:0;position:absolute;z-index:-1" checked="" value="Hi Vis Green"><span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="Hi-Vis-Green">Hi Vis Green</span>
+                          </label><label class="product_radio_field w-radio">
+                            <div class="product_radio_circle-inner is-color-swatch-1"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input"></div><input type="radio" name="color-swatch" id="Gold" data-name="color-swatch" style="opacity:0;position:absolute;z-index:-1" value="Gold"><span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="Gold">Gold</span>
+                          </label><label class="product_radio_field w-radio">
+                            <div class="product_radio_circle-inner is-color-swatch-2"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input"></div><input type="radio" name="color-swatch" id="White" data-name="color-swatch" style="opacity:0;position:absolute;z-index:-1" value="White"><span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="White">White</span>
+                          </label><label class="product_radio_field w-radio">
+                            <div class="product_radio_circle-inner is-color-swatch-3"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input"></div><input type="radio" name="color-swatch" id="Black" data-name="color-swatch" style="opacity:0;position:absolute;z-index:-1" value="Black"><span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="Black">Black</span>
+                          </label><label class="product_radio_field w-radio">
+                            <div class="product_radio_circle-inner is-color-swatch-4"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input"></div><input type="radio" name="color-swatch" id="Grey" data-name="color-swatch" style="opacity:0;position:absolute;z-index:-1" value="Grey"><span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="Grey">Light Grey</span>
+                          </label></div>
+                      </div>
+                      <div class="product_radio-size_component">
+                        <div class="product_label">
+                          <div>Size:</div>
+                          <div id="radio-size-label" class="text-weight-bold w-node-cc7bbb81-dbae-6343-29ea-9946636b178f-5d7073e7">Hi Vis Green</div>
+                        </div>
+                        <div aria-label="add_description_here" role="radiogroup" class="product_radio-size_group"><label class="product_radio-size_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input"></div><input type="radio" name="size" id="Extra-Small" data-name="size" style="opacity:0;position:absolute;z-index:-1" value="Extra Small"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Extra-Small">XS</span>
+                          </label><label class="product_radio-size_field is-active-inputactive w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input w--redirected-checked"></div><input type="radio" name="size" id="Small" data-name="size" style="opacity:0;position:absolute;z-index:-1" checked="" value="Small"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Small">S</span>
+                          </label><label class="product_radio-size_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input"></div><input type="radio" name="size" id="Medium" data-name="size" style="opacity:0;position:absolute;z-index:-1" value="Medium"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Medium">M</span>
+                          </label><label class="product_radio-size_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input"></div><input type="radio" name="size" id="Large" data-name="size" style="opacity:0;position:absolute;z-index:-1" value="Large"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Large">L</span>
+                          </label><label class="product_radio-size_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input"></div><input type="radio" name="size" id="Extra-Large" data-name="size" style="opacity:0;position:absolute;z-index:-1" value="Extra Large"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Extra-Large">XL</span>
+                          </label><label class="product_radio-size_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input"></div><input type="radio" name="size" id="Double-Extra-Large" data-name="size" style="opacity:0;position:absolute;z-index:-1" value="Double Extra Large"><span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="Double-Extra-Large">XXL</span>
+                          </label></div>
+                      </div>
+                      <a href="#" class="text-style-link">Size Guide</a>
+                      <div class="product_radio-length_component">
+                        <div class="product_label">
+                          <div>Length:</div>
+                          <div id="radio-length-label" class="text-weight-bold w-node-_143e927d-9cbb-26cb-c1cf-e233cf5328fb-5d7073e7">Hi Vis Green</div>
+                        </div>
+                        <div aria-label="add_description_here" role="radiogroup" class="product_radio-length_group"><label class="product_radio-length_field w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-length_button w-radio-input"></div><input type="radio" name="Length" id="Original-Length" data-name="Length" style="opacity:0;position:absolute;z-index:-1" value="Original Length"><span fs-inputactive-class="is-active-inputactive" class="product_radio-length_label w-form-label" for="Original-Length">Original Length</span>
+                          </label><label class="product_radio-length_field is-active-inputactive w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-length_button w-radio-input w--redirected-checked"></div><input type="radio" name="Length" id="Shorter-Length" data-name="Length" style="opacity:0;position:absolute;z-index:-1" checked="" value="Shorter Length"><span fs-inputactive-class="is-active-inputactive" class="product_radio-length_label w-form-label" for="Shorter-Length">Shorter Length</span>
+                          </label></div>
+                      </div>
+                      <div class="product_inputcounter_component">
+                        <div class="product_inputcounter_embed w-embed w-script"><!--  [Finsweet Attributes] Input Counter  -->
+                          <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputcounter@1/inputcounter.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                        </div><label for="">Qty:</label>
+                        <div class="product_inputcounter_wrapper">
+                          <div aria-controls="fs-inputcounter-1-input" fs-inputcounter-element="decrement" role="button" aria-label="Decrement input value" tabindex="0" class="product_inputcounter_button">
+                            <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <path d="M5 11H19V13H5V11Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div><input fs-inputcounter-element="input" class="product_inputcounter_input w-input" fs-inputcounter-initial="1" maxlength="256" name="Quantity" data-name="Quantity" min="1" placeholder="" type="text" id="Quantity" required="">
+                          <div aria-controls="fs-inputcounter-1-input" fs-inputcounter-element="increment" role="button" aria-label="Increment input value" tabindex="0" class="product_inputcounter_button">
+                            <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <path d="M19 11H13V5H11V11H5V13H11V19H13V13H19V11Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product_price_wrap"><label for="">Total:</label>
+                        <div class="product_price_wrap-bottom">
+                          <div class="text-size-tiny">Tax included. Shipping calculated at checkout.</div>
+                          <div class="heading-style-h4">$34.95</div>
+                        </div>
+                      </div>
+                      <div class="button-group is-shop"><button class="button is-shop">
+                          <div>Buy with Shop</div>
+                        </button><button class="button is-submit is-full">
+                          <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                            </svg></div>
+                          <div>ADD TO CART</div>
+                        </button></div>
+                      <div class="product_component_footer">
+                        <div class="text-size-tiny text-color-secondary">Free Unlimited Returnsfor A$2.99</div>
+                        <a href="#" class="text-size-tiny text-color-secondary">More Payment Options</a>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div li-section:on_templates="product" li-section="Product Review" class="product_reviews_section">
+        <div class="padding-global padding-section-large">
+          <div class="container-large">
+            <div class="template_product_reviews_wrapper">
+              <div class="template_product_reviews_title">
+                <h2>Customer testimonials</h2>
+                <div class="template_product_reviews_title_divider"></div>
+              </div>
+              <div class="template_product_reviews_rating_wrapper">
+                <div class="template_product_reviews_rating_content">
+                  <div class="template_product_reviews_rating_content_numbers">
+                    <div class="template_product_reviews_rating_graph_grid">
+                      <div id="w-node-_7bf71776-eddc-719f-eb93-37a1cefd74e5-5d7073e7" class="template_rating_up">4.1</div>
+                      <div id="w-node-_7bf71776-eddc-719f-eb93-37a1cefd74e7-5d7073e7" class="template_rating_down">/5</div>
+                    </div>
+                    <div class="template_product_reviews_rating">
+                      <div class="template_product_description_review">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div>1858 ratings</div>
+                    </div>
+                  </div>
+                  <div class="template_product_reviews_rating_line_graph">
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">5</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number">
+                        <div class="text-size-regular">47%</div>
+                      </div>
+                    </div>
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">4</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper is-31"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number">
+                        <div class="text-size-regular">31%</div>
+                      </div>
+                    </div>
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">3</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper is-14"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number">
+                        <div class="text-size-regular">14%</div>
+                      </div>
+                    </div>
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">2</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper is-4"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number">
+                        <div class="text-size-regular">4%</div>
+                      </div>
+                    </div>
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">1</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                            <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                          </svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper is-4"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number">
+                        <div class="text-size-regular">4%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="template_product_reviews_rating_grid">
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                  <div class="template_product_reviews_rating_item_wrapper"><img src="images/Placeholder-Image.png" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                </div>
+              </div>
+              <div class="template_product_reviews_title">
+                <div class="template_product_reviews_title_wrapper">
+                  <h2>Reviews</h2>
+                </div>
+                <div class="template_product_reviews_title_divider"></div>
+                <div class="form_filter-block w-form">
+                  <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form_filter" data-wf-page-id="6a0beefbc13bed565d7073e7" data-wf-element-id="7f0167da-eb30-85fa-6ead-aa0fefae711d">
+                    <div class="form_filter-selectcustom_component">
+                      <div class="form_filter-selectcustom_embed w-embed w-script"><!--  [Finsweet Attributes] Select Custom  -->
+                        <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-selectcustom@1/selectcustom.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                      </div>
+                      <div class="form_filter-dropdown-list"><input class="form_filter_input is-search w-input" maxlength="256" name="field" data-name="Field" placeholder="Search reviews" type="text" id="field" required="">
+                        <div data-delay="0" data-hover="false" fs-selectcustom-element="dropdown" class="form_filter-selectcustom_dropdown w-dropdown">
+                          <div class="form_filter-selectcustom_toggle is-light-grey w-dropdown-toggle">
+                            <div class="form_filter-selectcustom_arrow w-icon-dropdown-toggle"></div>
+                            <div class="form_filter-selectcustom_text">Most recent</div>
+                          </div>
+                          <nav class="form_filter-selectcustom_list w-dropdown-list"><select id="Select-field-1" name="Select-field-1" data-name="Select field 1" class="form_filter-selectcustom_field w-select">
+                              <option value="">Select one...</option>
+                              <option value="First">First choice</option>
+                              <option value="Second">Second choice</option>
+                              <option value="Third">Third choice</option>
+                            </select>
+                            <a href="#" class="form_filter-selectcustom_link w-dropdown-link">Select link</a>
+                          </nav>
+                        </div>
+                        <div data-delay="0" data-hover="false" fs-selectcustom-element="dropdown" class="form_filter-selectcustom_dropdown w-dropdown">
+                          <div class="form_filter-selectcustom_toggle is-light-grey w-dropdown-toggle">
+                            <div class="form_filter-selectcustom_arrow w-icon-dropdown-toggle"></div>
+                            <div class="form_filter-selectcustom_text">All ratings</div>
+                          </div>
+                          <nav class="form_filter-selectcustom_list w-dropdown-list"><select id="Select-field-1" name="Select-field-1" data-name="Select field 1" class="form_filter-selectcustom_field w-select">
+                              <option value="">Select one...</option>
+                              <option value="First">First choice</option>
+                              <option value="Second">Second choice</option>
+                              <option value="Third">Third choice</option>
+                            </select>
+                            <a href="#" class="form_filter-selectcustom_link w-dropdown-link">Select link</a>
+                          </nav>
+                        </div>
+                        <div data-delay="0" data-hover="false" fs-selectcustom-element="dropdown" class="form_filter-selectcustom_dropdown w-dropdown">
+                          <div class="form_filter-selectcustom_toggle is-light-grey w-dropdown-toggle">
+                            <div class="form_filter-selectcustom_arrow w-icon-dropdown-toggle"></div>
+                            <div class="form_filter-selectcustom_text">All variants</div>
+                          </div>
+                          <nav class="form_filter-selectcustom_list w-dropdown-list"><select id="Select-field-1" name="Select-field-1" data-name="Select field 1" class="form_filter-selectcustom_field w-select">
+                              <option value="">Select one...</option>
+                              <option value="First">First choice</option>
+                              <option value="Second">Second choice</option>
+                              <option value="Third">Third choice</option>
+                            </select>
+                            <a href="#" class="form_filter-selectcustom_link w-dropdown-link">Select link</a>
+                          </nav>
+                        </div>
+                        <div data-delay="0" data-hover="false" fs-selectcustom-element="dropdown" class="form_filter-selectcustom_dropdown w-dropdown">
+                          <div class="form_filter-selectcustom_toggle is-light-grey w-dropdown-toggle">
+                            <div class="form_filter-selectcustom_arrow w-icon-dropdown-toggle"></div>
+                            <div class="form_filter-selectcustom_text">More filters</div>
+                          </div>
+                          <nav class="form_filter-selectcustom_list w-dropdown-list"><select id="Select-field-1" name="Select-field-1" data-name="Select field 1" class="form_filter-selectcustom_field w-select">
+                              <option value="">Select one...</option>
+                              <option value="First">First choice</option>
+                              <option value="Second">Second choice</option>
+                              <option value="Third">Third choice</option>
+                            </select>
+                            <a href="#" class="form_filter-selectcustom_link w-dropdown-link">Select link</a>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="w-form-done">
+                    <div>Thank you! Your submission has been received!</div>
+                  </div>
+                  <div class="w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="template_product_reviews_comments_wrapper">
+                <div class="template_product_reviews_comments">
+                  <div class="template_product_description_review">
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                  </div>
+                  <div class="template_product_reviews_comments_content">
+                    <h5>&quot;Lorem ipsum “</h5>
+                    <div class="template_product_reviews_comments_details">
+                      <div><strong>Name Surname</strong></div>
+                      <div class="text-size-small text-color-secondary">Verified buyer</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur. Lacus odio dui est risus nunc eget mattis. Tortor consequat et mi sed pellentesque non duis pretium.</p>
+                  </div>
+                </div>
+                <div class="template_product_reviews_comments">
+                  <div class="template_product_description_review">
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                  </div>
+                  <div class="template_product_reviews_comments_content">
+                    <h5>&quot;Lorem ipsum “</h5>
+                    <div class="template_product_reviews_comments_details">
+                      <div><strong>Name Surname</strong></div>
+                      <div class="text-size-small text-color-secondary">Verified buyer</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur. Lacus odio dui est risus nunc eget mattis. Tortor consequat et mi sed pellentesque non duis pretium.</p>
+                  </div>
+                </div>
+                <div class="template_product_reviews_comments">
+                  <div class="template_product_description_review">
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                    <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path>
+                      </svg></div>
+                  </div>
+                  <div class="template_product_reviews_comments_content">
+                    <h5>&quot;Lorem ipsum “</h5>
+                    <div class="template_product_reviews_comments_details">
+                      <div><strong>Name Surname</strong></div>
+                      <div class="text-size-small text-color-secondary">Verified buyer</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur. Lacus odio dui est risus nunc eget mattis. Tortor consequat et mi sed pellentesque non duis pretium.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="button-group align-center">
+                <a href="#" class="button is-icon w-inline-block">
+                  <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                    </svg></div>
+                  <div>SHOW MORE</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="component_feature_section">
+        <div class="component_feature_top">
+          <div class="component_feature_logo-wrap"><img src="images/sparms-logo-wordmark.png" loading="lazy" sizes="(max-width: 2160px) 100vw, 2160px" srcset="images/sparms-logo-wordmark-p-500.png 500w, images/sparms-logo-wordmark-p-800.png 800w, images/sparms-logo-wordmark-p-1080.png 1080w, images/sparms-logo-wordmark-p-1600.png 1600w, images/sparms-logo-wordmark-p-2000.png 2000w, images/sparms-logo-wordmark.png 2160w" alt=""></div>
+          <div class="spacer-xxlarge"></div>
+          <div class="padding-global">
+            <div class="container-large">
+              <div class="component_heading_split">
+                <h2>the sporting advantage</h2>
+                <div id="w-node-_725a5cf9-db4b-33bf-989d-71ac5b7a6f1e-5d7073e7" class="component_heading_description">
+                  <p>The Original sun sleeve, and the choice of champions, Sparms is trusted by elite athletes worldwide. Our lightweight, breathable fabrics are designed to enhance, not limit. Get the best protection for your every day.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component_feature_body">
+          <div class="padding-global padding-section-large">
+            <div class="container-large">
+              <div class="component_feature_body-content">
+                <div class="hide w-embed w-script">
+                  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('#is-feature', {
+      spaceBetween: 16,
+      navigation: {
+        nextEl: '#feature-swiper-next',
+        prevEl: '#feature-swiper-prev',
+      },
+      breakpoints: {
+        0: {
+          enabled: true,
+          slidesPerView: 1,
+          spaceBetween: 16,
+        },
+        992: {
+          enabled: false,
+          slidesPerView: 'auto',
+          spaceBetween: 32,
+        },
+      },
+    });
+  });
+</script>
+                </div>
+                <div class="component_feature_swiper-wrap">
+                  <div id="is-feature" class="swiper is-feature">
+                    <div class="swiper-wrapper is-feature">
+                      <div id="w-node-_725a5cf9-db4b-33bf-989d-71ac5b7a6f29-5d7073e7" class="swiper-slide">
+                        <div class="component_feature_card">
+                          <div class="component_feature_title-wrap">
+                            <h3 class="home_feature_title">Proven SPF 50+ Protection</h3>
+                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="component_feature_card-body">
+                            <p class="paragraph">Claiming to have the best sun sleeves is bold, but we back it up.  Every year, our products are independently certified and rigorously tested to give you the ultimate UV defence. When you choose Sparms, you’re choosing protection you can trust.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="w-node-_725a5cf9-db4b-33bf-989d-71ac5b7a6f32-5d7073e7" class="swiper-slide is-feature">
+                        <div class="component_feature_card is-feature-right">
+                          <div class="component_feature_title-wrap is-right-aligned">
+                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                              </svg></div>
+                            <h3 class="home_feature_title">Stay Cool Under Pressure</h3>
+                          </div>
+                          <div class="component_feature_card-body is-right-aligned">
+                            <p class="paragraph">Our proprietary process harnesses the moisture-wicking power of premium fabrics, delivering a cooling, effortless fit from the moment you put it on. Whether you’re under the midday sun or pushing through an intense session, our sleeves keep you fresh, focused and moving at your best.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="w-node-_725a5cf9-db4b-33bf-989d-71ac5b7a6f3b-5d7073e7" class="swiper-slide is-feature">
+                        <div class="component_feature_card">
+                          <div class="component_feature_title-wrap">
+                            <h3 class="home_feature_title">The Style in SPF</h3>
+                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                              </svg></div>
+                          </div>
+                          <div class="component_feature_card-body">
+                            <p class="paragraph">Designed for athletes who demand more than just function, our sleeves keep you cool, protected, and looking sharp while you push your limits.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="w-node-_725a5cf9-db4b-33bf-989d-71ac5b7a6f44-5d7073e7" class="swiper-slide is-feature">
+                        <div class="component_feature_card is-feature-right">
+                          <div class="component_feature_title-wrap is-right-aligned">
+                            <div class="home_feature_icon-wrap w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                                <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                              </svg></div>
+                            <h3 class="home_feature_title">The Style in SPF</h3>
+                          </div>
+                          <div class="component_feature_card-body is-right-aligned">
+                            <p class="paragraph">With a wide range of sizes, every piece stays in place, supporting your performance and letting you focus on the play. Engineered for every body and designed to look as sharp as it feels, Sparms keeps you ready for whatever the day throws at you.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper_arrow_wrapper is-feature">
+                    <div id="feature-swiper-prev" class="swiper_arrow is-dark">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                        </svg></div>
+                    </div>
+                    <div id="feature-swiper-next" class="swiper_arrow is-dark">
+                      <div class="icon-embed-blogs is-reversed w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                        </svg></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-group">
+                  <a href="#" class="button is-secondary is-icon w-inline-block">
+                    <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                      </svg></div>
+                    <div>View collection</div>
+                  </a>
+                  <a href="#" class="button is-link is-icon w-inline-block">
+                    <div>Shop All</div>
+                    <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <path d="M9.70697 16.9496L15.414 11.2426L9.70697 5.53564L8.29297 6.94964L12.586 11.2426L8.29297 15.5356L9.70697 16.9496Z" fill="currentColor"></path>
+                      </svg></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component_feature_body-img-wrap"><img src="images/Feature-background-Image.webp" loading="lazy" sizes="(max-width: 2160px) 100vw, 2160px" srcset="images/Feature-background-Image-p-500.webp 500w, images/Feature-background-Image-p-800.webp 800w, images/Feature-background-Image-p-1080.webp 1080w, images/Feature-background-Image-p-1600.webp 1600w, images/Feature-background-Image-p-2000.webp 2000w, images/Feature-background-Image.webp 2160w" alt="" class="home_feature_body-img"></div>
+        </div>
+      </section>
+      <div class="component_ambassadors-slide_section">
+        <div class="w-embed w-script">
+          <style>
+  #ambassador-list .splide__arrow {
+  position: relative !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: 30px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 1.5rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 999rem;
+  background-color: rgba(240, 240, 240, 0);
+  box-sizing: border-box;
+}
+#ambassador-list .splide__arrow svg {
+  width: 3rem !important;
+  height: 1.875rem !important;
+}
+</style>
+          <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //Splide Code for socials
+    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const gap = 16;
+    const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
+    new Splide('#ambassador-list', {
+      type: 'loop',
+      drag: 'free', // enables drag-to-swipe with no snap
+      gap: '1rem',
+      autoWidth: true,
+      arrows: true,
+      pagination: false,
+      clones: needed,
+      arrowPath: 'M11.293 17.293L12.707 18.707L19.414 12L12.707 5.29297L11.293 6.70697L15.586 11H6V13H15.586L11.293 17.293Z',
+      autoScroll: {
+        speed: 0.3, // px per frame — increase to go faster
+        pauseOnHover: true, // keeps playing on hover
+        pauseOnFocus: false, // keeps playing on focus
+      },
+    }).mount(window.splide.Extensions);
+  });
+</script>
+        </div>
+        <div class="padding-section-large">
+          <div class="padding-global">
+            <div class="container-large">
+              <div class="component_heading_split">
+                <h2>OUR AMBASSADORS</h2>
+                <p id="w-node-_3dba9612-f59a-c59c-e05a-9df716be1ca0-16be1c98">A powerhouse collective from every corner of sport, our ambassadors wear Sparms with pride in training, on the field, and at every competition.</p>
+              </div>
+              <div class="spacer-xxlarge"></div>
+            </div>
+          </div>
+          <div id="ambassador-list" class="splide">
+            <div class="splide__track">
+              <div class="splide__list">
+                <div class="splide__slide">
+                  <div class="component_ambassadors_card">
+                    <div class="component_ambassadors_img-wrap"><img loading="lazy" src="images/Ambassadors-Image.webp" alt="" class="component_ambassadors_img"></div>
+                    <div class="component_ambassadors_content">
+                      <div class="component_ambassadors_name-wrap">
+                        <div class="component_collection_icon-wrap">
+                          <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                      </div>
+                      <div class="component_ambasadors_tag-wrap">
+                        <div class="component_ambassadors_tag">
+                          <div>Golf</div>
+                        </div>
+                        <div class="component_ambassadors_tag">
+                          <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="images/au.webp" alt=""></div>
+                          <div>Code</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_ambassadors_card">
+                    <div class="component_ambassadors_img-wrap"><img loading="lazy" src="images/Ambassadors-Image.webp" alt="" class="component_ambassadors_img"></div>
+                    <div class="component_ambassadors_content">
+                      <div class="component_ambassadors_name-wrap">
+                        <div class="component_collection_icon-wrap">
+                          <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                      </div>
+                      <div class="component_ambasadors_tag-wrap">
+                        <div class="component_ambassadors_tag">
+                          <div>Golf</div>
+                        </div>
+                        <div class="component_ambassadors_tag">
+                          <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="images/au.webp" alt=""></div>
+                          <div>Code</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_ambassadors_card">
+                    <div class="component_ambassadors_img-wrap"><img loading="lazy" src="images/Ambassadors-Image.webp" alt="" class="component_ambassadors_img"></div>
+                    <div class="component_ambassadors_content">
+                      <div class="component_ambassadors_name-wrap">
+                        <div class="component_collection_icon-wrap">
+                          <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                      </div>
+                      <div class="component_ambasadors_tag-wrap">
+                        <div class="component_ambassadors_tag">
+                          <div>Golf</div>
+                        </div>
+                        <div class="component_ambassadors_tag">
+                          <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="images/au.webp" alt=""></div>
+                          <div>Code</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_ambassadors_card">
+                    <div class="component_ambassadors_img-wrap"><img loading="lazy" src="images/Ambassadors-Image.webp" alt="" class="component_ambassadors_img"></div>
+                    <div class="component_ambassadors_content">
+                      <div class="component_ambassadors_name-wrap">
+                        <div class="component_collection_icon-wrap">
+                          <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                      </div>
+                      <div class="component_ambasadors_tag-wrap">
+                        <div class="component_ambassadors_tag">
+                          <div>Golf</div>
+                        </div>
+                        <div class="component_ambassadors_tag">
+                          <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="images/au.webp" alt=""></div>
+                          <div>Code</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="padding-global">
+              <div class="container-large">
+                <div class="component_ambassadors_controls">
+                  <div class="splide__arrows"><button class="splide__arrow splide__arrow--prev"></button><button class="splide__arrow splide__arrow--next"></button></div>
+                  <a href="#" class="button is-icon w-inline-block">
+                    <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                        <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                      </svg></div>
+                    <div>See All</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="product_faqs_section">
+        <div class="padding-global padding-section-large">
+          <div class="container-large">
+            <div class="product_faqs_component">
+              <div class="component_heading_split">
+                <h2>Frequently asked questions</h2>
+                <div id="w-node-_37ef7619-f117-4703-f0f6-01d48b48605d-5d7073e7" class="max-width-small">
+                  <p>A powerhouse collective from every corner of sport, our  ambassadors wear Sparms with pride in training, on the field,  and at every competition.</p>
+                </div>
+              </div>
+              <div class="spacer-xxlarge"></div>
+              <div class="component_faq_component">
+                <div class="component_faq_wrapper">
+                  <div class="component_faq_item">
+                    <div class="component_faq_title_wrapper">
+                      <div class="component_faq_title">
+                        <div class="component_faq_icon is-title"></div>
+                        <div class="component_faq_title-text">How do I find my size?</div>
+                      </div>
+                      <div class="component_faq_icon_wrapper">
+                        <div class="component_faq_icon_vertical"></div>
+                        <div class="component_faq_icon_horizontal"></div>
+                      </div>
+                    </div>
+                    <div class="component_faq_content_wrapper">
+                      <div class="component_faq_content">
+                        <div class="component_faq_icon is-content"></div>
+                        <div class="text-size-medium">Getting the right fit matters. Sparms come in a full range of sizes designed to move with, perform, and protect you. Check out our sizing guide in the menu and find your perfect layer.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="component_faq_item">
+                    <div class="component_faq_title_wrapper">
+                      <div class="component_faq_title">
+                        <div class="component_faq_icon is-title"></div>
+                        <div class="component_faq_title-text">How do I care for my Sparms products?</div>
+                      </div>
+                      <div class="component_faq_icon_wrapper">
+                        <div class="component_faq_icon_vertical"></div>
+                        <div class="component_faq_icon_horizontal"></div>
+                      </div>
+                    </div>
+                    <div class="component_faq_content_wrapper">
+                      <div class="component_faq_content">
+                        <div class="component_faq_icon is-content"></div>
+                        <div class="text-size-medium">Getting the right fit matters. Sparms come in a full range of sizes designed to move with, perform, and protect you. Check out our sizing guide in the menu and find your perfect layer.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="component_faq_item">
+                    <div class="component_faq_title_wrapper">
+                      <div class="component_faq_title">
+                        <div class="component_faq_icon is-title"></div>
+                        <div class="component_faq_title-text">Can I use my Sparms in the water?</div>
+                      </div>
+                      <div class="component_faq_icon_wrapper">
+                        <div class="component_faq_icon_vertical"></div>
+                        <div class="component_faq_icon_horizontal"></div>
+                      </div>
+                    </div>
+                    <div class="component_faq_content_wrapper">
+                      <div class="component_faq_content">
+                        <div class="component_faq_icon is-content"></div>
+                        <div class="text-size-medium">Getting the right fit matters. Sparms come in a full range of sizes designed to move with, perform, and protect you. Check out our sizing guide in the menu and find your perfect layer.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="component_faq_item">
+                    <div class="component_faq_title_wrapper">
+                      <div class="component_faq_title">
+                        <div class="component_faq_icon is-title"></div>
+                        <div class="component_faq_title-text">Where are your products manufactured?</div>
+                      </div>
+                      <div class="component_faq_icon_wrapper">
+                        <div class="component_faq_icon_vertical"></div>
+                        <div class="component_faq_icon_horizontal"></div>
+                      </div>
+                    </div>
+                    <div class="component_faq_content_wrapper">
+                      <div class="component_faq_content">
+                        <div class="component_faq_icon is-content"></div>
+                        <div class="text-size-medium">Getting the right fit matters. Sparms come in a full range of sizes designed to move with, perform, and protect you. Check out our sizing guide in the menu and find your perfect layer.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="component_faq_item">
+                    <div class="component_faq_title_wrapper">
+                      <div class="component_faq_title">
+                        <div class="component_faq_icon is-title"></div>
+                        <div class="component_faq_title-text">Can I return or exchange an item?</div>
+                      </div>
+                      <div class="component_faq_icon_wrapper">
+                        <div class="component_faq_icon_vertical"></div>
+                        <div class="component_faq_icon_horizontal"></div>
+                      </div>
+                    </div>
+                    <div class="component_faq_content_wrapper">
+                      <div class="component_faq_content">
+                        <div class="component_faq_icon is-content"></div>
+                        <div class="text-size-medium">Getting the right fit matters. Sparms come in a full range of sizes designed to move with, perform, and protect you. Check out our sizing guide in the menu and find your perfect layer.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hide w-embed w-script">
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+                  <style>
+/* --- BASE STYLES --- */
+.component_faq_item {
+  cursor: pointer;
+  overflow: hidden;
+}
+/* Vertical line of the 'plus' icon */
+.component_faq_icon_vertical {
+  transition: height 0.4s ease;
+}
+/* The Title Icon (initially 0 width) 
+.component_faq_icon.is-title {
+  width: 0rem;
+  margin-right: 0rem;
+  overflow: hidden;
+  transition: width 0.4s ease, margin-right 0.4s ease;
+}*/
+/* The Title */
+.component_faq_title {
+  transition: font-weight 0.3s ease;
+}
+/* Content Wrapper - starts hidden */
+.component_faq_content_wrapper {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+/* --- ACTIVE CLASS OVERRIDES --- */
+.component_faq_item.is-active .component_faq_icon_vertical {
+  height: 0%;
+}
+.component_faq_item.is-active .component_faq_icon.is-title {
+  transform: scale(1);
+}
+.component_faq_item.is-active .component_faq_title {
+  font-weight: 600;
+}
+.is-active .component_faq_title-text {
+  margin-left: 0.5rem;
+}
+</style>
+                  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const faqItems = document.querySelectorAll(".component_faq_item");
+  // Function to open an item smoothly
+  function openFaqItem(item) {
+    const content = item.querySelector(".component_faq_content_wrapper");
+    item.classList.add("is-active");
+    gsap.to(content, { 
+      height: "auto", 
+      opacity: 1, 
+      duration: 0.5, 
+      ease: "power2.out" 
+    });
+  }
+  // Function to close an item smoothly
+  function closeFaqItem(item) {
+    const content = item.querySelector(".component_faq_content_wrapper");
+    item.classList.remove("is-active");
+    gsap.to(content, { 
+      height: 0, 
+      opacity: 0, 
+      duration: 0.4, 
+      ease: "power2.inOut" 
+    });
+  }
+  // Set up click listeners
+  faqItems.forEach((item) => {
+    item.addEventListener("click", function() {
+      // NEW LOGIC: If the clicked item is already active, do nothing and stop the function
+      if (this.classList.contains("is-active")) {
+        return; 
+      }
+      // Close all other open items
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== this && otherItem.classList.contains("is-active")) {
+          closeFaqItem(otherItem);
+        }
+      });
+      // Open the clicked item (since we know it wasn't active)
+      openFaqItem(this);
+    });
+  });
+  // --- INITIALIZE ---
+  // Apply "is-active" to the first item and open it on load
+  if (faqItems.length > 0) {
+    setTimeout(() => {
+      openFaqItem(faqItems[0]);
+    }, 100);
+  }
+});
+</script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="home_product-slide_section">
+        <div class="padding-global padding-section-large">
+          <div class="container-large">
+            <div class="hide w-embed w-script">
+              <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('#is-product', {
+      spaceBetween: 16,
+      navigation: {
+        nextEl: '#product-swiper-next',
+        prevEl: '#product-swiper-prev',
+      },
+      breakpoints: {
+        0: {
+          enabled: false,
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+        },
+        992: {
+          enabled: true,
+          slidesPerView: 'auto',
+          spaceBetween: 32,
+        },
+      },
+    });
+  });
+</script>
+              <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+              <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('.button.is-add-to-cart');
+    const panels = document.querySelectorAll('.component_product-list_size-wrapper');
+    // Hide all panels on load
+    gsap.set(panels, { autoAlpha: 0 });
+    triggers.forEach((trigger, i) => {
+      const panel = panels[i]; // match each trigger to its own panel
+      // Open on click
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close all other panels first
+        panels.forEach((p) => {
+          if (p !== panel) {
+            gsap.to(p, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+          }
+        });
+        // Toggle this panel
+        const isVisible = gsap.getProperty(panel, 'autoAlpha') === 1;
+        gsap.to(panel, {
+          autoAlpha: isVisible ? 0 : 1,
+          duration: 0.3,
+          ease: isVisible ? 'power2.in' : 'power2.out',
+        });
+      });
+    });
+    // Close all panels when clicking outside
+    document.addEventListener('click', (e) => {
+      const clickedOutside = ![...triggers, ...panels].some(el => el.contains(e.target));
+      if (clickedOutside) {
+        gsap.to(panels, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+      }
+    });
+    // Close all panels when tapping outside on mobile
+    document.addEventListener('touchstart', (e) => {
+      const tappedOutside = ![...triggers, ...panels].some(el => el.contains(e.target));
+      if (tappedOutside) {
+        gsap.to(panels, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' });
+      }
+    });
+  });
+</script>
+            </div>
+            <div class="w-embed"></div>
+            <div class="component_heading_split is-single-row">
+              <h2 class="text-color-white">LOCK IN PERFORMANCE</h2>
+              <p id="w-node-_91ba2255-1b59-73ae-6125-72043fa502fb-5d7073e7" class="text-color-white text-size-medium">Discover the next generation in skin care that plays as hard as you do.</p>
+            </div>
+            <div class="spacer-xlarge"></div>
+            <div id="is-product" class="swiper is-product">
+              <div class="swiper-wrapper is-product">
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper-slide is-product">
+                  <div class="component_product-list_card">
+                    <div class="component_product-list_img-wrap">
+                      <a href="#" class="component_product-list_ilink w-inline-block"><img sizes="(max-width: 648px) 100vw, 648px" srcset="images/Product-Image-placeholder-p-500.webp 500w, images/Product-Image-placeholder.webp 648w" alt="" src="images/Product-Image-placeholder.webp" loading="lazy" class="component_product-list_img"></a>
+                      <div class="component_product-list_size-wrapper">
+                        <div class="text-size-small text-color-white">Select a Size</div>
+                        <div class="component_product-list_size-list"><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>S</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button><button id="" class="component_product-list_size">
+                            <div>xs</div>
+                          </button></div>
+                      </div>
+                    </div>
+                    <div class="component_product-list_content">
+                      <a href="#" class="w-inline-block">
+                        <div class="text-size-medium text-weight-semibold">Product Name Here</div>
+                      </a>
+                      <div class="text-size-medium">$49</div>
+                      <div class="component_product-list_colors"><button id="" class="component_product-list_color-wrap">
+                          <div class="component_product-list_color"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-white"></div>
+                        </button><button id="" class="component_product-list_color-wrap is-grey">
+                          <div class="component_product-list_color is-grey"></div>
+                        </button></div>
+                    </div><button id="" class="button is-add-to-cart">
+                      <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                          <path d="M10.5 21C11.3284 21 12 20.3284 12 19.5C12 18.6716 11.3284 18 10.5 18C9.67157 18 9 18.6716 9 19.5C9 20.3284 9.67157 21 10.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M17.5 21C18.3284 21 19 20.3284 19 19.5C19 18.6716 18.3284 18 17.5 18C16.6716 18 16 18.6716 16 19.5C16 20.3284 16.6716 21 17.5 21Z" fill="#0A0A0A"></path>
+                          <path d="M13 13H15V10.01H17.99V8.01003H15V5.03003H13V8.01003H10.01V10.01H13V13Z" fill="black"></path>
+                          <path d="M10 17H18C18.2014 16.9994 18.398 16.938 18.564 16.8238C18.7299 16.7096 18.8575 16.5479 18.93 16.36L21.76 9H19.62L17.31 15H10.67L6.18 4.23C6.02776 3.86507 5.77077 3.55344 5.44149 3.33452C5.11221 3.11559 4.72542 2.99918 4.33 3H2V5H4.33L9.08 16.38C9.15502 16.5626 9.28242 16.719 9.44614 16.8293C9.60986 16.9396 9.80257 16.999 10 17Z" fill="black"></path>
+                        </svg></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="spacer-xlarge"></div>
+            <div class="home_product-slide_bottom-wrap">
+              <div class="swiper_arrow_wrapper hide-tablet">
+                <div id="product-swiper-prev" class="swiper_arrow">
+                  <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                    </svg></div>
+                </div>
+                <div id="product-swiper-next" class="swiper_arrow">
+                  <div class="icon-embed-blogs is-reversed w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path>
+                    </svg></div>
+                </div>
+              </div>
+              <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+                <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                    <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                  </svg></div>
+                <div>Shop All</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="component_cta_section">
+        <div class="padding-global padding-section-medium">
+          <div class="container-large">
+            <div class="component_cta_wrapper">
+              <div class="component_cta_content_wrapper">
+                <h2>PERFORM UNDER PRESSURE with THE ORIGINAL SUN SLEEVE</h2>
+                <div class="max-width-xsmall">
+                  <p>Join thousands of athletes protecting their skin with our high-performance sun sleeves.</p>
+                </div>
+              </div>
+              <div class="component_cta_button_wrapper">
+                <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+                  <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                      <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                    </svg></div>
+                  <div>SHOP ALL</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="component_community_serction">
+        <div class="padding-section-medium">
+          <div class="padding-global">
+            <div class="container-large">
+              <div class="component_community_title_serction">
+                <h2>OUR community</h2>
+                <p>Real athletes. Real protection. Real stories.</p>
+              </div>
+            </div>
+          </div>
+          <div class="spacer-small"></div>
+          <div class="hide w-embed w-script">
+            <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //Splide Code for socials
+    const slideWidth = 16 * 16; // 16rem in px (assuming 16px base)
+    const gap = 16;
+    const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
+    new Splide('#community', {
+      type: 'loop',
+      drag: 'free', // enables drag-to-swipe with no snap
+      gap: '1rem',
+      autoWidth: true,
+      arrows: false,
+      pagination: false,
+      clones: needed,
+      autoScroll: {
+        speed: 0.3, // px per frame — increase to go faster
+        pauseOnHover: true, // keeps playing on hover
+        pauseOnFocus: false, // keeps playing on focus
+      },
+    }).mount(window.splide.Extensions);
+  });
+</script>
+          </div>
+          <div id="community" class="splide">
+            <div class="splide__track">
+              <div class="splide__list">
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-7.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-5.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-4.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-3.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-2.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-1.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-6.webp" alt="" class="component_community_image"></div>
+                </div>
+                <div class="splide__slide">
+                  <div class="component_community_image_wrapper"><img loading="lazy" src="images/community-image-4.webp" alt="" class="component_community_image"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="component_footer_section">
+      <div class="padding-global padding-section-medium">
+        <div class="container-large">
+          <div class="component_footer_wrapper">
+            <div class="component_footer_upper_wrapper">
+              <div class="component_footer_upper_logo_wrapper">
+                <a href="index.html" class="component_footer_logo w-inline-block"><img loading="lazy" src="images/footer-logo.svg" alt="" class="component_footer_logo_image"></a>
+                <div class="component_footer_form_wrapper">
+                  <p>Stay connected with the latest SParms protection and performance updates</p>
+                  <div class="spacer-small"></div>
+                  <div class="component_footer_form_block w-form">
+                    <form id="wf-form-Subscribe-Form" name="wf-form-Subscribe-Form" data-name="Subscribe Form" method="get" class="component_footer_form" data-wf-page-id="6a0beefbc13bed565d7073e7" data-wf-element-id="c8b4e31b-fcc7-8bca-7d44-b59bf16e1615"><input class="form_input is-footer w-input" maxlength="256" name="Email" data-name="Email" placeholder="sparms@email.com" type="email" id="Email">
+                      <div class="button-group is-footer">
+                        <a href="#" class="button is-secondary is-icon is-alternate w-inline-block">
+                          <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" preserveaspectratio="xMidYMid meet" aria-hidden="true" role="img">
+                              <circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle>
+                            </svg></div>
+                          <div>SUBMIT</div>
+                        </a>
+                      </div>
+                    </form>
+                    <div class="w-form-done">
+                      <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                  <div class="spacer-xxsmall"></div>
+                  <p class="text-size-tiny">By subscribing, you agree to our privacy policy and email terms</p>
+                </div>
+              </div>
+              <div class="component_footer_upper_menu_wrapper">
+                <div class="component_footer_upper_menu">
+                  <div class="text-weight-semibold">Shop All</div>
+                  <div class="component_footer_upper_menu_link_wrapper">
+                    <a href="#" class="component_footer_upper_menu_link">Women</a>
+                    <a href="#" class="component_footer_upper_menu_link">Men</a>
+                    <a href="#" class="component_footer_upper_menu_link">Youth</a>
+                    <a href="#" class="component_footer_upper_menu_link">Birthday Event</a>
+                    <a href="#" class="component_footer_upper_menu_link">Other</a>
+                    <a href="#" class="component_footer_upper_menu_link">Accessories</a>
+                  </div>
+                </div>
+                <div class="component_footer_upper_menu">
+                  <div class="text-weight-semibold">More</div>
+                  <div class="component_footer_upper_menu_link_wrapper">
+                    <a href="#" class="component_footer_upper_menu_link">Ambassadors</a>
+                    <a href="#" class="component_footer_upper_menu_link">Size guide</a>
+                    <a href="#" class="component_footer_upper_menu_link">About Us</a>
+                    <a href="#" class="component_footer_upper_menu_link">Shipping &amp; Returns</a>
+                    <a href="#" class="component_footer_upper_menu_link">Store Locator</a>
+                    <a href="#" class="component_footer_upper_menu_link">Blog</a>
+                    <a href="#" class="component_footer_upper_menu_link">FAQs</a>
+                    <a href="#" class="component_footer_upper_menu_link">Wholesale</a>
+                    <a href="#" class="component_footer_upper_menu_link">Contact Us</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="component_footer_divider"></div>
+            <div class="component_footer_lower_wrapper">
+              <div class="component_footer_lower_payment_wrapper">
+                <div class="component_footer_lower_payment"><img loading="lazy" src="images/payment-01.svg" alt="" class="component_footer_lower_payment_image"><img loading="lazy" src="images/payment-02.svg" alt="" class="component_footer_lower_payment_image"><img loading="lazy" src="images/payment-03.svg" alt="" class="component_footer_lower_payment_image"><img loading="lazy" src="images/payment-04.svg" alt="" class="component_footer_lower_payment_image"><img loading="lazy" src="images/payment-05.svg" alt="" class="component_footer_lower_payment_image"></div>
+                <div class="text-size-small">© 2025 SParms</div>
+              </div>
+              <div class="component_footer_lower_terms_wrapper">
+                <div class="component_footer_lower_currency"><img loading="lazy" src="images/au.webp" alt="" class="component_footer_lower_currency_image">
+                  <div>Australia AUD$</div>
+                </div>
+                <div class="component_footer_lower_policy">
+                  <a href="#" class="component_footer_lower_policy_link">Privacy Policy</a>
+                  <a href="#" class="component_footer_lower_policy_link">Terms of Service</a>
+                  <a href="#" class="component_footer_lower_policy_link">Cookies Settings</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69f96182cd5d92656832ecc9" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/sparms.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+  <!--  Splide Init Code  -->
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+</body>
+</html>
