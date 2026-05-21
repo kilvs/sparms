@@ -35,6 +35,7 @@
   {{ 'components.css' | asset_url | stylesheet_tag }}
   {{ 'sparms.css' | asset_url | stylesheet_tag }}
   {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'collection-filter.css' | asset_url | stylesheet_tag }}
   {% render 'theme-variables' %}
 
   <script>window.Shopify = window.Shopify || {}; Shopify.routes = { root: '{{ routes.root_url }}' }; Shopify.money_format = {{ shop.money_format | json }};</script>

@@ -1,56 +1,163 @@
+{%- comment -%}
+  SParms cart drawer.
+
+  Renders the slide-from-right cart drawer used by `assets/cart-ajax.js`.
+  Always lives in the page (rendered once from `layout/theme.liquid`) and
+  is opened by any element with `data-cart-open`.
+
+  Optional parameters (pass via render):
+    free_shipping_threshold  - dollar amount (in cart.currency) above which
+                                shipping is free. Drives the progress bar.
+                                Default: 80
+    upsell_collection_handle - collection whose products show in the upsell
+                                row beneath the line items. Default: 'all'
+                                Pass blank to hide the upsell row.
+
+  Class naming: every element is prefixed `.cart-drawer__*` so Webflow CSS
+  selectors never accidentally match. Styling lives in
+  `assets/cart-drawer.css`.
+{%- endcomment -%}
+
+{%- liquid
+  assign free_ship_threshold = free_shipping_threshold | default: 80
+  assign upsell_handle = upsell_collection_handle | default: 'all'
+  assign threshold_cents = free_ship_threshold | times: 100
+  assign remaining_cents = threshold_cents | minus: cart.total_price
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+  assign progress_pct = cart.total_price | times: 100 | divided_by: threshold_cents
+  if progress_pct > 100
+    assign progress_pct = 100
+  endif
+  assign upsell_collection = collections[upsell_handle]
+-%}
+
 <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-label="Cart">
   <div class="cart-drawer__overlay" data-cart-close></div>
-  <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-label="Cart">
+
+  <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
     <header class="cart-drawer__header">
-      <h2 class="cart-drawer__title">Your Cart (<span data-cart-count>{{ cart.item_count }}</span>)</h2>
-      <button type="button" class="cart-drawer__close" data-cart-close aria-label="Close cart">&times;</button>
+      <div class="cart-drawer__header-text">
+        <p class="cart-drawer__eyebrow"><span class="cart-drawer__dot"></span> Your bag</p>
+        <h2 id="cart-drawer-title" class="cart-drawer__title">
+          <span data-cart-count>{{ cart.item_count }}</span>
+          <span class="cart-drawer__title-suffix">{% if cart.item_count == 1 %}item{% else %}items{% endif %}</span>
+        </h2>
+      </div>
+      <button type="button" class="cart-drawer__close" data-cart-close aria-label="Close cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
     </header>
 
-    <div class="cart-drawer__body">
-      <div data-cart-empty-state{% if cart.item_count > 0 %} style="display:none"{% endif %}>
-        <p class="cart-drawer__empty">Your cart is empty.</p>
-        <div class="button-group" style="justify-content:center;">
-          <a href="{{ routes.collections_url }}/all" class="button-primary w-button" data-cart-close>Continue shopping</a>
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-drawer__shipping" data-cart-shipping>
+        {%- if remaining_cents > 0 -%}
+          <p class="cart-drawer__shipping-text">
+            <strong>{{ remaining_cents | money_without_trailing_zeros }}</strong> away from free shipping
+          </p>
+        {%- else -%}
+          <p class="cart-drawer__shipping-text cart-drawer__shipping-text--unlocked">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            You've unlocked free shipping
+          </p>
+        {%- endif -%}
+        <div class="cart-drawer__shipping-track">
+          <div class="cart-drawer__shipping-fill" style="width: {{ progress_pct }}%"></div>
         </div>
       </div>
+    {%- endif -%}
 
-      <div data-cart-drawer-items{% if cart.item_count == 0 %} style="display:none"{% endif %}>
+    <div class="cart-drawer__body">
+      <div data-cart-empty-state class="cart-drawer__empty"{% if cart.item_count > 0 %} style="display:none"{% endif %}>
+        <div class="cart-drawer__empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <p class="cart-drawer__empty-title">Your bag is empty</p>
+        <p class="cart-drawer__empty-subtitle">Find your defence layer below.</p>
+        <a href="{{ routes.collections_url }}/all" class="cart-drawer__cta cart-drawer__cta--primary" data-cart-close>Shop all</a>
+      </div>
+
+      <div data-cart-drawer-items class="cart-drawer__items"{% if cart.item_count == 0 %} style="display:none"{% endif %}>
         {%- for line_item in cart.items -%}
-          <div class="cart-drawer__line" data-cart-line-key="{{ line_item.key }}">
-            <a href="{{ line_item.url }}" class="cart-drawer__line-image-wrap">
+          <article class="cart-drawer__line" data-cart-line-key="{{ line_item.key }}">
+            <a href="{{ line_item.url }}" class="cart-drawer__line-image-wrap" data-cart-close>
               {%- if line_item.image -%}
-                <img src="{{ line_item.image | image_url: width: 160 }}" alt="{{ line_item.title | escape }}" class="cart-drawer__line-image" loading="lazy">
+                <img src="{{ line_item.image | image_url: width: 200 }}" alt="{{ line_item.title | escape }}" class="cart-drawer__line-image" loading="lazy" width="80" height="100">
+              {%- else -%}
+                <div class="cart-drawer__line-image cart-drawer__line-image--placeholder"></div>
               {%- endif -%}
             </a>
             <div class="cart-drawer__line-body">
-              <a href="{{ line_item.url }}" class="cart-drawer__line-title">{{ line_item.product.title }}</a>
-              {%- unless line_item.variant.title contains 'Default' -%}
-                <p class="cart-drawer__line-variant">{{ line_item.variant.title }}</p>
-              {%- endunless -%}
-              <p class="cart-drawer__line-price">{{ line_item.final_line_price | money }}</p>
-              <div class="cart-drawer__line-qty">
-                <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="-1" data-cart-line-key="{{ line_item.key }}" aria-label="Decrease quantity">&minus;</button>
-                <input type="number" value="{{ line_item.quantity }}" min="0" class="cart-drawer__qty-input" data-cart-line-change="{{ line_item.key }}">
-                <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="1" data-cart-line-key="{{ line_item.key }}" aria-label="Increase quantity">+</button>
+              <div class="cart-drawer__line-row">
+                <div class="cart-drawer__line-info">
+                  <a href="{{ line_item.url }}" class="cart-drawer__line-title" data-cart-close>{{ line_item.product.title }}</a>
+                  {%- unless line_item.variant.title contains 'Default' -%}
+                    <p class="cart-drawer__line-variant">{{ line_item.variant.title }}</p>
+                  {%- endunless -%}
+                </div>
                 <button type="button" class="cart-drawer__line-remove" data-cart-line-remove="{{ line_item.key }}" aria-label="Remove">Remove</button>
               </div>
+              <div class="cart-drawer__line-foot">
+                <div class="cart-drawer__qty">
+                  <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="-1" data-cart-line-key="{{ line_item.key }}" aria-label="Decrease quantity">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                  </button>
+                  <input type="number" value="{{ line_item.quantity }}" min="0" class="cart-drawer__qty-input" data-cart-line-change="{{ line_item.key }}" aria-label="Quantity">
+                  <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="1" data-cart-line-key="{{ line_item.key }}" aria-label="Increase quantity">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                </div>
+                <p class="cart-drawer__line-price">{{ line_item.final_line_price | money }}</p>
+              </div>
             </div>
-          </div>
+          </article>
         {%- endfor -%}
+
+        {%- if upsell_handle != blank and upsell_collection != blank and upsell_collection.products.size > 0 -%}
+          <section class="cart-drawer__upsell" aria-label="Recommended">
+            <div class="cart-drawer__upsell-head">
+              <p class="cart-drawer__upsell-label"><span class="cart-drawer__dot"></span> Complete the set</p>
+              <a href="{{ upsell_collection.url }}" class="cart-drawer__upsell-link" data-cart-close>See all →</a>
+            </div>
+            <div class="cart-drawer__upsell-grid">
+              {%- for product in upsell_collection.products limit: 3 -%}
+                <a href="{{ product.url }}" class="cart-drawer__upsell-card" data-cart-close>
+                  <div class="cart-drawer__upsell-img-wrap">
+                    {%- if product.featured_image -%}
+                      <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" class="cart-drawer__upsell-img" loading="lazy" width="80" height="80">
+                    {%- endif -%}
+                  </div>
+                  <p class="cart-drawer__upsell-title">{{ product.title }}</p>
+                  <p class="cart-drawer__upsell-price">{{ product.price | money_without_trailing_zeros }}</p>
+                </a>
+              {%- endfor -%}
+            </div>
+          </section>
+        {%- endif -%}
+
+        <details class="cart-drawer__note">
+          <summary class="cart-drawer__note-summary">
+            <span>Add gift note or special instruction</span>
+            <span class="cart-drawer__note-icon" aria-hidden="true">+</span>
+          </summary>
+          <textarea name="note" class="cart-drawer__note-input" rows="3" placeholder="E.g. gift wrap, sizing exchange details..."></textarea>
+        </details>
       </div>
     </div>
 
-    <footer class="cart-drawer__footer">
+    <footer class="cart-drawer__footer" data-cart-footer{% if cart.item_count == 0 %} style="display:none"{% endif %}>
       <div class="cart-drawer__subtotal-row">
-        <span>Subtotal</span>
-        <span data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+        <span class="cart-drawer__subtotal-label">Subtotal</span>
+        <span class="cart-drawer__subtotal-value" data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
       </div>
-      <div class="cart-drawer__actions">
-        <form action="{{ routes.cart_url }}" method="post">
-          <button type="submit" name="checkout" class="button-primary w-button" style="width:100%;">Checkout</button>
-        </form>
-        <a href="{{ routes.cart_url }}" class="button-secondary w-button" style="text-align:center;">View cart</a>
-      </div>
+      <p class="cart-drawer__taxes">Shipping &amp; taxes calculated at checkout.</p>
+      <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
+        <button type="submit" name="checkout" class="cart-drawer__cta cart-drawer__cta--primary cart-drawer__cta--block">
+          Checkout · <span data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+        </button>
+      </form>
+      <a href="{{ routes.cart_url }}" class="cart-drawer__cta cart-drawer__cta--ghost cart-drawer__cta--block">View full cart</a>
     </footer>
   </div>
 </aside>

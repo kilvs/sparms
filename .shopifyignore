@@ -12,9 +12,6 @@ convert-forms.cjs
 # Project / AI context (root-only — don't deploy)
 CLAUDE.md
 
-# UI mocks / previews (browser-only HTML, not theme files)
-previews/
-
 # Editor / OS
 .DS_Store
 Thumbs.db
