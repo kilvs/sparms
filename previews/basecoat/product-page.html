@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <title>SParms — Basecoat product page mock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/basecoat.cdn.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.11/dist/js/all.min.js" defer></script>
+</head>
+<body class="min-h-screen bg-background text-foreground">
+
+  <header class="border-b">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <strong class="text-lg tracking-wide">SPARMS</strong>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#">Shop all</a>
+        <a href="#">Ambassadors</a>
+        <a href="#">Size guide</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 py-8">
+
+    <!-- Breadcrumbs -->
+    <nav class="text-xs text-muted-foreground mb-6">
+      <a href="#">Home</a> <span class="mx-2">·</span>
+      <a href="#">Shop all</a> <span class="mx-2">·</span>
+      <a href="#">Sun sleeves</a> <span class="mx-2">·</span>
+      <span class="text-foreground">Performance Sun Sleeve</span>
+    </nav>
+
+    <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+
+      <!-- ============================================================== -->
+      <!-- Gallery                                                         -->
+      <!-- ============================================================== -->
+      <section>
+        <div class="aspect-[4/5] rounded-lg bg-muted grid place-items-center text-sm text-muted-foreground mb-3 relative">
+          Main image
+          <span class="badge absolute top-4 left-4">Best seller</span>
+          <button class="btn-icon btn-outline absolute bottom-4 right-4" aria-label="Zoom">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/><path d="M11 8v6"/></svg>
+          </button>
+        </div>
+        <div class="grid grid-cols-5 gap-2">
+          <button class="aspect-square rounded-md bg-muted ring-2 ring-primary text-xs text-muted-foreground grid place-items-center">1</button>
+          <button class="aspect-square rounded-md bg-muted text-xs text-muted-foreground grid place-items-center">2</button>
+          <button class="aspect-square rounded-md bg-muted text-xs text-muted-foreground grid place-items-center">3</button>
+          <button class="aspect-square rounded-md bg-muted text-xs text-muted-foreground grid place-items-center">4</button>
+          <button class="aspect-square rounded-md bg-muted text-xs text-muted-foreground grid place-items-center">5</button>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- Details / buy box                                               -->
+      <!-- ============================================================== -->
+      <section>
+        <p class="text-xs uppercase tracking-wider text-muted-foreground">SParms · UPF 50+</p>
+        <h1 class="text-3xl font-semibold tracking-tight mt-2">Performance Sun Sleeve</h1>
+
+        <!-- Rating -->
+        <div class="flex items-center gap-2 mt-3">
+          <div class="flex text-yellow-400">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <span class="text-sm text-muted-foreground">4.9 (327 reviews)</span>
+        </div>
+
+        <!-- Price -->
+        <div class="mt-4 flex items-baseline gap-3">
+          <p class="text-2xl font-semibold">$49.00</p>
+          <p class="text-sm text-muted-foreground line-through">$59.00</p>
+          <span class="badge badge-destructive">Save 17%</span>
+        </div>
+        <p class="text-xs text-muted-foreground mt-1">AUD · Inclusive of GST</p>
+
+        <!-- Inventory note -->
+        <p class="text-xs mt-4 text-amber-500">Only 4 left in Size M · Black</p>
+
+        <!-- Color picker -->
+        <div class="mt-6">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm font-medium">Color: <span class="text-muted-foreground font-normal">Black</span></p>
+          </div>
+          <div class="flex gap-2">
+            <label class="cursor-pointer">
+              <input type="radio" name="color" class="sr-only peer" checked>
+              <span class="block h-10 w-10 rounded-full border-2 bg-black ring-offset-2 ring-offset-background peer-checked:ring-2 ring-primary"></span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="color" class="sr-only peer">
+              <span class="block h-10 w-10 rounded-full border-2 bg-white ring-offset-2 ring-offset-background peer-checked:ring-2 ring-primary"></span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="color" class="sr-only peer">
+              <span class="block h-10 w-10 rounded-full border-2 bg-gray-400 ring-offset-2 ring-offset-background peer-checked:ring-2 ring-primary"></span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="color" class="sr-only peer">
+              <span class="block h-10 w-10 rounded-full border-2 bg-blue-600 ring-offset-2 ring-offset-background peer-checked:ring-2 ring-primary"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Size picker -->
+        <div class="mt-6">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm font-medium">Size</p>
+            <button class="text-xs underline text-muted-foreground hover:text-foreground"
+                    onclick="document.getElementById('size-guide').showModal()">Size guide</button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <label class="label cursor-pointer">
+              <input type="radio" name="size" class="sr-only peer">
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary">XS</span>
+            </label>
+            <label class="label cursor-pointer">
+              <input type="radio" name="size" class="sr-only peer">
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary">S</span>
+            </label>
+            <label class="label cursor-pointer">
+              <input type="radio" name="size" class="sr-only peer" checked>
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary">M</span>
+            </label>
+            <label class="label cursor-pointer">
+              <input type="radio" name="size" class="sr-only peer">
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary">L</span>
+            </label>
+            <label class="label cursor-pointer">
+              <input type="radio" name="size" class="sr-only peer">
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground peer-checked:border-primary">XL</span>
+            </label>
+            <label class="label cursor-pointer opacity-50">
+              <input type="radio" name="size" class="sr-only peer" disabled>
+              <span class="inline-flex h-11 min-w-12 px-4 items-center justify-center rounded-md border text-sm font-medium line-through">XXL</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Quantity + Add to cart -->
+        <div class="mt-6 flex gap-3">
+          <div class="flex items-center border rounded-md">
+            <button class="btn-icon btn-ghost h-11 w-11" aria-label="Decrease">−</button>
+            <span class="w-10 text-center text-sm">1</span>
+            <button class="btn-icon btn-ghost h-11 w-11" aria-label="Increase">+</button>
+          </div>
+          <button class="btn flex-1 h-11">Add to bag · $49.00</button>
+        </div>
+        <button class="btn-outline w-full mt-3 h-11">Buy now with Shop Pay</button>
+
+        <!-- Quick info row -->
+        <div class="mt-6 grid grid-cols-2 gap-3 text-xs">
+          <div class="flex items-center gap-2 text-muted-foreground">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M2 12h20"/></svg>
+            Free shipping over $80
+          </div>
+          <div class="flex items-center gap-2 text-muted-foreground">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+            60-day returns
+          </div>
+          <div class="flex items-center gap-2 text-muted-foreground">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 7v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V7Z"/></svg>
+            UPF 50+ tested
+          </div>
+          <div class="flex items-center gap-2 text-muted-foreground">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+            Ships in 1–2 business days
+          </div>
+        </div>
+
+        <!-- Tabs: details / specs / reviews -->
+        <div class="mt-8" data-tabs>
+          <div role="tablist" class="border-b flex gap-6">
+            <button role="tab" aria-selected="true" class="pb-3 text-sm font-medium border-b-2 border-primary -mb-px">Details</button>
+            <button role="tab" aria-selected="false" class="pb-3 text-sm text-muted-foreground hover:text-foreground">Specs</button>
+            <button role="tab" aria-selected="false" class="pb-3 text-sm text-muted-foreground hover:text-foreground">Reviews (327)</button>
+            <button role="tab" aria-selected="false" class="pb-3 text-sm text-muted-foreground hover:text-foreground">Shipping</button>
+          </div>
+          <div role="tabpanel" class="pt-4 text-sm text-muted-foreground leading-relaxed">
+            <p>Premium UPF 50+ certified sun sleeves engineered for elite athletes. Lightweight moisture-wicking fabric stays cool under pressure. Compression fit supports muscle recovery without limiting movement. Trusted by Australian Cricket, LPGA pros, and Olympic-level athletes worldwide.</p>
+            <ul class="mt-3 space-y-1 list-disc list-inside">
+              <li>UPF 50+ independently certified</li>
+              <li>Cooling moisture-wicking fabric</li>
+              <li>Compression fit</li>
+              <li>Quick-dry, anti-odor</li>
+              <li>Designed in Australia</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Recommendations carousel                                        -->
+    <!-- ============================================================== -->
+    <section class="mt-16 pt-10 border-t">
+      <div class="flex items-end justify-between mb-6">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-muted-foreground mb-1">Pair it with</p>
+          <h2 class="text-2xl font-semibold">You may also like</h2>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn-icon btn-outline" aria-label="Previous">‹</button>
+          <button class="btn-icon btn-outline" aria-label="Next">›</button>
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="card">
+          <div class="aspect-[4/5] rounded-md bg-muted grid place-items-center text-xs text-muted-foreground relative">
+            img
+            <button class="btn-icon btn-outline absolute top-3 right-3" aria-label="Quick add">+</button>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium">Cooling Arm Sleeve</h3>
+            <p class="text-sm font-semibold mt-1">$39.00</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="aspect-[4/5] rounded-md bg-muted grid place-items-center text-xs text-muted-foreground relative">
+            img
+            <button class="btn-icon btn-outline absolute top-3 right-3" aria-label="Quick add">+</button>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium">Neck Gaiter</h3>
+            <p class="text-sm font-semibold mt-1">$29.00</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="aspect-[4/5] rounded-md bg-muted grid place-items-center text-xs text-muted-foreground relative">
+            img
+            <button class="btn-icon btn-outline absolute top-3 right-3" aria-label="Quick add">+</button>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium">Leg Sleeve Pair</h3>
+            <p class="text-sm font-semibold mt-1">$59.00</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="aspect-[4/5] rounded-md bg-muted grid place-items-center text-xs text-muted-foreground relative">
+            img
+            <button class="btn-icon btn-outline absolute top-3 right-3" aria-label="Quick add">+</button>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-sm font-medium">Cooling Towel</h3>
+            <p class="text-sm font-semibold mt-1">$19.00</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Size guide dialog (centered, default basecoat) -->
+  <dialog id="size-guide" class="dialog" aria-labelledby="sg-title"
+          onclick="if (event.target === this) this.close()">
+    <div>
+      <header>
+        <h2 id="sg-title">Size guide</h2>
+        <p>Measure your bicep at the widest point.</p>
+      </header>
+      <section>
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b text-left">
+              <th class="py-2">Size</th>
+              <th class="py-2">Bicep (cm)</th>
+              <th class="py-2">Bicep (in)</th>
+            </tr>
+          </thead>
+          <tbody class="text-muted-foreground">
+            <tr class="border-b"><td class="py-2 text-foreground font-medium">XS</td><td>22–25</td><td>8.5–10</td></tr>
+            <tr class="border-b"><td class="py-2 text-foreground font-medium">S</td><td>25–28</td><td>10–11</td></tr>
+            <tr class="border-b"><td class="py-2 text-foreground font-medium">M</td><td>28–31</td><td>11–12</td></tr>
+            <tr class="border-b"><td class="py-2 text-foreground font-medium">L</td><td>31–34</td><td>12–13.5</td></tr>
+            <tr class="border-b"><td class="py-2 text-foreground font-medium">XL</td><td>34–37</td><td>13.5–14.5</td></tr>
+            <tr><td class="py-2 text-foreground font-medium">XXL</td><td>37–40</td><td>14.5–16</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <footer>
+        <button class="btn-outline" onclick="this.closest('dialog').close()">Close</button>
+      </footer>
+      <button type="button" aria-label="Close dialog" onclick="this.closest('dialog').close()">✕</button>
+    </div>
+  </dialog>
+
+</body>
+</html>
