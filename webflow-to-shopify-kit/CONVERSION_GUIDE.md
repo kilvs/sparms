@@ -539,6 +539,70 @@ Bind each with a section group JSON file:
 
 Then in `theme.liquid`: `{% sections 'header-group' %}`.
 
+### 9.1 Two valid rendering patterns — pick one and stay consistent
+
+The header + footer can render site-wide via two patterns. They look similar but differ in editor UX and file count.
+
+**Pattern A — Section groups (Dawn / Horizon default):**
+
+```
+sections/header.liquid              ← the section file (markup + schema)
+sections/header-group.json          ← section group manifest
+                                      lists which sections render in the group
+layout/theme.liquid:
+  <div id="header-group">           ← wrapper provides JS hook + sticky context
+    {% sections 'header-group' %}   ← PLURAL `sections`, calls the manifest
+  </div>
+```
+
+- Theme editor: Header + Footer appear as **standalone top-level groups** in the sidebar, separate from each template's section tree.
+- Easy to extend later: add an announcement bar above the navbar by editing only `header-group.json` (no `theme.liquid` change).
+- Trade-off: 2 extra files per region (`header-group.json` + `footer-group.json`), plus the file/reference name mismatch (file is `header.liquid` but call says `'header-group'`) confuses people.
+
+**Pattern B — Direct section rendering (simpler):**
+
+```
+sections/header.liquid              ← the section file (the only file)
+layout/theme.liquid:
+  {% section 'header' %}            ← SINGULAR `section`, renders the file directly
+```
+
+- Theme editor: Header + Footer appear **nested inside every template tree**. A merchant edits them on any template; the change propagates everywhere because `theme.liquid` renders the same section on all templates.
+- Fewer files. File name (`header.liquid`) matches the reference (`'header'`).
+- Trade-off: no separate top-level group in the editor. To add an announcement bar later you'd either (a) re-introduce a section group, (b) add another `{% section %}` call in theme.liquid, or (c) model the announcement as a block inside header.liquid.
+
+**Critical syntax distinction:**
+
+| Liquid | Loads | File extension |
+|---|---|---|
+| `{% sections 'header-group' %}` (plural) | section GROUP manifest | `sections/header-group.json` |
+| `{% section 'header' %}` (singular) | a single section file | `sections/header.liquid` |
+
+These are easy to mix up. Always check the file pattern (`.json` vs `.liquid`) that the call targets.
+
+**Recommendation:** the kit's `starter-theme/` ships with section groups (Pattern A) so the conversion ends up Dawn-aligned by default. If a project doesn't need multi-section header areas, simplifying to Pattern B post-conversion is a 4-step refactor (rewrite the two `theme.liquid` calls, delete the two `-group.json` files). Either pattern is fine — pick one and stay consistent within the theme.
+
+### 9.2 `tag` property on header/footer schemas — get this right
+
+The section schema's `tag` property controls Shopify's wrapper element. **Valid values**: `"article"`, `"aside"`, `"div"`, `"footer"`, `"header"`, `"section"`, or **omit the property entirely** (defaults to `<div>`).
+
+`"tag": null` is **not valid**. Shopify silently skips rendering the section. No error, no warning — the section just doesn't appear on the page. This is one of the most insidious bugs in OS 2.0 because every other tool (JSON parsers, schema validators, `shopify theme check`) accepts `null` as a valid JSON value.
+
+| Section | Recommended `tag` | Why |
+|---|---|---|
+| `header.liquid` | `"header"` | Wraps navbar in semantic `<header class="shopify-section">`. Inner markup is typically a `<div class="component_navbar_section">` so no element duplication. |
+| `footer.liquid` | `"div"` | The Webflow markup typically already opens with `<footer class="component_footer_section">`. Using `"footer"` here would produce `<footer><footer>…</footer></footer>`. |
+| Page-level home / collection sections | `"section"` (Webflow class is `*_section` so semantic match) | |
+| Component sections (logo strip, CTA, testimonial, etc.) | `"section"` or omit | |
+
+When auditing a converted theme, grep for `"tag": null` before pushing:
+
+```bash
+grep -nE '"tag":\s*null' sections/*.liquid
+```
+
+Any hit is a section that won't render.
+
 ---
 
 ## 10. Webflow JS preservation gotchas
@@ -659,6 +723,9 @@ done
 - **`<main>` placement when splitting the homepage.** The kit's `convert.cjs` leaves `<main class="main-wrapper">` inside the monolithic `page-<name>.liquid`. When you split into per-block sections, the `<main>` wrapper has nowhere obvious to live. Move it into `layout/theme.liquid` around `{{ content_for_layout }}` — the kit's CONVERSION_GUIDE §5's "don't double-wrap" warning only applies when the page-level section still owns the `<main>`.
 - **`.home_hero_load` style fades to invisible but stays in the DOM.** Webflow's hero intro typically animates a fullscreen `position: fixed` overlay with `autoAlpha: 0` — leaves the element with `visibility: hidden` but technically still there. The original Webflow's `hasSeenIntro` shortcut path is worse: it sets only `opacity: 0`, leaving `visibility: visible`, so a fixed invisible div silently captures clicks across the viewport. Fix: add a GSAP `onComplete` callback that sets `display: none` after the animation, and have the shortcut path go straight to `display: none`.
 - **Hard-coded `{% for i in (1..N) %}` fallback loops should match the original card count.** When a Webflow section's static HTML has 5 product cards or 8 ambassador headshots, your `{% for block %}{% else %}` fallback should produce the same number. Mismatch causes layout shift between bound vs. fallback states.
+- **`"tag": null` in a section schema silently breaks rendering.** Shopify's section schema accepts `tag` values `article`, `aside`, `div`, `footer`, `header`, `section`, or the property omitted. `null` is *not* valid — Shopify quietly skips the section, no error reported. Bit us with the navbar disappearing on every template. Always grep for `"tag":\s*null` before pushing. See §9.2.
+- **`{% sections %}` plural vs `{% section %}` singular reference different things.** Plural loads a section GROUP via `sections/<name>.json` manifest. Singular loads one section file via `sections/<name>.liquid`. AI assistants regularly swap these. Always verify the file extension (`.json` vs `.liquid`) at the path being called. See §9.1.
+- **Section group `<div id="header-group">` wrappers in `theme.liquid` are Dawn convention, not strictly required.** Dawn/Horizon wrap `{% sections 'header-group' %}` in a div for JS height-calc hooks and sticky-positioning ancestors. If your converted theme doesn't need either, the wrapper is optional. When using direct `{% section 'header' %}` rendering instead of groups, drop the wrapper — Shopify's per-section `<header class="shopify-section">` envelope is sufficient.
 
 ---
 
