@@ -11,9 +11,23 @@
   assign primary_cta_url = primary_cta_url | default: routes.collections_url | append: '/all'
 
   assign nav_variant = section.settings.nav_variant | default: 'default'
+  assign dark_templates_csv = section.settings.dark_on_templates | default: 'product'
+  assign dark_templates = dark_templates_csv | split: ','
+  assign is_dark = false
+  if nav_variant == 'dark'
+    assign is_dark = true
+  elsif nav_variant == 'auto'
+    for t in dark_templates
+      assign t_clean = t | strip
+      if template == t_clean or template.name == t_clean
+        assign is_dark = true
+        break
+      endif
+    endfor
+  endif
   assign nav_variant_data = 'base'
   assign nav_variant_class = ''
-  if nav_variant == 'dark'
+  if is_dark
     assign nav_variant_data = 'dark'
     assign nav_variant_class = ' w-variant-68e39418-5105-edf7-f1ae-5c78351ae185 is-black'
   endif
@@ -107,12 +121,20 @@
       "type": "select",
       "id": "nav_variant",
       "label": "Navbar style",
-      "default": "default",
+      "default": "auto",
       "options": [
-        { "value": "default", "label": "Default" },
-        { "value": "dark", "label": "Dark" }
+        { "value": "default", "label": "Default (light)" },
+        { "value": "dark", "label": "Dark (always)" },
+        { "value": "auto", "label": "Auto — dark on selected templates" }
       ],
-      "info": "Dark applies the Webflow dark variant (black background)."
+      "info": "Section groups are site-wide — pick ‘Auto’ to vary by template."
+    },
+    {
+      "type": "text",
+      "id": "dark_on_templates",
+      "label": "Dark on which templates (when Auto)",
+      "default": "product",
+      "info": "Comma-separated list of template names that should render the dark variant. e.g. ‘product, collection, cart’."
     },
     { "type": "header", "content": "Logo" },
     { "type": "paragraph", "content": "Logo image is set in Theme settings → Brand identity. The Webflow SVG is used as fallback." },
