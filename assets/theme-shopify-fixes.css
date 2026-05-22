@@ -1,0 +1,32 @@
+/* SParms / Shopify wrapper compatibility fixes.
+   These rules patch interactions between Shopify's per-section
+   wrappers and the preserved Webflow CSS. They never modify the
+   Webflow stylesheet itself -- everything here is a layered override.
+*/
+
+/* ---------------------------------------------------------------
+   Sticky navbar fix.
+
+   Webflow CSS sets `position: sticky; top: 0` on the inner
+   `.component_navbar_section` div. When the section renders via
+   `{% section 'header' %}` (or any Shopify rendering), Shopify wraps
+   it in <header class="shopify-section shopify-section-header">.
+   That wrapper is exactly as tall as the navbar -- so the sticky
+   child has no scroll room WITHIN its parent. The moment the page
+   scrolls, the wrapper scrolls off, taking the "sticky" child with it.
+
+   Fix: make the wrapper itself sticky so it pins to the much-taller
+   `.page-wrapper`. The inner sticky becomes harmless redundancy.
+--------------------------------------------------------------- */
+.shopify-section-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* Body offset reset -- in case Shopify's editor injected anything that
+   would push the sticky off-position. */
+.shopify-section-header > .component_navbar_section {
+  position: relative;
+  top: auto;
+}
