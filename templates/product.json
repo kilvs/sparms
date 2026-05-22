@@ -11,43 +11,123 @@
   "sections": {
     "buy-box": {
       "type": "product-01-buy-box",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "show_breadcrumbs": true,
+        "show_rating": true,
+        "show_compare_at_price": true,
+        "show_inventory_threshold": true,
+        "inventory_threshold": 5,
+        "swatch_source": "metafield",
+        "swatch_metafield_key": "custom.swatch_color",
+        "size_guide_url": "",
+        "show_line_item_properties": false,
+        "show_subscription": false,
+        "show_quick_info_row": true,
+        "returns_text": "Free Unlimited Returns for A$2.99",
+        "payment_options_text": "More Payment Options",
+        "reviews_app": "none",
+        "show_sticky_add_to_cart": true,
+        "track_recently_viewed": true,
+        "show_json_ld": true
+      }
     },
     "reviews": {
       "type": "product-02-reviews",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "heading": "Customer testimonials",
+        "list_heading": "Reviews",
+        "reviews_app": "none",
+        "show_rating_summary": true,
+        "show_photo_grid": true,
+        "fallback_rating": "4.1",
+        "fallback_rating_count": "1858",
+        "rating_distribution_5": 47,
+        "rating_distribution_4": 31,
+        "rating_distribution_3": 14,
+        "rating_distribution_2": 4,
+        "rating_distribution_1": 4
+      }
     },
     "feature": {
       "type": "component-feature",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "show_wordmark": true,
+        "wordmark_filename": "sparms-logo-wordmark.png",
+        "heading": "the sporting advantage",
+        "body": "The Original sun sleeve, and the choice of champions, Sparms is trusted by elite athletes worldwide. Our lightweight, breathable fabrics are designed to enhance, not limit. Get the best protection for your every day.",
+        "background_image_filename": "Feature-background-Image.webp",
+        "show_primary_cta": true,
+        "primary_cta_label": "View collection",
+        "primary_cta_collection": "",
+        "primary_cta_url": "",
+        "show_secondary_cta": true,
+        "secondary_cta_label": "Shop All",
+        "secondary_cta_collection": "",
+        "secondary_cta_url": ""
+      }
     },
     "ambassadors": {
       "type": "component-ambassadors-slide",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "heading": "OUR AMBASSADORS",
+        "body": "A powerhouse collective from every corner of sport, our ambassadors wear Sparms with pride in training, on the field, and at every competition."
+      }
     },
     "faqs": {
       "type": "product-03-faqs",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "heading": "Frequently asked questions",
+        "body": "Common questions about our products, sizing, care, shipping and returns."
+      }
     },
     "related": {
       "type": "home-02-product-slider",
       "settings": {
         "show_section": true,
-        "data_source": "recommendations",
         "heading": "You may also like",
         "body": "Pair it with the rest of the kit.",
+        "data_source": "recommendations",
+        "collection": "",
+        "product_limit": 8,
         "show_shop_all": true,
-        "shop_all_label": "Shop all"
+        "shop_all_label": "Shop all",
+        "shop_all_collection": "",
+        "shop_all_url": ""
       }
     },
     "cta": {
       "type": "component-cta",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true,
+        "heading": "PERFORM UNDER PRESSURE with THE ORIGINAL SUN SLEEVE",
+        "body": "Join thousands of athletes protecting their skin with our high-performance sun sleeves.",
+        "show_cta": true,
+        "cta_label": "SHOP ALL",
+        "cta_product": "",
+        "cta_collection": "",
+        "cta_url": ""
+      }
     },
     "community": {
       "type": "component-community",
-      "settings": { "show_section": true }
+      "settings": {
+        "show_section": true
+      }
     }
   },
-  "order": ["buy-box", "reviews", "feature", "ambassadors", "faqs", "related", "cta", "community"]
+  "order": [
+    "buy-box",
+    "reviews",
+    "feature",
+    "ambassadors",
+    "faqs",
+    "related",
+    "cta",
+    "community"
+  ]
 }
