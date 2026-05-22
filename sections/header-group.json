@@ -14,7 +14,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "nav_variant": "dark",
+        "nav_variant": "default",
         "main_menu": "",
         "more_menu": "",
         "cta_label": "SHOP ALL",
