@@ -8,24 +8,35 @@
    Sticky navbar fix.
 
    Webflow CSS sets `position: sticky; top: 0` on the inner
-   `.component_navbar_section` div. When the section renders via
-   `{% section 'header' %}` (or any Shopify rendering), Shopify wraps
-   it in <header class="shopify-section shopify-section-header">.
-   That wrapper is exactly as tall as the navbar -- so the sticky
-   child has no scroll room WITHIN its parent. The moment the page
-   scrolls, the wrapper scrolls off, taking the "sticky" child with it.
+   `.component_navbar_section` div. Shopify wraps the rendered section
+   in a wrapper that's exactly as tall as the navbar -- the sticky
+   child has no scroll room WITHIN its parent, so the moment the page
+   scrolls, the wrapper scrolls off and takes the "sticky" child with it.
 
-   Fix: make the wrapper itself sticky so it pins to the much-taller
-   `.page-wrapper`. The inner sticky becomes harmless redundancy.
+   Fix: make whichever wrapper Shopify produces also sticky. We cover
+   both cases:
+     1. Section group via `{% sections 'header-group' %}`:
+        Shopify outputs <div class="shopify-section-group-header-group">
+        also wraps each child in <header class="shopify-section ...">.
+        Our wrapping <div id="header-group"> in theme.liquid is also sticky-safe.
+     2. Direct `{% section 'header' %}` (legacy fallback):
+        Outputs <header class="shopify-section shopify-section-header">.
+
+   Selectors below sticky-pin all three options + the manual #header-group
+   wrapper. Only one of these will actually exist at runtime; the others
+   are inert.
 --------------------------------------------------------------- */
+#header-group,
+.shopify-section-group-header-group,
 .shopify-section-header {
   position: sticky;
   top: 0;
   z-index: 9999;
 }
 
-/* Body offset reset -- in case Shopify's editor injected anything that
-   would push the sticky off-position. */
+/* Inner navbar div doesn't need to be its own sticky context anymore. */
+#header-group .component_navbar_section,
+.shopify-section-group-header-group .component_navbar_section,
 .shopify-section-header > .component_navbar_section {
   position: relative;
   top: auto;
