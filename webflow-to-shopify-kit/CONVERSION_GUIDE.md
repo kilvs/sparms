@@ -727,6 +727,23 @@ done
 - **`{% sections %}` plural vs `{% section %}` singular reference different things.** Plural loads a section GROUP via `sections/<name>.json` manifest. Singular loads one section file via `sections/<name>.liquid`. AI assistants regularly swap these. Always verify the file extension (`.json` vs `.liquid`) at the path being called. See §9.1.
 - **Section group `<div id="header-group">` wrappers in `theme.liquid` are Dawn convention, not strictly required.** Dawn/Horizon wrap `{% sections 'header-group' %}` in a div for JS height-calc hooks and sticky-positioning ancestors. If your converted theme doesn't need either, the wrapper is optional. When using direct `{% section 'header' %}` rendering instead of groups, drop the wrapper — Shopify's per-section `<header class="shopify-section">` envelope is sufficient.
 - **Sticky navbar stops sticking after the conversion.** Webflow CSS commonly applies `position: sticky; top: 0` to `.component_navbar_section`. After conversion, the section gets wrapped in `<header class="shopify-section shopify-section-header">` (or `<div class="shopify-section-group-header-group">` for section groups). That wrapper is exactly as tall as the navbar — so the sticky child has no scroll room WITHIN its parent, and scrolls off the page with the wrapper. Fix: layer a small CSS override (e.g. `assets/theme-shopify-fixes.css`) promoting `position: sticky; top: 0; z-index: 9999` onto the Shopify wrapper class (`.shopify-section-header` for direct rendering, or `.shopify-section-group-header-group` for section groups). Never edit the original Webflow CSS — keep the fix in a separate layered file loaded from `theme.liquid` after the main stylesheets.
+- **Webflow Variants → expose as theme settings.** Webflow's [Variants](https://university.webflow.com/lesson/variants) feature can produce multiple visual states of the same component (e.g. a navbar with both a "default" and a "dark" variant). The export ships these as CSS rules keyed off generated class hashes: `.component_navbar_section:where(.w-variant-68e39418-5105-edf7-f1ae-5c78351ae185) { ... }`. The hash is unique per export — find yours by grepping `assets/*.css` for `w-variant-` selectors. To expose the variant in the theme editor, add a `select` or `checkbox` setting to the section schema and conditionally append the hash class (often paired with a human-readable modifier like `is-black`) to the markup. Don't hard-code variant hashes in the kit's starter theme — they only exist in projects whose Webflow design uses Variants.
+- **Section groups apply globally — for per-template variation, use a `select` with an "auto" option + a CSV of template names.** Sections inside `header-group.json` / `footer-group.json` are site-wide; a setting changed once shows everywhere. If a merchant wants different navbar styles per template (e.g. light navbar on home, dark on product page), the cleanest pattern is a 3-state select on the section: `default` / `dark` / `auto`, paired with a `text` setting holding a comma-separated list of template names. The Liquid then splits the CSV and matches the current `template` / `template.name`:
+  ```liquid
+  {%- liquid
+    if section.settings.nav_variant == 'auto'
+      for t in section.settings.dark_on_templates | split: ','
+        if template == t | strip or template.name == t | strip
+          assign is_dark = true
+          break
+        endif
+      endfor
+    elsif section.settings.nav_variant == 'dark'
+      assign is_dark = true
+    endif
+  -%}
+  ```
+  Alternatives (worse): maintain two parallel section groups (`header-group-dark.json`) — merchants have to edit logo/menus/CTAs in both. Or move the header out of the section group into each template's JSON — loses the top-level Header tree in the editor. Auto-by-template is the best trade-off.
 
 ---
 
