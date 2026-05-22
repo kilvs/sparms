@@ -38,7 +38,7 @@
         "show_section": true,
         "heading": "LOCK IN PERFORMANCE",
         "body": "Discover the next generation in skin care that plays as hard as you do.",
-        "data_source": "collection",
+        "data_source": "recommendations",
         "collection": "frontpage",
         "product_limit": 8,
         "show_shop_all": true,
