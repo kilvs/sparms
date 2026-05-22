@@ -9,8 +9,16 @@
     assign primary_cta_url = section.settings.cta_collection.url
   endif
   assign primary_cta_url = primary_cta_url | default: routes.collections_url | append: '/all'
+
+  assign nav_variant = section.settings.nav_variant | default: 'default'
+  assign nav_variant_data = 'base'
+  assign nav_variant_class = ''
+  if nav_variant == 'dark'
+    assign nav_variant_data = 'dark'
+    assign nav_variant_class = ' w-variant-68e39418-5105-edf7-f1ae-5c78351ae185 is-black'
+  endif
 -%}
-<div data-wf--main-menu--variant="base" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="component_navbar_section w-nav">
+<div data-wf--main-menu--variant="{{ nav_variant_data }}" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="component_navbar_section w-nav{{ nav_variant_class }}">
   <div class="component_navbar_wrapper">
     <nav role="navigation" class="component_navbar_navigation_wrapper w-nav-menu">
       <a href="{{ primary_cta_url }}" class="button is-secondary is-icon is-alternate w-inline-block">
@@ -95,6 +103,14 @@
   "tag": "header",
   "class": "shopify-section-header",
   "settings": [
+    { "type": "header", "content": "Appearance" },
+    { "type": "select", "id": "nav_variant", "label": "Navbar style", "default": "default",
+      "options": [
+        { "value": "default", "label": "Default (transparent / theme background)" },
+        { "value": "dark", "label": "Dark (black background, .is-black + Webflow variant)" }
+      ],
+      "info": "Switches the navbar to the dark variant defined in the Webflow CSS."
+    },
     { "type": "header", "content": "Logo" },
     { "type": "paragraph", "content": "Logo image is set in Theme settings → Brand identity. The Webflow SVG is used as fallback." },
     { "type": "header", "content": "Navigation" },

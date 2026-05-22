@@ -1,21 +1,18 @@
 {%- comment -%}
   SParms cart drawer.
 
-  Renders the slide-from-right cart drawer used by `assets/cart-ajax.js`.
-  Always lives in the page (rendered once from `layout/theme.liquid`) and
-  is opened by any element with `data-cart-open`.
+  Slide-from-right drawer with a clean, contrast-first layout inspired by
+  modern Shopify drawer patterns. Big "Cart" title with item-count pill,
+  per-line image + title + variant + price + qty stepper + trash icon,
+  expandable discount input, estimated total row, primary checkout CTA.
 
-  Optional parameters (pass via render):
-    free_shipping_threshold  - dollar amount (in cart.currency) above which
-                                shipping is free. Drives the progress bar.
-                                Default: 80
-    upsell_collection_handle - collection whose products show in the upsell
-                                row beneath the line items. Default: 'all'
-                                Pass blank to hide the upsell row.
+  Driven by `assets/cart-ajax.js`. Open via any element with `data-cart-open`.
 
-  Class naming: every element is prefixed `.cart-drawer__*` so Webflow CSS
-  selectors never accidentally match. Styling lives in
-  `assets/cart-drawer.css`.
+  Optional render parameters:
+    free_shipping_threshold  - dollars (in cart.currency) above which
+                                shipping is free. Default: 80. Pass 0 to hide.
+    upsell_collection_handle - collection whose products show under line items.
+                                Default: 'all'. Pass blank to hide.
 {%- endcomment -%}
 
 {%- liquid
@@ -37,20 +34,20 @@
   <div class="cart-drawer__overlay" data-cart-close></div>
 
   <div class="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
+
     <header class="cart-drawer__header">
-      <div class="cart-drawer__header-text">
-        <p class="cart-drawer__eyebrow"><span class="cart-drawer__dot"></span> Your bag</p>
-        <h2 id="cart-drawer-title" class="cart-drawer__title">
+      <h2 id="cart-drawer-title" class="cart-drawer__title">
+        Cart
+        <span class="cart-drawer__count-pill" data-cart-count-pill{% if cart.item_count == 0 %} hidden{% endif %}>
           <span data-cart-count>{{ cart.item_count }}</span>
-          <span class="cart-drawer__title-suffix">{% if cart.item_count == 1 %}item{% else %}items{% endif %}</span>
-        </h2>
-      </div>
+        </span>
+      </h2>
       <button type="button" class="cart-drawer__close" data-cart-close aria-label="Close cart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </header>
 
-    {%- if cart.item_count > 0 -%}
+    {%- if free_ship_threshold > 0 and cart.item_count > 0 -%}
       <div class="cart-drawer__shipping" data-cart-shipping>
         {%- if remaining_cents > 0 -%}
           <p class="cart-drawer__shipping-text">
@@ -69,95 +66,111 @@
     {%- endif -%}
 
     <div class="cart-drawer__body">
-      <div data-cart-empty-state class="cart-drawer__empty"{% if cart.item_count > 0 %} style="display:none"{% endif %}>
+
+      <div data-cart-empty-state class="cart-drawer__empty"{% if cart.item_count > 0 %} hidden{% endif %}>
         <div class="cart-drawer__empty-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </div>
-        <p class="cart-drawer__empty-title">Your bag is empty</p>
-        <p class="cart-drawer__empty-subtitle">Find your defence layer below.</p>
+        <p class="cart-drawer__empty-title">Your cart is empty</p>
         <a href="{{ routes.collections_url }}/all" class="cart-drawer__cta cart-drawer__cta--primary" data-cart-close>Shop all</a>
       </div>
 
-      <div data-cart-drawer-items class="cart-drawer__items"{% if cart.item_count == 0 %} style="display:none"{% endif %}>
+      <ul data-cart-drawer-items class="cart-drawer__items"{% if cart.item_count == 0 %} hidden{% endif %}>
         {%- for line_item in cart.items -%}
-          <article class="cart-drawer__line" data-cart-line-key="{{ line_item.key }}">
+          <li class="cart-drawer__line" data-cart-line-key="{{ line_item.key }}">
             <a href="{{ line_item.url }}" class="cart-drawer__line-image-wrap" data-cart-close>
               {%- if line_item.image -%}
-                <img src="{{ line_item.image | image_url: width: 200 }}" alt="{{ line_item.title | escape }}" class="cart-drawer__line-image" loading="lazy" width="80" height="100">
+                <img src="{{ line_item.image | image_url: width: 200 }}" alt="{{ line_item.title | escape }}" class="cart-drawer__line-image" loading="lazy" width="64" height="80">
               {%- else -%}
                 <div class="cart-drawer__line-image cart-drawer__line-image--placeholder"></div>
               {%- endif -%}
             </a>
             <div class="cart-drawer__line-body">
-              <div class="cart-drawer__line-row">
-                <div class="cart-drawer__line-info">
-                  <a href="{{ line_item.url }}" class="cart-drawer__line-title" data-cart-close>{{ line_item.product.title }}</a>
-                  {%- unless line_item.variant.title contains 'Default' -%}
-                    <p class="cart-drawer__line-variant">{{ line_item.variant.title }}</p>
-                  {%- endunless -%}
-                </div>
-                <button type="button" class="cart-drawer__line-remove" data-cart-line-remove="{{ line_item.key }}" aria-label="Remove">Remove</button>
+              <div class="cart-drawer__line-top">
+                <a href="{{ line_item.url }}" class="cart-drawer__line-title" data-cart-close>{{ line_item.product.title }}</a>
+                <p class="cart-drawer__line-price">{{ line_item.final_line_price | money }}</p>
               </div>
+              {%- unless line_item.variant.title contains 'Default' -%}
+                <p class="cart-drawer__line-variant">{{ line_item.variant.title | replace: ' / ', ', ' }}</p>
+              {%- endunless -%}
+              {%- if line_item.selling_plan_allocation -%}
+                <p class="cart-drawer__line-meta">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
+              {%- endif -%}
+              {%- if line_item.properties -%}
+                {%- for prop in line_item.properties -%}
+                  {%- if prop.first != '' and prop.last != blank and prop.first contains '_' == false -%}
+                    <p class="cart-drawer__line-meta">{{ prop.first }}: {{ prop.last }}</p>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
               <div class="cart-drawer__line-foot">
                 <div class="cart-drawer__qty">
                   <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="-1" data-cart-line-key="{{ line_item.key }}" aria-label="Decrease quantity">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
                   </button>
                   <input type="number" value="{{ line_item.quantity }}" min="0" class="cart-drawer__qty-input" data-cart-line-change="{{ line_item.key }}" aria-label="Quantity">
                   <button type="button" class="cart-drawer__qty-step" data-cart-qty-step="1" data-cart-line-key="{{ line_item.key }}" aria-label="Increase quantity">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
                   </button>
                 </div>
-                <p class="cart-drawer__line-price">{{ line_item.final_line_price | money }}</p>
+                <button type="button" class="cart-drawer__line-remove" data-cart-line-remove="{{ line_item.key }}" aria-label="Remove from cart">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1.5 14a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 6m4 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg>
+                </button>
               </div>
             </div>
-          </article>
+          </li>
         {%- endfor -%}
+      </ul>
 
-        {%- if upsell_handle != blank and upsell_collection != blank and upsell_collection.products.size > 0 -%}
-          <section class="cart-drawer__upsell" aria-label="Recommended">
-            <div class="cart-drawer__upsell-head">
-              <p class="cart-drawer__upsell-label"><span class="cart-drawer__dot"></span> Complete the set</p>
-              <a href="{{ upsell_collection.url }}" class="cart-drawer__upsell-link" data-cart-close>See all →</a>
-            </div>
-            <div class="cart-drawer__upsell-grid">
-              {%- for product in upsell_collection.products limit: 3 -%}
-                <a href="{{ product.url }}" class="cart-drawer__upsell-card" data-cart-close>
-                  <div class="cart-drawer__upsell-img-wrap">
-                    {%- if product.featured_image -%}
-                      <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" class="cart-drawer__upsell-img" loading="lazy" width="80" height="80">
-                    {%- endif -%}
-                  </div>
-                  <p class="cart-drawer__upsell-title">{{ product.title }}</p>
-                  <p class="cart-drawer__upsell-price">{{ product.price | money_without_trailing_zeros }}</p>
-                </a>
-              {%- endfor -%}
-            </div>
-          </section>
-        {%- endif -%}
-
-        <details class="cart-drawer__note">
-          <summary class="cart-drawer__note-summary">
-            <span>Add gift note or special instruction</span>
-            <span class="cart-drawer__note-icon" aria-hidden="true">+</span>
-          </summary>
-          <textarea name="note" class="cart-drawer__note-input" rows="3" placeholder="E.g. gift wrap, sizing exchange details..."></textarea>
-        </details>
-      </div>
+      {%- if cart.item_count > 0 and upsell_handle != blank and upsell_collection != blank and upsell_collection.products.size > 0 -%}
+        <section class="cart-drawer__upsell" aria-label="Recommended">
+          <p class="cart-drawer__upsell-label">You may also like</p>
+          <div class="cart-drawer__upsell-grid">
+            {%- for product in upsell_collection.products limit: 3 -%}
+              <a href="{{ product.url }}" class="cart-drawer__upsell-card" data-cart-close>
+                <div class="cart-drawer__upsell-img-wrap">
+                  {%- if product.featured_image -%}
+                    <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" class="cart-drawer__upsell-img" loading="lazy" width="80" height="80">
+                  {%- endif -%}
+                </div>
+                <p class="cart-drawer__upsell-title">{{ product.title }}</p>
+                <p class="cart-drawer__upsell-price">{{ product.price | money_without_trailing_zeros }}</p>
+              </a>
+            {%- endfor -%}
+          </div>
+        </section>
+      {%- endif -%}
     </div>
 
-    <footer class="cart-drawer__footer" data-cart-footer{% if cart.item_count == 0 %} style="display:none"{% endif %}>
-      <div class="cart-drawer__subtotal-row">
-        <span class="cart-drawer__subtotal-label">Subtotal</span>
-        <span class="cart-drawer__subtotal-value" data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+    <footer class="cart-drawer__footer" data-cart-footer{% if cart.item_count == 0 %} hidden{% endif %}>
+
+      {%- comment -%} Discount expandable {%- endcomment -%}
+      <details class="cart-drawer__discount">
+        <summary class="cart-drawer__discount-summary">
+          <span>Discount</span>
+          <svg class="cart-drawer__discount-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__discount-form">
+          <input type="text" name="discount" class="cart-drawer__discount-input" placeholder="Discount code" aria-label="Discount code">
+          <button type="submit" class="cart-drawer__discount-apply">Apply</button>
+        </form>
+      </details>
+
+      <div class="cart-drawer__totals-row">
+        <span class="cart-drawer__totals-label">Estimated total</span>
+        <span class="cart-drawer__totals-value">
+          <span data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+          <span class="cart-drawer__totals-code">{{ cart.currency.iso_code }}</span>
+        </span>
       </div>
-      <p class="cart-drawer__taxes">Shipping &amp; taxes calculated at checkout.</p>
+      <p class="cart-drawer__taxes">Taxes and shipping calculated at checkout.</p>
+
       <form action="{{ routes.cart_url }}" method="post" class="cart-drawer__form">
         <button type="submit" name="checkout" class="cart-drawer__cta cart-drawer__cta--primary cart-drawer__cta--block">
-          Checkout · <span data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+          Check out
         </button>
       </form>
-      <a href="{{ routes.cart_url }}" class="cart-drawer__cta cart-drawer__cta--ghost cart-drawer__cta--block">View full cart</a>
     </footer>
   </div>
 </aside>
