@@ -23,7 +23,7 @@
         {%- for link in menu.links -%}
           {%- if link.links.size > 0 -%}
             <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
-              <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+              <div class="component_navbar_dropdown_toggle w-dropdown-toggle">
                 <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
                 <div>{{ link.title }}</div>
               </div>
@@ -42,7 +42,7 @@
         <a href="{{ routes.root_url }}pages/size-guide" class="component_navbar_navigation_link w-nav-link">Size Guide</a>
         {%- if more_menu != blank and more_menu.links.size > 0 -%}
           <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
-            <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+            <div class="component_navbar_dropdown_toggle w-dropdown-toggle">
               <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
               <div>More</div>
             </div>
@@ -54,7 +54,7 @@
           </div>
         {%- else -%}
           <div data-delay="0" data-hover="false" class="component_navbar_navigation_dropdown w-dropdown">
-            <div class="component_navbar_navigation_dropdown_toggle w-dropdown-toggle">
+            <div class="component_navbar_dropdown_toggle w-dropdown-toggle">
               <div class="component_navbar_navigation_dropdown_icon w-icon-dropdown-toggle"></div>
               <div>More</div>
             </div>

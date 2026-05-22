@@ -36,29 +36,35 @@
       "type": "component-collection",
       "settings": { "show_section": true },
       "blocks": {
-        "slide-1": { "type": "slide", "settings": {} },
-        "slide-2": { "type": "slide", "settings": {} },
-        "slide-3": { "type": "slide", "settings": {} },
-        "slide-4": { "type": "slide", "settings": {} },
-        "slide-5": { "type": "slide", "settings": {} },
-        "slide-6": { "type": "slide", "settings": {} }
+        "slide-1": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 1" } },
+        "slide-2": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 2" } },
+        "slide-3": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 3" } },
+        "slide-4": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 4" } },
+        "slide-5": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 5" } },
+        "slide-6": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 6" } },
+        "slide-7": { "type": "slide", "settings": { "name": "SP Arms Sun Sleeves 7" } }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5", "slide-6"]
+      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5", "slide-6", "slide-7"]
     },
     "ambassadors": {
       "type": "component-ambassadors",
       "settings": { "show_section": true },
       "blocks": {
-        "a-1": { "type": "ambassador", "settings": {} },
-        "a-2": { "type": "ambassador", "settings": {} },
-        "a-3": { "type": "ambassador", "settings": {} },
-        "a-4": { "type": "ambassador", "settings": {} },
-        "a-5": { "type": "ambassador", "settings": {} },
-        "a-6": { "type": "ambassador", "settings": {} },
-        "a-7": { "type": "ambassador", "settings": {} },
-        "a-8": { "type": "ambassador", "settings": {} }
+        "a-1":  { "type": "ambassador", "settings": {} },
+        "a-2":  { "type": "ambassador", "settings": {} },
+        "a-3":  { "type": "ambassador", "settings": {} },
+        "a-4":  { "type": "ambassador", "settings": {} },
+        "a-5":  { "type": "ambassador", "settings": {} },
+        "a-6":  { "type": "ambassador", "settings": {} },
+        "a-7":  { "type": "ambassador", "settings": {} },
+        "a-8":  { "type": "ambassador", "settings": {} },
+        "a-9":  { "type": "ambassador", "settings": {} },
+        "a-10": { "type": "ambassador", "settings": {} },
+        "a-11": { "type": "ambassador", "settings": {} },
+        "a-12": { "type": "ambassador", "settings": {} },
+        "a-13": { "type": "ambassador", "settings": {} }
       },
-      "block_order": ["a-1", "a-2", "a-3", "a-4", "a-5", "a-6", "a-7", "a-8"]
+      "block_order": ["a-1","a-2","a-3","a-4","a-5","a-6","a-7","a-8","a-9","a-10","a-11","a-12","a-13"]
     },
     "testimonial": {
       "type": "component-testimonial",
