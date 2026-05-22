@@ -1,11 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "nav_variant": "dark",
+        "main_menu": "",
+        "more_menu": "",
+        "cta_label": "SHOP ALL",
+        "cta_product": "",
+        "cta_collection": "",
+        "cta_url": ""
+      }
     }
   },
-  "order": ["header"]
+  "order": [
+    "header"
+  ]
 }
