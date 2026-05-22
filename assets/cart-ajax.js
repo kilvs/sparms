@@ -118,14 +118,21 @@
       // Drawer items
       var itemsEl = document.querySelector('[data-cart-drawer-items]');
       var emptyEl = document.querySelector('[data-cart-empty-state]');
+      var footerEl = document.querySelector('[data-cart-footer]');
+      var pillEl = document.querySelector('[data-cart-count-pill]');
+      var isEmpty = cart.item_count === 0;
       if (itemsEl) {
         itemsEl.innerHTML = cart.items.map(Cart.renderLine).join('');
+        if (isEmpty) itemsEl.setAttribute('hidden', ''); else itemsEl.removeAttribute('hidden');
       }
       if (emptyEl) {
-        emptyEl.style.display = cart.item_count === 0 ? '' : 'none';
+        if (isEmpty) emptyEl.removeAttribute('hidden'); else emptyEl.setAttribute('hidden', '');
       }
-      if (itemsEl) {
-        itemsEl.style.display = cart.item_count === 0 ? 'none' : '';
+      if (footerEl) {
+        if (isEmpty) footerEl.setAttribute('hidden', ''); else footerEl.removeAttribute('hidden');
+      }
+      if (pillEl) {
+        if (isEmpty) pillEl.setAttribute('hidden', ''); else pillEl.removeAttribute('hidden');
       }
 
       // Subtotal
@@ -138,26 +145,50 @@
     },
 
     renderLine: function (item) {
+      function esc(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
       var img = item.featured_image && item.featured_image.url
-        ? '<img src="' + item.featured_image.url + '" alt="' + (item.featured_image.alt || item.product_title) + '" class="cart-drawer__line-image" loading="lazy">'
-        : '';
-      var variantTitle = (item.variant_title && item.variant_title !== 'Default Title')
-        ? '<p class="cart-drawer__line-variant">' + item.variant_title + '</p>' : '';
+        ? '<img src="' + esc(item.featured_image.url) + '" alt="' + esc(item.featured_image.alt || item.product_title) + '" class="cart-drawer__line-image" loading="lazy" width="64" height="80">'
+        : '<div class="cart-drawer__line-image cart-drawer__line-image--placeholder"></div>';
+      var variantLine = (item.variant_title && item.variant_title !== 'Default Title')
+        ? '<p class="cart-drawer__line-variant">' + esc(String(item.variant_title).replace(/\s\/\s/g, ', ')) + '</p>' : '';
+      var sellingPlan = (item.selling_plan_allocation && item.selling_plan_allocation.selling_plan && item.selling_plan_allocation.selling_plan.name)
+        ? '<p class="cart-drawer__line-meta">' + esc(item.selling_plan_allocation.selling_plan.name) + '</p>' : '';
+      var properties = '';
+      if (item.properties && typeof item.properties === 'object') {
+        Object.keys(item.properties).forEach(function (k) {
+          if (k && k.charAt(0) !== '_' && item.properties[k]) {
+            properties += '<p class="cart-drawer__line-meta">' + esc(k) + ': ' + esc(item.properties[k]) + '</p>';
+          }
+        });
+      }
+      var trashIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6l-1.5 14a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 6m4 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg>';
+      var minusIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>';
+      var plusIcon  = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>';
       return '' +
-        '<div class="cart-drawer__line" data-cart-line-key="' + item.key + '">' +
-          '<a href="' + item.url + '" class="cart-drawer__line-image-wrap">' + img + '</a>' +
+        '<li class="cart-drawer__line" data-cart-line-key="' + esc(item.key) + '">' +
+          '<a href="' + esc(item.url) + '" class="cart-drawer__line-image-wrap" data-cart-close>' + img + '</a>' +
           '<div class="cart-drawer__line-body">' +
-            '<a href="' + item.url + '" class="cart-drawer__line-title">' + item.product_title + '</a>' +
-            variantTitle +
-            '<p class="cart-drawer__line-price">' + moneyFormat(item.final_line_price) + '</p>' +
-            '<div class="cart-drawer__line-qty">' +
-              '<button type="button" class="cart-drawer__qty-step" data-cart-qty-step="-1" data-cart-line-key="' + item.key + '" aria-label="Decrease quantity">&minus;</button>' +
-              '<input type="number" value="' + item.quantity + '" min="0" class="cart-drawer__qty-input" data-cart-line-change="' + item.key + '">' +
-              '<button type="button" class="cart-drawer__qty-step" data-cart-qty-step="1" data-cart-line-key="' + item.key + '" aria-label="Increase quantity">+</button>' +
-              '<button type="button" class="cart-drawer__line-remove" data-cart-line-remove="' + item.key + '" aria-label="Remove">Remove</button>' +
+            '<div class="cart-drawer__line-top">' +
+              '<a href="' + esc(item.url) + '" class="cart-drawer__line-title" data-cart-close>' + esc(item.product_title) + '</a>' +
+              '<p class="cart-drawer__line-price">' + moneyFormat(item.final_line_price) + '</p>' +
+            '</div>' +
+            variantLine +
+            sellingPlan +
+            properties +
+            '<div class="cart-drawer__line-foot">' +
+              '<div class="cart-drawer__qty">' +
+                '<button type="button" class="cart-drawer__qty-step" data-cart-qty-step="-1" data-cart-line-key="' + esc(item.key) + '" aria-label="Decrease quantity">' + minusIcon + '</button>' +
+                '<input type="number" value="' + item.quantity + '" min="0" class="cart-drawer__qty-input" data-cart-line-change="' + esc(item.key) + '" aria-label="Quantity">' +
+                '<button type="button" class="cart-drawer__qty-step" data-cart-qty-step="1" data-cart-line-key="' + esc(item.key) + '" aria-label="Increase quantity">' + plusIcon + '</button>' +
+              '</div>' +
+              '<button type="button" class="cart-drawer__line-remove" data-cart-line-remove="' + esc(item.key) + '" aria-label="Remove from cart">' + trashIcon + '</button>' +
             '</div>' +
           '</div>' +
-        '</div>';
+        '</li>';
     }
   };
 
