@@ -103,13 +103,12 @@
   "tag": "header",
   "class": "shopify-section-header",
   "settings": [
-    { "type": "header", "content": "Appearance" },
-    { "type": "select", "id": "nav_variant", "label": "Navbar style", "default": "default",
-      "options": [
-        { "value": "default", "label": "Default (transparent / theme background)" },
-        { "value": "dark", "label": "Dark (black background, .is-black + Webflow variant)" }
-      ],
-      "info": "Switches the navbar to the dark variant defined in the Webflow CSS."
+    {
+      "type": "checkbox",
+      "id": "nav_dark",
+      "label": "Use dark navbar variant",
+      "default": false,
+      "info": "Applies the Webflow dark variant (black background)."
     },
     { "type": "header", "content": "Logo" },
     { "type": "paragraph", "content": "Logo image is set in Theme settings → Brand identity. The Webflow SVG is used as fallback." },
