@@ -1,0 +1,173 @@
+{%- comment -%}
+  SParms ambassador slide carousel (Splide).
+  Reusable across pages. Same ambassador block schema as
+  component-ambassadors.liquid; if you want this slide-style on the
+  product page and the grid-style on a campaign page, both sections
+  share the data shape.
+{%- endcomment -%}
+
+{%- if section.settings.show_section -%}
+<div class="component_ambassadors-slide_section">
+  <div class="w-embed w-script">
+    <style>
+      #ambassador-list .splide__arrow {
+        position: relative !important;
+        transform: none !important;
+        top: auto !important; left: auto !important; right: auto !important;
+        opacity: 1 !important;
+        width: auto !important; height: 30px !important;
+        display: flex !important;
+        justify-content: center; align-items: center;
+        gap: 8px;
+        padding: 0 1.5rem;
+        border: 1px solid black; border-radius: 999rem;
+        background-color: rgba(240, 240, 240, 0);
+        box-sizing: border-box;
+      }
+      #ambassador-list .splide__arrow svg { width: 3rem !important; height: 1.875rem !important; }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const slideWidth = 16 * 16;
+        const gap = 16;
+        const needed = Math.ceil((window.innerWidth * 2) / (slideWidth + gap));
+        new Splide('#ambassador-list', {
+          type: 'loop',
+          drag: 'free',
+          gap: '1rem',
+          autoWidth: true,
+          arrows: true,
+          pagination: false,
+          clones: needed,
+          arrowPath: 'M11.293 17.293L12.707 18.707L19.414 12L12.707 5.29297L11.293 6.70697L15.586 11H6V13H15.586L11.293 17.293Z',
+          autoScroll: {
+            speed: 0.3,
+            pauseOnHover: true,
+            pauseOnFocus: false,
+          },
+        }).mount(window.splide.Extensions);
+      });
+    </script>
+  </div>
+
+  <div class="padding-section-large">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="component_heading_split">
+          <h2>{{ section.settings.heading | default: 'OUR AMBASSADORS' }}</h2>
+          <p>{{ section.settings.body | default: 'A powerhouse collective from every corner of sport, our ambassadors wear Sparms with pride in training, on the field, and at every competition.' }}</p>
+        </div>
+        <div class="spacer-xxlarge"></div>
+      </div>
+    </div>
+
+    <div id="ambassador-list" class="splide">
+      <div class="splide__track">
+        <div class="splide__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ambassador' -%}
+              {%- liquid
+                if block.settings.photo != blank
+                  assign photo_url = block.settings.photo | image_url: width: 800
+                else
+                  assign photo_url = block.settings.photo_filename | default: 'Ambassadors-Image.webp' | asset_url
+                endif
+                if block.settings.country_flag != blank
+                  assign flag_url = block.settings.country_flag | image_url: width: 80
+                else
+                  assign flag_url = block.settings.country_flag_filename | default: 'au.webp' | asset_url
+                endif
+              -%}
+              <div class="splide__slide" {{ block.shopify_attributes }}>
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ photo_url }}" alt="{{ block.settings.name | escape }}" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" aria-hidden="true" role="img"><circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle></svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">{{ block.settings.name | default: 'Angel Yin' }}</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      {%- if block.settings.sport != blank -%}
+                        <div class="component_ambassadors_tag"><div>{{ block.settings.sport }}</div></div>
+                      {%- endif -%}
+                      {%- if block.settings.country_label != blank -%}
+                        <div class="component_ambassadors_tag">
+                          <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ flag_url }}" alt=""></div>
+                          <div>{{ block.settings.country_label }}</div>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            {%- for i in (1..8) -%}
+              <div class="splide__slide">
+                <div class="component_ambassadors_card">
+                  <div class="component_ambassadors_img-wrap"><img loading="lazy" src="{{ 'Ambassadors-Image.webp' | asset_url }}" alt="" class="component_ambassadors_img"></div>
+                  <div class="component_ambassadors_content">
+                    <div class="component_ambassadors_name-wrap">
+                      <div class="component_collection_icon-wrap">
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" aria-hidden="true" role="img"><circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle></svg></div>
+                      </div>
+                      <div class="text-size-medium text-style-allcaps">Angel yin</div>
+                    </div>
+                    <div class="component_ambasadors_tag-wrap">
+                      <div class="component_ambassadors_tag"><div>Golf</div></div>
+                      <div class="component_ambassadors_tag">
+                        <div class="compnent_ambassadors_country-icon"><img loading="lazy" src="{{ 'au.webp' | asset_url }}" alt=""></div>
+                        <div>AU</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ambassadors carousel",
+  "tag": "section",
+  "class": "shopify-section-component-ambassadors-slide",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "OUR AMBASSADORS" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "A powerhouse collective from every corner of sport, our ambassadors wear Sparms with pride in training, on the field, and at every competition." }
+  ],
+  "blocks": [
+    {
+      "type": "ambassador",
+      "name": "Ambassador",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Angel Yin" },
+        { "type": "text", "id": "sport", "label": "Sport tag", "default": "Golf" },
+        { "type": "text", "id": "country_label", "label": "Country code", "default": "AU" },
+        { "type": "image_picker", "id": "photo", "label": "Photo (override)" },
+        { "type": "text", "id": "photo_filename", "label": "Photo fallback filename", "default": "Ambassadors-Image.webp" },
+        { "type": "image_picker", "id": "country_flag", "label": "Country flag (override)" },
+        { "type": "text", "id": "country_flag_filename", "label": "Flag fallback filename", "default": "au.webp" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "Ambassadors carousel",
+      "blocks": [
+        { "type": "ambassador" }, { "type": "ambassador" }, { "type": "ambassador" }, { "type": "ambassador" },
+        { "type": "ambassador" }, { "type": "ambassador" }, { "type": "ambassador" }, { "type": "ambassador" }
+      ]
+    }
+  ]
+}
+{% endschema %}

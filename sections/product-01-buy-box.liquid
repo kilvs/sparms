@@ -1,0 +1,656 @@
+{%- comment -%}
+  SParms product page — buy box section.
+
+  Hosts the gallery, breadcrumbs, title, rating, price, variant pickers,
+  quantity, add-to-cart, in-buy-box FAQ accordion, sticky add-to-cart bar,
+  JSON-LD structured data, and recently-viewed tracking.
+
+  All 15 features from PRODUCT_PAGE backlog are individually toggleable
+  via section settings — see schema at bottom.
+{%- endcomment -%}
+
+{%- liquid
+  assign cur_variant = product.selected_or_first_available_variant
+  assign has_compare = false
+  if cur_variant != blank and cur_variant.compare_at_price > cur_variant.price
+    assign has_compare = true
+  endif
+  assign inv_threshold = section.settings.inventory_threshold | default: 5
+  assign show_low_stock = false
+  if section.settings.show_inventory_threshold and cur_variant.inventory_management == 'shopify' and cur_variant.inventory_quantity > 0 and cur_variant.inventory_quantity <= inv_threshold
+    assign show_low_stock = true
+  endif
+  assign swatch_source = section.settings.swatch_source | default: 'metafield'
+  assign swatch_metafield_key = section.settings.swatch_metafield_key | default: 'custom.swatch_color'
+-%}
+
+{%- if section.settings.show_section -%}
+<section class="product_header_section" data-product-section data-product-id="{{ product.id }}">
+  <div class="padding-global">
+    <div class="padding-vertical padding-small">
+      <div class="container-large">
+
+        {%- comment -%} ============ Inline scripts (gallery swiper, accordion bootstrap) ============ {%- endcomment -%}
+        <div class="w-embed w-script">
+          <style>
+            .is-active-accordion .product_faq_icon-wrap { transform: scale(1); }
+            .is-active-accordion .product_faq_label { margin-left: 0.5rem; font-weight: 700; }
+            .is-active-inputactive .product_radio_circle-inner { border-color: var(--border--dark); }
+            [data-variant-unavailable] { opacity: 0.4; cursor: not-allowed; }
+            [data-variant-unavailable] span.w-form-label { text-decoration: line-through; }
+          </style>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              new Swiper('#is-product-img', {
+                spaceBetween: 16, loop: true, slidesPerView: 'auto',
+                navigation: { nextEl: '#product-swiper-next', prevEl: '#product-swiper-prev' },
+                pagination: { el: '#service-swiper-pagination', bulletClass: 'swiper_bullet', bulletActiveClass: 'is-active', clickable: true }
+              });
+            });
+          </script>
+        </div>
+
+        {%- comment -%} ============ Breadcrumbs ============ {%- endcomment -%}
+        {%- if section.settings.show_breadcrumbs -%}
+          <div class="product_header_bredcrumbs-wrapper">
+            <a href="{{ routes.root_url }}" class="product_header_bredcrumb-link">Home</a>
+            <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M6.47099 11.2998L10.2757 7.4951L6.47099 3.69043L5.52832 4.6331L8.39032 7.4951L5.52832 10.3571L6.47099 11.2998Z" fill="currentColor"></path></svg></div>
+            {%- if collection != blank -%}
+              <a href="{{ collection.url }}" class="product_header_bredcrumb-link">{{ collection.title }}</a>
+              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M6.47099 11.2998L10.2757 7.4951L6.47099 3.69043L5.52832 4.6331L8.39032 7.4951L5.52832 10.3571L6.47099 11.2998Z" fill="currentColor"></path></svg></div>
+            {%- else -%}
+              <a href="{{ routes.collections_url }}/all" class="product_header_bredcrumb-link">Shop all</a>
+              <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M6.47099 11.2998L10.2757 7.4951L6.47099 3.69043L5.52832 4.6331L8.39032 7.4951L5.52832 10.3571L6.47099 11.2998Z" fill="currentColor"></path></svg></div>
+            {%- endif -%}
+            <a href="{{ product.url }}" class="product_header_bredcrumb-link">{{ product.title | default: 'Product name' }}</a>
+          </div>
+          <div class="spacer-small"></div>
+        {%- endif -%}
+
+        {%- comment -%} ============ Gallery swiper ============ {%- endcomment -%}
+        <div class="swiper_wrapper">
+          <div id="is-product-img" class="swiper is-product-img">
+            <div class="swiper-wrapper is-product-img">
+              {%- if product.media.size > 0 -%}
+                {%- for media in product.media -%}
+                  <div class="swiper-slide is-product-img" data-media-id="{{ media.id }}">
+                    <div class="product_header_img-wrap">
+                      {%- if media.media_type == 'image' -%}
+                        <img src="{{ media | image_url: width: 878 }}" loading="lazy" sizes="(max-width: 878px) 100vw, 878px" srcset="{{ media | image_url: width: 500 }} 500w, {{ media | image_url: width: 800 }} 800w, {{ media | image_url: width: 878 }} 878w" alt="{{ media.alt | escape | default: product.title }}">
+                      {%- else -%}
+                        {{ media | media_tag: image_size: '878x' }}
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..3) -%}
+                  <div class="swiper-slide is-product-img">
+                    <div class="product_header_img-wrap">
+                      <img src="{{ 'product-placeholder-1.webp' | asset_url | replace: '-1.webp', '-' | append: i | append: '.webp' }}" loading="lazy" alt="" sizes="(max-width: 878px) 100vw, 878px">
+                    </div>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="spacer-small"></div>
+          <div class="swiper_bottom_wrapper">
+            <div id="service-swiper-pagination" class="swiper_bullet_wrapper"></div>
+            <div class="swiper_arrow_wrapper">
+              <div id="product-swiper-prev" class="swiper_arrow is-dark">
+                <div class="icon-embed-blogs w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" aria-hidden="true" role="img"><path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path></svg></div>
+              </div>
+              <div id="product-swiper-next" class="swiper_arrow is-dark">
+                <div class="icon-embed-blogs is-reversed w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" aria-hidden="true" role="img"><path d="M12.7069 17.293L8.41394 13H17.9999V11H8.41394L12.7069 6.70697L11.2929 5.29297L4.58594 12L11.2929 18.707L12.7069 17.293Z" fill="currentColor"></path></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spacer-medium"></div>
+
+        <div class="product_header_component">
+
+          {%- comment -%} ============ Title / Price / Rating / Description ============ {%- endcomment -%}
+          <div class="product_header_content">
+            <h1>{{ product.title | default: 'Product Name' }}</h1>
+            <div class="spacer-small"></div>
+            <div data-product-price>
+              {%- if product != blank -%}
+                {{ cur_variant.price | money }}
+                {%- if has_compare and section.settings.show_compare_at_price -%}
+                  <span class="text-style-strikethrough" data-product-compare>{{ cur_variant.compare_at_price | money }}</span>
+                {%- endif -%}
+              {%- else -%}
+                $34.95
+              {%- endif -%}
+            </div>
+
+            {%- if section.settings.show_rating -%}
+              <div class="product_trust_rating-wrap" data-product-rating>
+                {%- assign rating = product.metafields.reviews.rating.value.rating | default: 5 -%}
+                {%- assign rating_count = product.metafields.reviews.rating_count | default: 0 -%}
+                <div class="product_star-rating_wrapper">
+                  {%- for i in (1..5) -%}
+                    <div class="product_star-rating_icon">
+                      <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path></svg></div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                <div class="text-size-small">{{ rating_count }} reviews</div>
+                {%- comment -%} App-ready placeholders {%- endcomment -%}
+                {%- if section.settings.reviews_app != 'none' -%}
+                  <div data-reviews-app="{{ section.settings.reviews_app }}" data-product-id="{{ product.id }}" data-rating-summary></div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if show_low_stock -%}
+              <p class="product_inventory_threshold text-color-secondary" data-inventory-threshold>
+                Only {{ cur_variant.inventory_quantity }} left
+              </p>
+            {%- endif -%}
+
+            <div class="spacer-small"></div>
+            <p>{% if product.description != blank %}{{ product.description }}{% else %}Hate sticky sunscreen? Meet the original Sparms sleeves. Built with Fusion FlexXP™ Microfibre technology, they keep you cool, protected, and performing under pressure, no matter the sport, no matter the conditions.{% endif %}</p>
+          </div>
+
+          {%- comment -%} ============ In-buy-box FAQ accordion ============ {%- endcomment -%}
+          <div class="product_header_content">
+            <div class="product_header_faqs-wrap">
+              <div fs-accordion-initial="1" fs-accordion-element="group" class="product_faq_component">
+                <div class="product_faq_embed hide w-embed w-script">
+                  <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-accordion@1/accordion.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                </div>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'faq_item' -%}
+                    <div fs-accordion-element="accordion" class="product_faq_item" {{ block.shopify_attributes }}>
+                      <div tabindex="0" role="button" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                        <div class="product_faq_icon-wrap">
+                          <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" aria-hidden="true" role="img"><circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle></svg></div>
+                        </div>
+                        <div class="product_faq_label">{{ block.settings.label | default: 'Label' }}</div>
+                        <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                          <div class="dash"></div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="content" class="product_faq_accordion_content">
+                        <div class="product_faq_body">
+                          {%- case block.settings.source -%}
+                            {%- when 'description' -%}
+                              <div class="product_faq_paragraph rte">{{ product.description }}</div>
+                            {%- when 'metafield' -%}
+                              <div class="product_faq_paragraph rte">{{ product.metafields[block.settings.metafield_namespace][block.settings.metafield_key] }}</div>
+                            {%- else -%}
+                              <div class="product_faq_paragraph rte">{{ block.settings.body }}</div>
+                          {%- endcase -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- else -%}
+                  {%- assign default_faqs = 'Description|Lorem ipsum dolor sit amet consectetur.;;Product Details|Material composition and care details.;;Sizing|See size guide for measurements.;;Care|Machine wash cold. Tumble dry low.;;Shipping & Returns|Free shipping on orders over $80.' | split: ';;' -%}
+                  {%- for f in default_faqs -%}
+                    {%- assign parts = f | split: '|' -%}
+                    <div fs-accordion-element="accordion" class="product_faq_item">
+                      <div tabindex="0" role="button" aria-expanded="false" fs-accordion-element="trigger" class="product_faq_accordion_header">
+                        <div class="product_faq_icon-wrap">
+                          <div class="dot_1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 17 17" fill="none" aria-hidden="true" role="img"><circle cx="8.5" cy="8.5" r="8.5" fill="currentColor"></circle></svg></div>
+                        </div>
+                        <div class="product_faq_label">{{ parts[0] }}</div>
+                        <div fs-accordion-element="arrow" class="product_faq_arrow-wrap is-active-accordion">
+                          <div class="dash"></div>
+                        </div>
+                      </div>
+                      <div fs-accordion-element="content" class="product_faq_accordion_content">
+                        <div class="product_faq_body"><p class="product_faq_paragraph">{{ parts[1] }}</p></div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+
+          {%- comment -%} ============ Buy form: variant pickers + qty + add-to-cart ============ {%- endcomment -%}
+          <div class="product_header_content is-card">
+            <div class="product_header_form-block w-form">
+              {%- form 'product', product, id: 'product-form', class: 'product_header_form', novalidate: 'novalidate', data-product-form: '' -%}
+                <input type="hidden" name="id" value="{{ cur_variant.id }}" data-product-variant-id>
+
+                {%- comment -%} Finsweet input-active bootstrap (preserved for inputactive class behaviour) {%- endcomment -%}
+                <div class="product_radio_embed w-embed w-script">
+                  <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputactive@1/inputactive.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                </div>
+
+                {%- comment -%} Variant pickers: loop product.options_with_values {%- endcomment -%}
+                {%- for option in product.options_with_values -%}
+                  {%- assign opt_handle = option.name | handle -%}
+                  {%- assign is_color = false -%}
+                  {%- assign is_size = false -%}
+                  {%- if opt_handle contains 'color' or opt_handle contains 'colour' -%}{%- assign is_color = true -%}{%- endif -%}
+                  {%- if opt_handle contains 'size' -%}{%- assign is_size = true -%}{%- endif -%}
+
+                  {%- if is_color -%}
+                    <div class="product_radio_component">
+                      <div class="product_label">
+                        <div>{{ option.name }}:</div>
+                        <div data-option-label="{{ option.position }}" class="text-weight-bold">{{ option.selected_value | default: option.values.first }}</div>
+                      </div>
+                      <div role="radiogroup" class="product_radio_group">
+                        {%- for value in option.values -%}
+                          {%- assign vidx = forloop.index0 -%}
+                          {%- assign swatch_class = '' -%}
+                          {%- assign swatch_style = '' -%}
+                          {%- if swatch_source == 'metafield' -%}
+                            {%- assign mf_parts = swatch_metafield_key | split: '.' -%}
+                            {%- assign mf_ns = mf_parts[0] -%}
+                            {%- assign mf_key = mf_parts[1] -%}
+                            {%- for v in product.variants -%}
+                              {%- if v.option1 == value or v.option2 == value or v.option3 == value -%}
+                                {%- assign hex = v.metafields[mf_ns][mf_key].value | default: blank -%}
+                                {%- if hex != blank -%}{%- assign swatch_style = 'background-color:' | append: hex | append: ';' -%}{%- endif -%}
+                                {%- break -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- elsif swatch_source == 'name' -%}
+                            {%- assign swatch_style = 'background-color:' | append: value | downcase | replace: ' ', '' | append: ';' -%}
+                          {%- elsif swatch_source == 'app' -%}
+                            {%- assign swatch_class = ' is-color-swatch-' | append: vidx -%}
+                          {%- endif -%}
+                          {%- assign vid = option.name | append: '-' | append: value | handle -%}
+                          <label class="product_radio_field {% if value == option.selected_value %}is-active-inputactive {% endif %}w-radio">
+                            <div class="product_radio_circle-inner{{ swatch_class }}" style="{{ swatch_style }}" data-swatch-color data-swatch-option-value="{{ value | escape }}"></div>
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio_button w-radio-input {% if value == option.selected_value %}w--redirected-checked{% endif %}"></div>
+                            <input type="radio" name="options[{{ option.name | escape }}]" id="{{ vid }}" data-product-option="{{ option.position }}" value="{{ value | escape }}"{% if value == option.selected_value %} checked{% endif %} style="opacity:0;position:absolute;z-index:-1">
+                            <span fs-inputactive-class="is-active-inputactive" class="product_radio_label w-form-label" for="{{ vid }}">{{ value }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- elsif is_size -%}
+                    <div class="product_radio-size_component">
+                      <div class="product_label">
+                        <div>{{ option.name }}:</div>
+                        <div data-option-label="{{ option.position }}" class="text-weight-bold">{{ option.selected_value | default: option.values.first }}</div>
+                      </div>
+                      <div role="radiogroup" class="product_radio-size_group">
+                        {%- for value in option.values -%}
+                          {%- assign vid = option.name | append: '-' | append: value | handle -%}
+                          <label class="product_radio-size_field {% if value == option.selected_value %}is-active-inputactive {% endif %}w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-size_button w-radio-input {% if value == option.selected_value %}w--redirected-checked{% endif %}"></div>
+                            <input type="radio" name="options[{{ option.name | escape }}]" id="{{ vid }}" data-product-option="{{ option.position }}" value="{{ value | escape }}"{% if value == option.selected_value %} checked{% endif %} style="opacity:0;position:absolute;z-index:-1">
+                            <span fs-inputactive-class="is-active-inputactive" class="product_radio-size_label w-form-label" for="{{ vid }}">{{ value }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                    {%- if section.settings.size_guide_url != blank -%}
+                      <a href="{{ section.settings.size_guide_url }}" class="text-style-link">Size Guide</a>
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="product_radio-length_component">
+                      <div class="product_label">
+                        <div>{{ option.name }}:</div>
+                        <div data-option-label="{{ option.position }}" class="text-weight-bold">{{ option.selected_value | default: option.values.first }}</div>
+                      </div>
+                      <div role="radiogroup" class="product_radio-length_group">
+                        {%- for value in option.values -%}
+                          {%- assign vid = option.name | append: '-' | append: value | handle -%}
+                          <label class="product_radio-length_field {% if value == option.selected_value %}is-active-inputactive {% endif %}w-radio">
+                            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom product_radio-length_button w-radio-input {% if value == option.selected_value %}w--redirected-checked{% endif %}"></div>
+                            <input type="radio" name="options[{{ option.name | escape }}]" id="{{ vid }}" data-product-option="{{ option.position }}" value="{{ value | escape }}"{% if value == option.selected_value %} checked{% endif %} style="opacity:0;position:absolute;z-index:-1">
+                            <span fs-inputactive-class="is-active-inputactive" class="product_radio-length_label w-form-label" for="{{ vid }}">{{ value }}</span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- comment -%} Line item properties (engraving / gift note) {%- endcomment -%}
+                {%- if section.settings.show_line_item_properties -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'line_item_property' -%}
+                      <div class="product_line_item_property" {{ block.shopify_attributes }}>
+                        <label for="lip-{{ block.id }}">{{ block.settings.label | default: 'Custom note' }}</label>
+                        {%- if block.settings.type == 'textarea' -%}
+                          <textarea id="lip-{{ block.id }}" name="properties[{{ block.settings.label | escape }}]" class="w-input" rows="2" maxlength="200" placeholder="{{ block.settings.placeholder | escape }}"></textarea>
+                        {%- else -%}
+                          <input type="text" id="lip-{{ block.id }}" name="properties[{{ block.settings.label | escape }}]" class="w-input" maxlength="100" placeholder="{{ block.settings.placeholder | escape }}">
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+
+                {%- comment -%} Selling plan (subscription) — prepped, hidden by default {%- endcomment -%}
+                {%- if section.settings.show_subscription and product.selling_plan_groups.size > 0 -%}
+                  <div class="product_selling_plan">
+                    <div class="product_label"><div>Purchase type:</div></div>
+                    <label class="w-radio">
+                      <input type="radio" name="selling_plan" value="" checked>
+                      <span class="w-form-label">One-time purchase</span>
+                    </label>
+                    {%- for group in product.selling_plan_groups -%}
+                      {%- for sp in group.selling_plans -%}
+                        <label class="w-radio">
+                          <input type="radio" name="selling_plan" value="{{ sp.id }}">
+                          <span class="w-form-label">{{ sp.name }}</span>
+                        </label>
+                      {%- endfor -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                {%- comment -%} Quantity (Finsweet input counter) {%- endcomment -%}
+                <div class="product_inputcounter_component">
+                  <div class="product_inputcounter_embed w-embed w-script">
+                    <script>(()=>{var t="https://cdn.jsdelivr.net/npm/@finsweet/attributes-inputcounter@1/inputcounter.js",e=document.querySelector(`script[src="${t}"]`);e||(e=document.createElement("script"),e.async=!0,e.src=t,document.head.append(e));})();</script>
+                  </div>
+                  <label for="Quantity">Qty:</label>
+                  <div class="product_inputcounter_wrapper">
+                    <div aria-controls="Quantity" fs-inputcounter-element="decrement" role="button" aria-label="Decrement input value" tabindex="0" class="product_inputcounter_button">
+                      <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" aria-hidden="true" role="img"><path d="M5 11H19V13H5V11Z" fill="currentColor"></path></svg></div>
+                    </div>
+                    <input fs-inputcounter-element="input" class="product_inputcounter_input w-input" fs-inputcounter-initial="1" maxlength="3" name="quantity" min="1" placeholder="" type="number" id="Quantity" value="1" required>
+                    <div aria-controls="Quantity" fs-inputcounter-element="increment" role="button" aria-label="Increment input value" tabindex="0" class="product_inputcounter_button">
+                      <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 24 24" fill="none" aria-hidden="true" role="img"><path d="M19 11H13V5H11V11H5V13H11V19H13V13H19V11Z" fill="currentColor"></path></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                {%- comment -%} Total line {%- endcomment -%}
+                <div class="product_price_wrap">
+                  <label for="">Total:</label>
+                  <div class="product_price_wrap-bottom">
+                    <div class="text-size-tiny">Tax included. Shipping calculated at checkout.</div>
+                    <div class="heading-style-h4" data-product-total>{{ cur_variant.price | money }}</div>
+                  </div>
+                </div>
+
+                {%- comment -%} Add to cart {%- endcomment -%}
+                <div class="button-group is-shop">
+                  {%- if shop.checkout.uses_payment_terms == false -%}
+                    <button type="submit" name="payment-button" class="button is-shop shopify-payment-button__button shopify-payment-button__button--unbranded">
+                      <div>Buy with Shop</div>
+                    </button>
+                  {%- endif -%}
+                  <button type="submit" name="add" class="button is-submit is-full" data-product-add{% if cur_variant.available == false %} disabled{% endif %}>
+                    <div class="button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 13 13" fill="none" aria-hidden="true" role="img"><circle cx="6.5" cy="6.5" r="6.5" fill="currentColor"></circle></svg></div>
+                    <div data-product-add-label>{% if cur_variant.available %}ADD TO CART{% else %}SOLD OUT{% endif %}</div>
+                  </button>
+                </div>
+
+                {%- if section.settings.show_quick_info_row -%}
+                  <div class="product_component_footer">
+                    <div class="text-size-tiny text-color-secondary">{{ section.settings.returns_text | default: 'Free Unlimited Returns for A$2.99' }}</div>
+                    <a href="#" class="text-size-tiny text-color-secondary">{{ section.settings.payment_options_text | default: 'More Payment Options' }}</a>
+                  </div>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ============ Sticky add-to-cart bar ============ {%- endcomment -%}
+{%- if section.settings.show_sticky_add_to_cart -%}
+  <div class="product_sticky_cart" data-sticky-cart aria-hidden="true">
+    <div class="product_sticky_cart__inner">
+      <div class="product_sticky_cart__info">
+        {%- if cur_variant.featured_image -%}
+          <img src="{{ cur_variant.featured_image | image_url: width: 100 }}" alt="{{ product.title | escape }}" class="product_sticky_cart__thumb">
+        {%- endif -%}
+        <div>
+          <p class="product_sticky_cart__title">{{ product.title }}</p>
+          <p class="product_sticky_cart__price" data-product-price-mirror>{{ cur_variant.price | money }}</p>
+        </div>
+      </div>
+      <button type="button" class="button is-submit" data-sticky-cart-add data-variant-id="{{ cur_variant.id }}">
+        <div data-product-add-label-mirror>{% if cur_variant.available %}Add to bag{% else %}Sold out{% endif %}</div>
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+
+{%- comment -%} ============ JSON-LD structured data ============ {%- endcomment -%}
+{%- if section.settings.show_json_ld and product != blank -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncatewords: 50 | json }},
+      "image": [
+        {%- for img in product.images limit: 5 -%}
+          {{ img | image_url: width: 1200 | prepend: 'https:' | json }}{%- if forloop.last == false -%},{%- endif -%}
+        {%- endfor -%}
+      ],
+      "brand": { "@type": "Brand", "name": {{ product.vendor | default: shop.name | json }} },
+      "sku": {{ cur_variant.sku | json }},
+      "offers": {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ cur_variant.price | divided_by: 100.0 | json }},
+        "availability": "{% if cur_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+      }
+      {%- if product.metafields.reviews.rating_count > 0 -%}
+        ,"aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ product.metafields.reviews.rating.value.rating | json }},
+          "reviewCount": {{ product.metafields.reviews.rating_count | json }}
+        }
+      {%- endif -%}
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} ============ Variant resolution + sticky observer + recently-viewed JS ============ {%- endcomment -%}
+<script>
+(function () {
+  var variants = {{ product.variants | json }};
+  var moneyFormat = {{ shop.money_format | json }};
+  var form = document.querySelector('[data-product-form]');
+  if (!form || !variants.length) return;
+
+  function formatMoney(cents) {
+    var n = (cents / 100).toFixed(2);
+    return moneyFormat.replace(/\{\{\s*amount\s*\}\}/g, n).replace(/\{\{\s*amount_no_decimals\s*\}\}/g, Math.round(cents / 100));
+  }
+  function selectedOptions() {
+    return Array.from(form.querySelectorAll('input[data-product-option]:checked')).map(function (r) { return r.value; });
+  }
+  function findVariant(opts) {
+    return variants.find(function (v) {
+      return (v.option1 == (opts[0] || null)) && (v.option2 == (opts[1] || null)) && (v.option3 == (opts[2] || null));
+    });
+  }
+  function updateUI() {
+    var opts = selectedOptions();
+    var variant = findVariant(opts);
+    var idInput = form.querySelector('[data-product-variant-id]');
+    var addBtn = form.querySelector('[data-product-add]');
+    var addLabel = form.querySelector('[data-product-add-label]');
+    var addLabelMirror = document.querySelector('[data-product-add-label-mirror]');
+    var priceEl = document.querySelector('[data-product-price]');
+    var totalEl = document.querySelector('[data-product-total]');
+    var priceMirror = document.querySelector('[data-product-price-mirror]');
+    var stickyAddBtn = document.querySelector('[data-sticky-cart-add]');
+
+    if (!variant) {
+      if (addLabel) addLabel.textContent = 'UNAVAILABLE';
+      if (addBtn) addBtn.disabled = true;
+      return;
+    }
+    if (idInput) idInput.value = variant.id;
+    if (stickyAddBtn) stickyAddBtn.setAttribute('data-variant-id', variant.id);
+    if (priceEl) priceEl.innerHTML = formatMoney(variant.price)
+      + (variant.compare_at_price && variant.compare_at_price > variant.price
+          ? ' <span class="text-style-strikethrough" data-product-compare>' + formatMoney(variant.compare_at_price) + '</span>' : '');
+    if (priceMirror) priceMirror.textContent = formatMoney(variant.price);
+    if (totalEl) {
+      var qty = parseInt((form.querySelector('input[name="quantity"]') || {}).value || 1, 10) || 1;
+      totalEl.textContent = formatMoney(variant.price * qty);
+    }
+    if (addBtn) {
+      addBtn.disabled = !variant.available;
+      if (addLabel) addLabel.textContent = variant.available ? 'ADD TO CART' : 'SOLD OUT';
+    }
+    if (addLabelMirror) addLabelMirror.textContent = variant.available ? 'Add to bag' : 'Sold out';
+
+    // Variant image swap (item 3)
+    if (variant.featured_media && variant.featured_media.position) {
+      var swiperEl = document.querySelector('#is-product-img');
+      if (swiperEl && swiperEl.swiper) {
+        try { swiperEl.swiper.slideToLoop(variant.featured_media.position - 1, 400); } catch (e) {}
+      }
+    }
+    // Update option label mirror (e.g. "Colour: Hi Vis Green")
+    Array.from(form.querySelectorAll('input[data-product-option]:checked')).forEach(function (r) {
+      var pos = r.getAttribute('data-product-option');
+      var lbl = document.querySelector('[data-option-label="' + pos + '"]');
+      if (lbl) lbl.textContent = r.value;
+    });
+  }
+  form.addEventListener('change', function (e) {
+    if (e.target.matches('input[data-product-option], input[name="quantity"], input[name="selling_plan"]')) updateUI();
+  });
+  form.addEventListener('input', function (e) {
+    if (e.target.name === 'quantity') updateUI();
+  });
+
+  {%- if section.settings.show_sticky_add_to_cart -%}
+  // Sticky add-to-cart observer (item 13)
+  var section = document.querySelector('[data-product-section]');
+  var sticky = document.querySelector('[data-sticky-cart]');
+  if (section && sticky && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        sticky.classList.toggle('is-visible', !e.isIntersecting);
+        sticky.setAttribute('aria-hidden', e.isIntersecting ? 'true' : 'false');
+      });
+    }, { rootMargin: '-100% 0px 0px 0px', threshold: 0 });
+    io.observe(section);
+  }
+  // Sticky add button submits the main form
+  var stickyBtn = document.querySelector('[data-sticky-cart-add]');
+  if (stickyBtn) stickyBtn.addEventListener('click', function () { form.requestSubmit ? form.requestSubmit() : form.submit(); });
+  {%- endif -%}
+
+  {%- if section.settings.track_recently_viewed -%}
+  // Recently-viewed tracking (item 12, no UI per backlog option C)
+  try {
+    var key = 'sparms_recently_viewed';
+    var ids = JSON.parse(localStorage.getItem(key) || '[]');
+    var pid = {{ product.id | json }};
+    ids = [pid].concat(ids.filter(function (i) { return i !== pid; })).slice(0, 12);
+    localStorage.setItem(key, JSON.stringify(ids));
+  } catch (e) {}
+  {%- endif -%}
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product — Buy box",
+  "tag": "section",
+  "class": "shopify-section-product-buy-box",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "header", "content": "Breadcrumbs · Rating · Description" },
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Show breadcrumbs", "default": true },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating row", "default": true },
+    { "type": "header", "content": "Price + Inventory" },
+    { "type": "checkbox", "id": "show_compare_at_price", "label": "Show compare-at price (sale strikethrough)", "default": true },
+    { "type": "checkbox", "id": "show_inventory_threshold", "label": "Show low-stock badge", "default": true, "info": "Renders ‘Only N left’ when inventory ≤ threshold." },
+    { "type": "range", "id": "inventory_threshold", "label": "Low-stock threshold", "min": 1, "max": 20, "step": 1, "default": 5 },
+    { "type": "header", "content": "Variant pickers · Swatch source" },
+    { "type": "select", "id": "swatch_source", "label": "Color swatch source", "default": "metafield",
+      "options": [
+        { "value": "metafield", "label": "Variant metafield (hex code)" },
+        { "value": "app", "label": "External app (CSS class .is-color-swatch-N)" },
+        { "value": "name", "label": "Option value name as CSS color (fragile)" }
+      ]
+    },
+    { "type": "text", "id": "swatch_metafield_key", "label": "Swatch metafield key", "default": "custom.swatch_color", "info": "Format: namespace.key. Read from variant metafields." },
+    { "type": "url", "id": "size_guide_url", "label": "Size guide URL", "info": "Optional. Link appears under size picker." },
+    { "type": "header", "content": "Line item properties (engraving / gift note)" },
+    { "type": "checkbox", "id": "show_line_item_properties", "label": "Show line-item property fields", "default": false, "info": "Add ‘Line item property’ blocks below to define fields." },
+    { "type": "header", "content": "Subscriptions" },
+    { "type": "checkbox", "id": "show_subscription", "label": "Show selling-plan selector", "default": false, "info": "Only renders if product has selling plans configured." },
+    { "type": "header", "content": "Trust + quick-info row" },
+    { "type": "checkbox", "id": "show_quick_info_row", "label": "Show returns / payment options row", "default": true },
+    { "type": "text", "id": "returns_text", "label": "Returns blurb", "default": "Free Unlimited Returns for A$2.99" },
+    { "type": "text", "id": "payment_options_text", "label": "Payment options link text", "default": "More Payment Options" },
+    { "type": "header", "content": "Reviews app placeholder" },
+    { "type": "select", "id": "reviews_app", "label": "Rating widget app", "default": "none",
+      "options": [
+        { "value": "none", "label": "None (native rating from metafields)" },
+        { "value": "yotpo", "label": "Yotpo" },
+        { "value": "loox", "label": "Loox" },
+        { "value": "judge-me", "label": "Judge.me" },
+        { "value": "okendo", "label": "Okendo" }
+      ]
+    },
+    { "type": "header", "content": "Sticky add-to-cart" },
+    { "type": "checkbox", "id": "show_sticky_add_to_cart", "label": "Show sticky add-to-cart bar", "default": true, "info": "Fades in after the buy box scrolls out of view, on desktop and mobile." },
+    { "type": "header", "content": "Recently viewed + SEO" },
+    { "type": "checkbox", "id": "track_recently_viewed", "label": "Track recently-viewed products (localStorage)", "default": true, "info": "Stores last 12 product IDs the visitor viewed. No UI rendered here — use a recently-viewed section later if you want one." },
+    { "type": "checkbox", "id": "show_json_ld", "label": "Output JSON-LD structured data", "default": true, "info": "schema.org Product markup for Google Shopping / rich results." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "In-buy-box FAQ item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Description" },
+        { "type": "select", "id": "source", "label": "Content source", "default": "static",
+          "options": [
+            { "value": "static", "label": "Static text (below)" },
+            { "value": "description", "label": "Product description" },
+            { "value": "metafield", "label": "Product metafield" }
+          ]
+        },
+        { "type": "richtext", "id": "body", "label": "Body (when source = static)" },
+        { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace", "default": "custom" },
+        { "type": "text", "id": "metafield_key", "label": "Metafield key" }
+      ]
+    },
+    {
+      "type": "line_item_property",
+      "name": "Line item property",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Engraving" },
+        { "type": "select", "id": "type", "label": "Field type", "default": "text",
+          "options": [
+            { "value": "text", "label": "Single line text" },
+            { "value": "textarea", "label": "Multi-line text" }
+          ]
+        },
+        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Up to 20 characters" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Product — Buy box",
+      "blocks": [
+        { "type": "faq_item", "settings": { "label": "Description",         "source": "description" } },
+        { "type": "faq_item", "settings": { "label": "Product Details",     "source": "static",      "body": "<p>Material composition and care details.</p>" } },
+        { "type": "faq_item", "settings": { "label": "Sizing",              "source": "static",      "body": "<p>See size guide for measurements.</p>" } },
+        { "type": "faq_item", "settings": { "label": "Care",                "source": "static",      "body": "<p>Machine wash cold. Tumble dry low.</p>" } },
+        { "type": "faq_item", "settings": { "label": "Shipping & Returns",  "source": "static",      "body": "<p>Free shipping on orders over $80. 60-day returns.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,11 +1,44 @@
 {
   "sections": {
-    "main": {
-      "type": "page-product",
-      "settings": {}
+    "buy-box": {
+      "type": "product-01-buy-box",
+      "settings": { "show_section": true }
+    },
+    "reviews": {
+      "type": "product-02-reviews",
+      "settings": { "show_section": true }
+    },
+    "feature": {
+      "type": "component-feature",
+      "settings": { "show_section": true }
+    },
+    "ambassadors": {
+      "type": "component-ambassadors-slide",
+      "settings": { "show_section": true }
+    },
+    "faqs": {
+      "type": "product-03-faqs",
+      "settings": { "show_section": true }
+    },
+    "related": {
+      "type": "home-02-product-slider",
+      "settings": {
+        "show_section": true,
+        "data_source": "recommendations",
+        "heading": "You may also like",
+        "body": "Pair it with the rest of the kit.",
+        "show_shop_all": true,
+        "shop_all_label": "Shop all"
+      }
+    },
+    "cta": {
+      "type": "component-cta",
+      "settings": { "show_section": true }
+    },
+    "community": {
+      "type": "component-community",
+      "settings": { "show_section": true }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["buy-box", "reviews", "feature", "ambassadors", "faqs", "related", "cta", "community"]
 }

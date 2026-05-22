@@ -1,0 +1,109 @@
+{%- comment -%}
+  SParms product page — standalone FAQs section.
+  Reusable: any page can render the same section type with a different
+  set of FAQ blocks. Distinct from the in-buy-box FAQ accordion which
+  lives inside product-01-buy-box.liquid.
+{%- endcomment -%}
+
+{%- if section.settings.show_section -%}
+<section class="product_faqs_section">
+  <div class="padding-global padding-section-large">
+    <div class="container-large">
+      <div class="product_faqs_component">
+        <div class="component_heading_split">
+          <h2>{{ section.settings.heading | default: 'Frequently asked questions' }}</h2>
+          <div class="max-width-small">
+            <p>{{ section.settings.body | default: 'Common questions about our products, sizing, care, shipping and returns.' }}</p>
+          </div>
+        </div>
+        <div class="spacer-xxlarge"></div>
+        <div class="component_faq_component">
+          <div class="component_faq_wrapper">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'faq_item' -%}
+                <div class="component_faq_item" {{ block.shopify_attributes }}>
+                  <div class="component_faq_title_wrapper">
+                    <div class="component_faq_title">
+                      <div class="component_faq_icon is-title"></div>
+                      <div class="component_faq_title-text">{{ block.settings.question | default: 'Question here?' }}</div>
+                    </div>
+                    <div class="component_faq_icon_wrapper">
+                      <div class="component_faq_icon_vertical"></div>
+                      <div class="component_faq_icon_horizontal"></div>
+                    </div>
+                  </div>
+                  <div class="component_faq_content_wrapper">
+                    <div class="component_faq_content">
+                      <div class="component_faq_icon is-content"></div>
+                      <div class="text-size-medium rte">{{ block.settings.answer | default: 'Answer here.' }}</div>
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              {%- assign default_faqs = 'How do I find my size?|Sparms come in a full range of sizes. Check the size guide.;;How do I care for my Sparms products?|Machine wash cold, tumble dry low.;;Can I use my Sparms in the water?|Yes, they are quick-dry and water-resistant.;;Where are your products manufactured?|Designed in Australia, ethically manufactured worldwide.;;Can I return or exchange an item?|Yes, 60-day returns on unworn items.' | split: ';;' -%}
+              {%- for f in default_faqs -%}
+                {%- assign parts = f | split: '|' -%}
+                <div class="component_faq_item">
+                  <div class="component_faq_title_wrapper">
+                    <div class="component_faq_title">
+                      <div class="component_faq_icon is-title"></div>
+                      <div class="component_faq_title-text">{{ parts[0] }}</div>
+                    </div>
+                    <div class="component_faq_icon_wrapper">
+                      <div class="component_faq_icon_vertical"></div>
+                      <div class="component_faq_icon_horizontal"></div>
+                    </div>
+                  </div>
+                  <div class="component_faq_content_wrapper">
+                    <div class="component_faq_content">
+                      <div class="component_faq_icon is-content"></div>
+                      <div class="text-size-medium">{{ parts[1] }}</div>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product — FAQs",
+  "tag": "section",
+  "class": "shopify-section-product-faqs",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "textarea", "id": "body", "label": "Intro body", "default": "Common questions about our products, sizing, care, shipping and returns." }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question here?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer here.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "Product — FAQs",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "How do I find my size?",                 "answer": "<p>Sparms come in a full range of sizes designed to move with, perform, and protect you. Check the sizing guide in the menu.</p>" } },
+        { "type": "faq_item", "settings": { "question": "How do I care for my Sparms products?", "answer": "<p>Machine wash cold with like colours. Tumble dry low or hang to dry. Do not iron.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Can I use my Sparms in the water?",     "answer": "<p>Yes — Sparms are quick-dry and water-resistant. Rinse with fresh water after exposure to chlorine or salt.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Where are your products manufactured?", "answer": "<p>Designed in Australia, ethically manufactured at our partner facilities worldwide.</p>" } },
+        { "type": "faq_item", "settings": { "question": "Can I return or exchange an item?",     "answer": "<p>Yes, 60-day returns on unworn items with tags. Visit our returns page for full policy.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

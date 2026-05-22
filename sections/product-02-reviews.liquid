@@ -1,0 +1,238 @@
+{%- comment -%}
+  SParms product page — reviews section.
+
+  Native UI: rating summary + distribution graph + photo grid + filter
+  shell + review cards (blocks). When a reviews app is selected, hides
+  the native UI and renders the app's documented widget container.
+{%- endcomment -%}
+
+{%- liquid
+  assign app = section.settings.reviews_app | default: 'none'
+  assign avg_rating = product.metafields.reviews.rating.value.rating | default: section.settings.fallback_rating | default: 4.1
+  assign rating_count = product.metafields.reviews.rating_count | default: section.settings.fallback_rating_count | default: 0
+-%}
+
+{%- if section.settings.show_section -%}
+<div class="product_reviews_section">
+  <div class="padding-global padding-section-large">
+    <div class="container-large">
+
+      {%- if app != 'none' -%}
+        {%- comment -%} App-rendered widget — native UI hidden. App injects content into the data-* container. {%- endcomment -%}
+        <div class="template_product_reviews_wrapper template_product_reviews_wrapper--app" data-reviews-app="{{ app }}" data-product-id="{{ product.id }}">
+          <div class="template_product_reviews_title">
+            <h2>{{ section.settings.heading | default: 'Customer reviews' }}</h2>
+            <div class="template_product_reviews_title_divider"></div>
+          </div>
+          {%- case app -%}
+            {%- when 'yotpo' -%}
+              <div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url | append: product.url }}"></div>
+            {%- when 'loox' -%}
+              <div id="looxReviews" data-product-id="{{ product.id }}"></div>
+            {%- when 'judge-me' -%}
+              <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}"></div>
+            {%- when 'okendo' -%}
+              <div data-oke-widget data-oke-product-id="shopify-{{ product.id }}"></div>
+            {%- when 'shopify-product-reviews' -%}
+              <div id="shopify-product-reviews" data-id="{{ product.id }}"></div>
+          {%- endcase -%}
+        </div>
+      {%- else -%}
+        <div class="template_product_reviews_wrapper">
+
+          {%- comment -%} Header ============================ {%- endcomment -%}
+          <div class="template_product_reviews_title">
+            <h2>{{ section.settings.heading | default: 'Customer testimonials' }}</h2>
+            <div class="template_product_reviews_title_divider"></div>
+          </div>
+
+          {%- comment -%} Rating summary ============================ {%- endcomment -%}
+          {%- if section.settings.show_rating_summary -%}
+            <div class="template_product_reviews_rating_wrapper">
+              <div class="template_product_reviews_rating_content">
+                <div class="template_product_reviews_rating_content_numbers">
+                  <div class="template_product_reviews_rating_graph_grid">
+                    <div class="template_rating_up">{{ avg_rating }}</div>
+                    <div class="template_rating_down">/5</div>
+                  </div>
+                  <div class="template_product_reviews_rating">
+                    <div class="template_product_description_review">
+                      {%- for i in (1..5) -%}
+                        <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path></svg></div>
+                      {%- endfor -%}
+                    </div>
+                    <div>{{ rating_count }} ratings</div>
+                  </div>
+                </div>
+                <div class="template_product_reviews_rating_line_graph">
+                  {%- for star in (1..5) reversed -%}
+                    {%- assign pct_key = 'rating_distribution_' | append: star -%}
+                    {%- assign pct = section.settings[pct_key] | default: 0 -%}
+                    <div class="template_product_reviews_rating_line_graph_wrapper">
+                      <div class="start_ratings">
+                        <div class="text-size-regular">{{ star }}</div>
+                        <div class="icon-embed-xxsmall text-color-accent w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path></svg></div>
+                      </div>
+                      <div class="ratings_line">
+                        <div class="ratings_line_upper" style="width:{{ pct }}%;"></div>
+                        <div class="ratings_line_lower"></div>
+                      </div>
+                      <div class="ratings_number"><div class="text-size-regular">{{ pct }}%</div></div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+
+              {%- comment -%} Photo grid ============================ {%- endcomment -%}
+              {%- if section.settings.show_photo_grid -%}
+                <div class="template_product_reviews_rating_grid">
+                  {%- assign photo_count = 0 -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'review_photo' -%}
+                      {%- assign photo_count = photo_count | plus: 1 -%}
+                      {%- liquid
+                        if block.settings.image != blank
+                          assign img_url = block.settings.image | image_url: width: 300
+                        else
+                          assign img_url = 'product-placeholder-1.webp' | asset_url
+                        endif
+                      -%}
+                      <div class="template_product_reviews_rating_item_wrapper" {{ block.shopify_attributes }}><img src="{{ img_url }}" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if photo_count == 0 -%}
+                    {%- for i in (1..6) -%}
+                      <div class="template_product_reviews_rating_item_wrapper"><img src="{{ 'product-placeholder-1.webp' | asset_url }}" loading="lazy" alt="" class="template_product_reviews_rating_item"></div>
+                    {%- endfor -%}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Reviews list ============================ {%- endcomment -%}
+          <div class="template_product_reviews_title">
+            <div class="template_product_reviews_title_wrapper"><h2>{{ section.settings.list_heading | default: 'Reviews' }}</h2></div>
+            <div class="template_product_reviews_title_divider"></div>
+          </div>
+
+          <div class="template_product_reviews_comments_wrapper">
+            {%- assign review_count = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'review' -%}
+                {%- assign review_count = review_count | plus: 1 -%}
+                {%- assign stars = block.settings.rating | default: 5 -%}
+                <div class="template_product_reviews_comments" {{ block.shopify_attributes }}>
+                  <div class="template_product_description_review">
+                    {%- for i in (1..stars) -%}
+                      <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path></svg></div>
+                    {%- endfor -%}
+                  </div>
+                  <div class="template_product_reviews_comments_content">
+                    <h5>“{{ block.settings.headline | default: 'Great product' }}”</h5>
+                    <div class="template_product_reviews_comments_details">
+                      <div><strong>{{ block.settings.author | default: 'Anonymous' }}</strong></div>
+                      {%- if block.settings.verified -%}
+                        <div class="text-size-small text-color-secondary">Verified buyer</div>
+                      {%- endif -%}
+                    </div>
+                    <p>{{ block.settings.body | default: 'Lorem ipsum dolor sit amet consectetur.' }}</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if review_count == 0 -%}
+              {%- for i in (1..3) -%}
+                <div class="template_product_reviews_comments">
+                  <div class="template_product_description_review">
+                    {%- for j in (1..5) -%}
+                      <div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewbox="0 0 16 16" fill="none" aria-hidden="true" role="img"><path d="M7.25672 0.489876C7.53172 -0.163293 8.46832 -0.163292 8.74332 0.489878L10.3663 4.345C10.4823 4.62036 10.7445 4.8085 11.0454 4.83233L15.2582 5.166C15.9719 5.22253 16.2614 6.10252 15.7175 6.56274L12.5079 9.27896C12.2786 9.473 12.1784 9.77745 12.2485 10.0675L13.2291 14.1288C13.3952 14.8169 12.6375 15.3608 12.0264 14.9921L8.41965 12.8157C8.16202 12.6602 7.83802 12.6602 7.5804 12.8157L3.9736 14.9921C3.3625 15.3608 2.60477 14.8169 2.77091 14.1288L3.75155 10.0675C3.82159 9.77745 3.72147 9.473 3.49221 9.27896L0.28245 6.56274C-0.261375 6.10252 0.0280544 5.22253 0.741835 5.166L4.9547 4.83233C5.25561 4.8085 5.51774 4.62036 5.63367 4.345L7.25672 0.489876Z" fill="currentColor"></path></svg></div>
+                    {%- endfor -%}
+                  </div>
+                  <div class="template_product_reviews_comments_content">
+                    <h5>“Lorem ipsum”</h5>
+                    <div class="template_product_reviews_comments_details">
+                      <div><strong>Name Surname</strong></div>
+                      <div class="text-size-small text-color-secondary">Verified buyer</div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur. Lacus odio dui est risus nunc eget mattis.</p>
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product — Reviews",
+  "tag": "section",
+  "class": "shopify-section-product-reviews",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "Show this section", "default": true },
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "Customer testimonials" },
+    { "type": "text", "id": "list_heading", "label": "Reviews list heading", "default": "Reviews" },
+    { "type": "header", "content": "App integration" },
+    { "type": "select", "id": "reviews_app", "label": "Reviews app", "default": "none",
+      "options": [
+        { "value": "none", "label": "None (native UI below)" },
+        { "value": "yotpo", "label": "Yotpo" },
+        { "value": "loox", "label": "Loox" },
+        { "value": "judge-me", "label": "Judge.me" },
+        { "value": "okendo", "label": "Okendo" },
+        { "value": "shopify-product-reviews", "label": "Shopify Product Reviews (legacy)" }
+      ],
+      "info": "When set, native UI is hidden and the app's widget container is rendered instead."
+    },
+    { "type": "header", "content": "Native UI — rating summary" },
+    { "type": "checkbox", "id": "show_rating_summary", "label": "Show rating summary + distribution graph", "default": true },
+    { "type": "checkbox", "id": "show_photo_grid", "label": "Show photo grid", "default": true, "info": "Add 'Review photo' blocks below." },
+    { "type": "header", "content": "Fallback values (when no app + no metafield data)" },
+    { "type": "text", "id": "fallback_rating", "label": "Fallback average rating", "default": "4.1" },
+    { "type": "text", "id": "fallback_rating_count", "label": "Fallback rating count", "default": "1858" },
+    { "type": "range", "id": "rating_distribution_5", "label": "5★ %", "min": 0, "max": 100, "step": 1, "default": 47 },
+    { "type": "range", "id": "rating_distribution_4", "label": "4★ %", "min": 0, "max": 100, "step": 1, "default": 31 },
+    { "type": "range", "id": "rating_distribution_3", "label": "3★ %", "min": 0, "max": 100, "step": 1, "default": 14 },
+    { "type": "range", "id": "rating_distribution_2", "label": "2★ %", "min": 0, "max": 100, "step": 1, "default": 4 },
+    { "type": "range", "id": "rating_distribution_1", "label": "1★ %", "min": 0, "max": 100, "step": 1, "default": 4 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Lorem ipsum" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Name Surname" },
+        { "type": "checkbox", "id": "verified", "label": "Verified buyer", "default": true },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "body", "label": "Review body", "default": "Lorem ipsum dolor sit amet consectetur." }
+      ]
+    },
+    {
+      "type": "review_photo",
+      "name": "Review photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "Product — Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "headline": "Best sleeves ever",       "author": "Alyssa H.",  "rating": 5, "body": "Cool, comfortable, and great UV protection. Love them." } },
+        { "type": "review", "settings": { "headline": "Performance under sun",   "author": "Mitchell S.","rating": 5, "body": "Wear these every match. They keep me cool and focused." } },
+        { "type": "review", "settings": { "headline": "Highly recommend",        "author": "Marina A.",  "rating": 4, "body": "Comfortable and stylish. Sometimes a little tight on the bicep." } },
+        { "type": "review_photo" }, { "type": "review_photo" }, { "type": "review_photo" },
+        { "type": "review_photo" }, { "type": "review_photo" }, { "type": "review_photo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

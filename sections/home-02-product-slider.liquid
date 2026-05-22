@@ -1,13 +1,29 @@
 {%- liquid
-  assign products_collection = collections[section.settings.collection]
+  assign data_source = section.settings.data_source | default: 'collection'
+  assign products_list = nil
+  if data_source == 'recommendations' and recommendations != blank and recommendations.performed and recommendations.products_count > 0
+    assign products_list = recommendations.products
+  elsif data_source == 'collection'
+    assign coll = collections[section.settings.collection]
+    if coll != blank and coll.products.size > 0
+      assign products_list = coll.products
+    endif
+  endif
   assign shop_all_url = section.settings.shop_all_url
   if shop_all_url == blank and section.settings.shop_all_collection != blank
     assign shop_all_url = section.settings.shop_all_collection.url
   endif
   assign shop_all_url = shop_all_url | default: routes.collections_url | append: '/all'
 -%}
+{%- comment -%}
+  Shopify Recommendations API requires this attribute on a wrapping element
+  so the storefront can asynchronously hydrate the recommendations endpoint.
+{%- endcomment -%}
+{%- if data_source == 'recommendations' and product != blank -%}
+  {%- capture recs_url -%}{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.product_limit | default: 8 }}{%- endcapture -%}
+{%- endif -%}
 {%- if section.settings.show_section -%}
-      <section class="home_product-slide_section">
+      <section class="home_product-slide_section"{% if data_source == 'recommendations' %} data-product-recommendations="{{ recs_url | escape }}"{% endif %}>
         <div class="padding-global padding-section-large">
           <div class="container-large">
             <div class="hide w-embed w-script">
@@ -57,8 +73,8 @@
             <div class="spacer-xlarge"></div>
             <div id="is-product" class="swiper is-product">
               <div class="swiper-wrapper is-product">
-                {%- if products_collection != blank and products_collection.products.size > 0 -%}
-                  {%- for product in products_collection.products limit: section.settings.product_limit -%}
+                {%- if products_list != blank -%}
+                  {%- for product in products_list limit: section.settings.product_limit -%}
                     {%- assign featured_img = product.featured_image -%}
                     <div class="swiper-slide is-product">
                       <div class="component_product-list_card">
@@ -186,7 +202,14 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "LOCK IN PERFORMANCE" },
     { "type": "textarea", "id": "body", "label": "Body", "default": "Discover the next generation in skin care that plays as hard as you do." },
     { "type": "header", "content": "Products" },
-    { "type": "collection", "id": "collection", "label": "Source collection", "info": "When set, the slider renders this collection’s products. Otherwise it shows static placeholder cards." },
+    { "type": "select", "id": "data_source", "label": "Source", "default": "collection",
+      "options": [
+        { "value": "collection", "label": "Pick a collection" },
+        { "value": "recommendations", "label": "Shopify recommended products (product page only)" }
+      ],
+      "info": "‘Recommendations’ uses the storefront recommendations.products API on product templates; falls back to a static collection if no recommendations are available."
+    },
+    { "type": "collection", "id": "collection", "label": "Source collection (when ‘Pick a collection’)", "info": "Renders this collection’s products. If empty, falls back to placeholder cards." },
     { "type": "range", "id": "product_limit", "label": "Max products", "min": 4, "max": 16, "step": 1, "default": 8 },
     { "type": "header", "content": "Shop all CTA" },
     { "type": "checkbox", "id": "show_shop_all", "label": "Show ‘Shop All’ button", "default": true },
