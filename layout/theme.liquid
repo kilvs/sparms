@@ -71,13 +71,17 @@
   <div class="page-wrapper">
     {% render 'global-styles' %}
 
-    {% sections 'header-group' %}
+    <div id="header-group">
+      {% sections 'header-group' %}
+    </div>
 
     <main class="main-wrapper">
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    <div id="footer-group">
+      {% sections 'footer-group' %}
+    </div>
   </div>
   {% render 'cart-drawer' %}
 
